@@ -10,7 +10,7 @@
  * - T&C + submit stay visible
  */
 
-/* Keep T&C + submit visible */
+/* Keep T&C + submit visible (overridden by Custom JS class when fromOnLoad=false) */
 #xSectionDetails_policy_1790353974879,
 #xSectionDetails_submit_1684917530454,
 #xSubmitContainer {
@@ -19,6 +19,19 @@
   min-height: 0 !important;
   opacity: 1 !important;
   visibility: visible !important;
+}
+
+/* NGX module:add:custom:classes → xCustomClass-sei-hide-cta (fromOnLoad False) */
+#xSectionDetails_policy_1790353974879.xCustomClass-sei-hide-cta,
+#xSectionDetails_submit_1684917530454.xCustomClass-sei-hide-cta {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 /* Shared Medium column — name / email / DOB / multi / policy */
@@ -189,8 +202,7 @@
   color: #000 !important;
 }
 
-/* Hide placeholder while typing / focused (Grow Custom JS is not executable
-   in this experience — it dumps as page text — so no .sei-filled runtime). */
+/* Hide placeholder while typing / focused (no .sei-filled JS — CSS :focus is enough). */
 #emailWrapper .xField input:focus + .xSubLabel,
 #emailWrapper .xField input.xFocused + .xSubLabel,
 #date_of_birthWrapper .xField input:focus + .xSubLabel,

@@ -1,10 +1,8 @@
-// SEI 9958 — placeholder hide-on-fill helper (REFERENCE ONLY)
+// SEI 9958 — placeholder hide-on-fill helper (REFERENCE ONLY — not used live)
 //
-// Do NOT paste into Grow Customize → Custom JavaScript for campaign 22815:
-// that slot dumps the source as visible page text and does not execute it.
-// Placeholders are restored via Custom CSS (opacity on .xSubLabel + hide on :focus).
-//
-// Keep this file if Grow later supports real script injection; wire .sei-filled then.
+// Live placeholders use Custom CSS (:focus opacity). If you paste Custom JS into
+// Grow Customize, wrap it in <script>…</script> (see Scripting Guide) or it
+// renders as page text. The live fromOnLoad gate is 9958-grow-fromonload-gate.js.
 (function () {
   function isFilled(input) {
     var v = (input.value || "").replace(/^\s+|\s+$/g, "");

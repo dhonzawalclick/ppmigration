@@ -8,13 +8,16 @@ This repo tracks migrating preference-center (and related) experiences from **Pu
 | --- | --- |
 | Grow → 3rd-party JSON integration reference | This file (section below) — how Grow posts entry data to external APIs |
 | Existing PushPlanet preference-center script | [`SEI/9958-desktop.js`](../SEI/9958-desktop.js) — SEI Soccer desktop preference center |
+| Grow Experience (staging) | Campaign **22815** — Customize CSS/JS for the preference-center form |
+| Grow Custom CSS | [`SEI/9958-grow-theme-fix.css`](../SEI/9958-grow-theme-fix.css) — paste into Customize → Custom Styles |
+| Grow Custom JS (`fromOnLoad` gate) | [`SEI/9958-grow-fromonload-gate.js`](../SEI/9958-grow-fromonload-gate.js) — paste into Customize → Custom JavaScript (**keep `<script>` tags**) |
 | Grow → ZMP identify config | [`SEI/9958-grow-zmp-identify.json`](../SEI/9958-grow-zmp-identify.json) — replaces `updateSubscriber` |
 | Grow → ZMP activity config | [`SEI/9958-grow-zmp-activity.json`](../SEI/9958-grow-zmp-activity.json) — replaces `zetaTrackEvent` (`preference_center`) |
 | Downstream CDP / ESP | ZMP REST API (`https://api.zetaglobal.net/ver2`) |
 
 PushPlanet already talks to ZMP (via Boomtrain / Zeta client helpers). Grow will replace the PushPlanet/Digioh experience layer; **Grow must call the same ZMP endpoints** (or equivalent) so profiles and preference events continue to land in ZMP.
 
-Next step (after this README): author Grow integration JSON that POSTs to those ZMP routes using the field mappings documented here.
+Draft identify/activity JSON configs live under `SEI/`; Friendly IDs on the Grow form must match the `entry.*` keys those configs use (see below).
 
 ---
 
@@ -33,12 +36,108 @@ AS-IS
 TARGET
   Zeta Grow experience
        │
-       └─ Grow “Other Data Integration” (JSON config)
-            POST identify  → https://api.zetaglobal.net/ver2/{site_id}/subscribers/identify
-            POST activity   → https://api.zetaglobal.net/ver2/{site_id}/activities
+       ├─ Form modules (Email, Name, checkboxes, Policy…) collect answers
+       ├─ Each module’s Friendly ID becomes a key on the Grow entry
+       └─ On submit → HTTP / Other Data Integration (JSON config)
+            reads ${entry.<friendly_id>} …
+            POST identify  → …/subscribers/identify
+            POST activity   → …/activities
 ```
 
 Grow’s JSON integration model (url, verb, headers, params mappings) is documented in **Grow JSON integration reference** below. That is the mechanism we will use to hit ZMP.
+
+---
+
+## How form fields relate to the Grow → ZMP JSON configs
+
+These are **not** two separate systems. The form is the **input**; the JSON configs are the **outbound mapping** that runs after submit.
+
+| Layer | What it is | Role |
+| --- | --- | --- |
+| Grow form modules | UI on the Experience (Email, Name, Multi Opt-in, Policy & Rules, …) | Collect answers from the participant |
+| Friendly ID | Set on a module under **Connect** (spaces → underscores) | Stable key for that answer when syncing to ESP/CRM/CDP |
+| Grow **entry** | Record created on submit | Holds standard fields + every Friendly ID as properties |
+| Integration JSON | Account **HTTP / Other Data Integration** config ([`9958-grow-zmp-identify.json`](../SEI/9958-grow-zmp-identify.json), [`9958-grow-zmp-activity.json`](../SEI/9958-grow-zmp-activity.json)) | Maps `entry` → ZMP request body and POSTs it |
+
+Flow:
+
+```
+Participant fills form
+        ↓
+Grow saves an entry  (email, first_name, parent, … keyed by Friendly ID / standard names)
+        ↓
+Integration fires (paramsType: mapped)
+        ↓
+"${entry.email}" / "${entry.parent}" / … → ZMP JSON payload
+        ↓
+POST api.zetaglobal.net/ver2/{site_id}/subscribers/identify
+POST api.zetaglobal.net/ver2/{site_id}/activities
+```
+
+### What must match
+
+In the JSON, expressions like `${entry.email}` and `${entry.parent}` only work if the Grow form exposes those keys on the entry:
+
+1. Add the module on the form (e.g. Email, checkbox / Multi Opt-in for prefs).
+2. Set **Friendly ID** to the same name the JSON expects (`email`, `parent`, `cleats_and_shoes`, …) — or change the JSON to match whatever Friendly ID you choose.
+3. Submit → Grow builds `entry` → integration substitutes the values.
+
+Built-in / common entry fields (also used in exports and email tokens) include things like email, first/last name, brand/group/third-party opt-ins, terms, `uid` / Customer ID — see [Experience Exports](https://products.zetaglobal.com/grow/Content/Grow/Post-launch%20Success/Understanding-Experience-exports.htm) and [Email Notification Tokens](https://products.zetaglobal.com/grow/Content/Grow/Email%20Notifications/Understanding-Email-Notification-Tokens.htm) (`${form.email}`, `${entry.uid}`, …). Custom quiz/checkbox answers show up as their own columns / entry keys via Friendly ID ([Opt-In → Connect](https://products.zetaglobal.com/grow/Content/Grow/Understanding%20Pages%20and%20Modules/Module-Optin.htm)).
+
+**Customer ID** (Form Settings → Advanced) is Grow’s unique person key for the Experience (default: email). That can feed `entry.uid` / ZMP `subscriber.uid` if you map it that way ([Change Your Unique Customer ID](https://products.zetaglobal.com/grow/Content/Grow/General%20Other%20Tasks/Change-your-unique-Customer-ID.htm)).
+
+### What the JSON does *not* do
+
+- It does **not** render the form or set Friendly IDs — that is Page Builder work.
+- It does **not** replace Policy & Rules / Opt-In UI; those modules only become data (`terms`, opt-in flags, etc.) once submitted.
+- Prefill / hide-submit JS (`fromOnLoad`, decrypt `ol_tok`) runs **before** submit; the integration JSON runs **after** submit.
+
+---
+
+## SEI Grow Experience Customize (campaign 22815)
+
+Staging preference-center form. Assets below are the source of truth; paste into **Customize** on the Experience, then **Apply / Save & Close**, then experience **Save**.
+
+| Slot | Repo file | Notes |
+| --- | --- | --- |
+| Custom Styles | [`SEI/9958-grow-theme-fix.css`](../SEI/9958-grow-theme-fix.css) | Layout, centered placeholders, name/email/DOB polish. Keeps Month dropdown working (no DOB overflow/padding overrides). |
+| Custom JavaScript | [`SEI/9958-grow-fromonload-gate.js`](../SEI/9958-grow-fromonload-gate.js) | Hides T&C + Sign up when `fromOnLoad` is False. |
+
+Scripting Guide (account): `/admin/campaign/scripthelpmicro` — Custom JS **must** include opening/closing `<script>` tags or Grow dumps the source as page text. Prefer `NGX.api` over raw DOM mutation for system modules (Preact re-renders wipe plain class/style changes).
+
+### `fromOnLoad` gate
+
+`fromOnLoad` is a radio module (`true` / `false`) used as a staging/prod gate (not an end-user preference).
+
+| Value | Grow conditionals (name, email, DOB, multi opt-ins) | T&C + Sign up |
+| --- | --- | --- |
+| **True** | Shown | Shown |
+| **False** | Hidden by Grow module conditionals | Hidden by Custom JS (`sei-hide-cta`) |
+
+Policy and submit modules are **not** conditional in Page Builder, so Custom JS covers them:
+
+1. On `page:ready`, read `input[name="fromOnLoad"]:checked`.
+2. If False → `NGX.api('module:add:custom:classes', { id, customClassNames: 'sei-hide-cta' })` on `policy_1790353974879` and `submit_1684917530454`.
+3. If True → `module:remove:custom:classes` for the same.
+4. Re-run on `module:component:didupdate` for the radio module and on `change` for `fromOnLoad`.
+
+Companion CSS (in the theme file) hides `.xCustomClass-sei-hide-cta` on those module IDs so the class wins over the “keep T&C + submit visible” rules and survives re-renders.
+
+In production, set `fromOnLoad` via onload/integration JS and hide the True/False radio UI itself when you no longer need the staging toggle.
+
+### Practical checklist for SEI prefs
+
+| ZMP property (in JSON) | Needs a Grow form field with Friendly ID (or standard name) |
+| --- | --- |
+| `email` | Email module → `email` |
+| `first_name` / `last_name` | Name module fields → `first_name` / `last_name` (or map whatever Grow emits) |
+| `date_of_birth` | DOB module → `date_of_birth` |
+| `pref_center_*` | Checkboxes / Multi Opt-in → Friendly IDs like `parent`, `fan`, `cleats_and_shoes`, … (JSON converts checked → `Y`/`N`) |
+| `uid` | Hidden/decrypted field or Customer ID → `uid` |
+
+If Friendly IDs in the live Experience differ from the stubs, **update the JSON `entry.*` keys** (or rename Friendly IDs) so they match — otherwise ZMP gets empty values.
+
+Grow docs for the push path: [Different Ways to Export Entry Data](https://products.zetaglobal.com/grow/Content/Grow/Post-launch%20Success/Understanding-Different-ways-to-export-Entry-data.htm) (real-time HTTP webhook / custom data integration) and [Entry Data Webhook](https://products.zetaglobal.com/grow/Content/Technical%20Documentation/Understanding-Entry-Data-Webhook.htm). Account setup: Gear → Integrations → HTTP / custom integration ([Third Party Integrations](https://products.zetaglobal.com/grow/Content/Third%20Party%20Integrations/Third-Party-Integrations-Intro.htm)).
 
 ---
 
