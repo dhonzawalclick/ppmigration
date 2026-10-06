@@ -82,7 +82,9 @@
   font-weight: 500 !important;
 }
 
-/* Name: hide inner sublabels (replaced by ::before) */
+/* Name: labels only via ::before (First name: / Last name:).
+   Hide theme xSubLabel — repeating "First Name" inside the box looks wrong;
+   email keeps its example placeholder (me@email.com). */
 #nameWrapper .xSubLabel {
   display: none !important;
 }
@@ -170,13 +172,31 @@
   font-size: 14px !important;
 }
 
-/* Theme only floats xSubLabel on :focus — on blur it drops back over typed text.
-   Hide when the field has a value. Requires Custom JS to set placeholder=" "
-   so :placeholder-shown works (Grow inputs ship with no placeholder attr). */
-.xForm .xComponent.xEmail .xField input:not(:placeholder-shown) + .xSubLabel,
-.xForm .xComponent.xDate_of_birth .xField input:not(:placeholder-shown) + .xSubLabel,
-.xForm .xComponent.xDate_of_birth .select-container > input:not(:placeholder-shown) + .xSubLabel,
-.xForm .xComponent.xName .xField input:not(:placeholder-shown) + .xSubLabel {
+/* Keep floating placeholders visible when empty.
+   Do NOT use :not(:placeholder-shown) — Grow inputs have no placeholder attr,
+   so that selector always matched and hid every xSubLabel.
+   Theme also sets opacity:0 on .xSelectAutocompleteInput + .xSubLabel (Month). */
+#emailWrapper .xSubLabel,
+#date_of_birthWrapper .xSubLabel,
+.xForm .xComponent.xEmail .xSubLabel,
+.xForm .xComponent.xDate_of_birth .xSubLabel,
+.xForm .xComponent.xDate_of_birth .select-container > input + .xSubLabel,
+.xForm .xComponent.xDate_of_birth .xSelect input.xSelectAutocompleteInput + .xSubLabel {
+  opacity: 0.55 !important;
+  visibility: visible !important;
+  display: block !important;
+  pointer-events: none !important;
+  color: #000 !important;
+}
+
+/* Hide placeholder while typing / focused (Grow Custom JS is not executable
+   in this experience — it dumps as page text — so no .sei-filled runtime). */
+#emailWrapper .xField input:focus + .xSubLabel,
+#emailWrapper .xField input.xFocused + .xSubLabel,
+#date_of_birthWrapper .xField input:focus + .xSubLabel,
+#date_of_birthWrapper .xField input.xFocused + .xSubLabel,
+#date_of_birthWrapper .select-container > input:focus + .xSubLabel,
+#date_of_birthWrapper .select-container > input.xFocused + .xSubLabel {
   opacity: 0 !important;
 }
 
@@ -314,4 +334,14 @@
   font-size: 14px !important;
   line-height: normal !important;
   text-align: center !important;
+  opacity: 0.55 !important;
+}
+
+#emailWrapper .xField input:focus + .xSubLabel,
+#emailWrapper .xField input.xFocused + .xSubLabel,
+#date_of_birthWrapper .xField input:focus + .xSubLabel,
+#date_of_birthWrapper .xField input.xFocused + .xSubLabel,
+#date_of_birthWrapper .select-container > input:focus + .xSubLabel,
+#date_of_birthWrapper .select-container > input.xFocused + .xSubLabel {
+  opacity: 0 !important;
 }
