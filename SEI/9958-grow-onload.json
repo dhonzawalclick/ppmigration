@@ -1,0 +1,19 @@
+{
+  "encryptionKey": "ba1accd01b6dec8daaf0cfd112d95913",
+  "logDebug": true,
+  "onlySubSteps": true,
+  "subSteps": [
+    {
+      "return$": {
+        "data": {
+          "fromOnLoad": "${encryptedTokenMapping.fromOnLoad ?: 'true'}",
+          "uid": "${encryptedTokenMapping.uid ?: ''}",
+          "email": "${encryptedTokenMapping.email ?: ''}"
+        },
+        "piidata": {
+          "email": "${encryptedTokenMapping.email ?: ''}"
+        }
+      }
+    }
+  ]
+}
