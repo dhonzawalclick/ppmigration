@@ -27,7 +27,6 @@ Start a new account or campaign by copying [`clients/_TEMPLATE-account-name-0000
 | Guide | Use it for |
 | --- | --- |
 | [`GUIDE-new-campaign.md`](GUIDE-new-campaign.md) | Building a migrated form end to end |
-| [`GUIDE-secrets.md`](GUIDE-secrets.md) | What may and may not be committed or put in page source |
 | [`readmes/readme.md`](readmes/readme.md) | Architecture, form → entry → ZMP flow, Grow JSON field reference |
 | [`readmes/grow-preference-center-process.md`](readmes/grow-preference-center-process.md) | Preference center build order |
 | [`readmes/grow-json-from-custom-js.md`](readmes/grow-json-from-custom-js.md) | Turning PushPlanet custom JS into Grow ZMP JSON |

@@ -8,8 +8,9 @@ This repo tracks migrating preference-center (and related) experiences from **Pu
 | --- | --- |
 | **This file** | Shared architecture, form→entry→JSON flow, ZMP API shape, Grow HTTP JSON reference |
 | [`sei-pushplanet-grow-migration.md`](sei-pushplanet-grow-migration.md) | Client workstream: SEI Soccer PushPlanet → Grow (includes official On Load / `nc.ol` docs) |
+| [`grow-preference-center-process.md`](grow-preference-center-process.md) | How to build a Grow preference center (On Load, ZMP, Customize) |
 | [`grow-json-from-custom-js.md`](grow-json-from-custom-js.md) | Prompt/process: Custom JS → Grow ZMP JSON configs |
-| [`lpo-api-documentation.md`](lpo-api-documentation.md) | LPO / PushPlanet API notes |
+| [`nathan-lpo-api-notes.md`](nathan-lpo-api-notes.md) | Nathan Vranicar’s LPO / PushPlanet API notes |
 
 PushPlanet already talks to ZMP (via Boomtrain / Zeta client helpers). Grow will replace the PushPlanet/Digioh experience layer; **Grow must call the same ZMP endpoints** (or equivalent) so profiles and preference events continue to land in ZMP.
 
@@ -32,11 +33,13 @@ TARGET
        │
        ├─ Form modules (Email, Name, checkboxes, Policy…) collect answers
        ├─ Each module’s Friendly ID becomes a key on the Grow entry
-       └─ On submit → HTTP / Other Data Integration (JSON config)
+       └─ On submit → one HTTP integration per destination
             reads ${entry.<friendly_id>} …
             POST identify  → …/subscribers/identify
             POST activity   → …/activities
 ```
+
+Grow can run many HTTP integrations on one experience. Each config is one request. The requests are independent, not chained: the activity call does not run from the identify response.
 
 Grow’s JSON integration model (url, verb, headers, params mappings) is documented in **Grow JSON integration reference** below. That is the mechanism we will use to hit ZMP.
 
@@ -75,6 +78,8 @@ In the JSON, expressions like `${entry.email}` only work if the Grow form expose
 1. Add the module on the form (e.g. Email, checkbox / Multi Opt-in for prefs).
 2. Set **Friendly ID** to the same name the JSON expects — or change the JSON to match whatever Friendly ID you choose.
 3. Submit → Grow builds `entry` → integration substitutes the values.
+
+A field hidden with CSS (`display: none`, or the `hidden` class) still posts, so it is on the entry and on `params`. A module closed by a display condition does not post. Hiding `uid` or `email` that way leaves both `${entry.uid}` / `${entry.email}` and `${params.uid}` / `${params.email}` empty.
 
 Built-in / common entry fields (also used in exports and email tokens) include things like email, first/last name, brand/group/third-party opt-ins, terms, `uid` / Customer ID — see [Experience Exports](https://products.zetaglobal.com/grow/Content/Grow/Post-launch%20Success/Understanding-Experience-exports.htm) and [Email Notification Tokens](https://products.zetaglobal.com/grow/Content/Grow/Email%20Notifications/Understanding-Email-Notification-Tokens.htm) (`${form.email}`, `${entry.uid}`, …). Custom quiz/checkbox answers show up as their own columns / entry keys via Friendly ID ([Opt-In → Connect](https://products.zetaglobal.com/grow/Content/Grow/Understanding%20Pages%20and%20Modules/Module-Optin.htm)).
 

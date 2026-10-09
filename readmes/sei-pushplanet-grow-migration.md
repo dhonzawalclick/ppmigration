@@ -53,8 +53,8 @@ Use them for values that Custom JavaScript writes (for example `message_uid` fro
 `a`, `b`, and `c` are **real fields**. Each of `a` and `b` (and typically the other On Load-filled fields) gets **`hidden` in the class box** (module → Design → Developer options → CSS class name). Grow adds the prefix `xCustom-`, so the page class is `xCustom-hidden`, and the theme hides it.
 
 - The class box takes **one class only**.
-- A field with `display: none` **still posts**.
-- A module whose **display condition** closes it **does not post**.
+- A field with `display: none` (or the `hidden` class) **still posts**. The value is on `entry.<friendly_id>` and on `params.<field name>`.
+- A module whose **display condition** closes it **does not post**. Hiding `uid` or `email` that way removes them from both `entry` and `params`, so the ZMP mapping is empty. Hide those fields with CSS, and use a display condition only when the field should be absent from the submit.
 
 We use these real fields (with the `hidden` class) because On Load does not always fill a real Advanced hidden field (observed behavior).
 
@@ -95,7 +95,7 @@ decode URL parameters
   → return$ values to the form
 ```
 
-An entry integration can send more calls in order (for example identify, then activity).
+Grow can run many HTTP entry integrations on one submit. Each integration is one request. They are independent, not chained: identify does not complete and then trigger activity. Use one integration per ZMP URL.
 
 #### Guards
 
@@ -370,12 +370,10 @@ Note: `pref_center_fan_jerseys_and_gear` is updated on the subscriber object but
 
 ### Grow implications (two calls)
 
-Grow’s JSON help describes **one** HTTP integration config per destination. To match PushPlanet’s sequence (identify, then track event), we likely need **two** Grow integrations on the same experience/entry:
+Grow’s JSON help describes **one** HTTP integration config per destination. To match PushPlanet’s two writes, use **two** Grow integrations on the same experience. They fire independently. Grow does not chain the activity call on the identify response.
 
 1. Identify → `POST .../subscribers/identify`
 2. Activity → `POST .../activities` with `event: preference_center`
-
-Or one call if product accepts only profile update *or* only the event — current PushPlanet does both.
 
 ---
 

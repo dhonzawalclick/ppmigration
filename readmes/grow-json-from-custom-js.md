@@ -27,7 +27,7 @@ Do **not** create a JS “Grow replica” of form/UI logic. Output is Grow JSON 
 ### Required reading (in this order)
 
 1. The custom JS the user provided (path or paste).
-2. [`lpo-api-documentation.md`](./lpo-api-documentation.md) — Push Planet / Digioh function signatures and payload shapes.
+2. [`nathan-lpo-api-notes.md`](./nathan-lpo-api-notes.md) — Push Planet / Digioh function signatures and payload shapes.
 3. [`readme.md`](./readme.md) — Grow JSON field reference + ZMP auth / base URL / migration context.
 4. Official ZMP docs as needed:
    - https://docs.zetaglobal.com/reference/getting-started
@@ -46,7 +46,7 @@ Do **not** create a JS “Grow replica” of form/UI logic. Output is Grow JSON 
 | `window.getSubscriber` | `api.ZETA_FUNCTIONS.getSubscriber` | Usually **read/prefill**, not a Grow outbound entry integration — note it; only write a Grow GET config if the user asks |
 | `window.getSubscriberByContactEmail` | `api.ZETA_FUNCTIONS.getSubscriberByContact` | Same as above — note / optional GET config only if asked |
 
-**One Grow JSON config = one HTTP call.** If the JS calls identify then track event, create **two** JSON files. Explain briefly why when asking.
+**One Grow JSON config = one HTTP call.** Grow can run many of these on one experience. They are independent, not chained. If the JS calls identify then track event, create **two** JSON files. Explain briefly why when asking.
 
 ### Payload rules
 
@@ -64,10 +64,11 @@ Do **not** create a JS “Grow replica” of form/UI logic. Output is Grow JSON 
    - `{experience}-grow-zmp-activity.json`
    - `{experience}-grow-zmp-unsubscribe.json`
 2. Short reply: which LPO functions were found → which files were created → open questions (uid vs email, contact_value quirks, Digioh-only gaps, prefill/GET needs).
-3. Do not dump large Grow field-reference docs into new files; link `readme.md` / `lpo-api-documentation.md` instead.
+3. Do not dump large Grow field-reference docs into new files; link `readme.md` / `nathan-lpo-api-notes.md` instead.
 
 ### Do not
 
 - Replicate checkbox UI, validation, or p13n bootstrap as new JS.
 - Commit real API keys, GUIDs used as secrets, or live Basic tokens.
+- Chain identify and activity in one config. One JSON is one request. Two writes are two integrations, and they do not run in order.
 - Collapse identify + activity into one JSON unless the user explicitly wants a single call and accepts dropping the other write.

@@ -14,4 +14,4 @@ Account-level ZMP HTTP templates live in `../templates/` (`identify.json`, `acti
 
 Put originals (PushPlanet / Digioh script), samples, and retired attempts in `reference/`. Nothing there is pasted into Grow.
 
-Set `encryptionKey` in Grow only. Keep `REPLACE_WITH_AES_KEY_HEX` in the repo. See [`GUIDE-secrets.md`](../../../GUIDE-secrets.md).
+Set `encryptionKey` in Grow only. Keep `REPLACE_WITH_AES_KEY_HEX` in the repo.
