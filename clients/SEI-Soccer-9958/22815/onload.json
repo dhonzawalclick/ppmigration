@@ -1,5 +1,5 @@
 {
-  "encryptionKey": "ba1accd01b6dec8daaf0cfd112d95913",
+  "encryptionKey": "REPLACE_WITH_AES_KEY_HEX",
   "logDebug": true,
   "onlySubSteps": true,
   "subSteps": [

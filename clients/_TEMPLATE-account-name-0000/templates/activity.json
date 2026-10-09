@@ -1,0 +1,33 @@
+{
+  "url": "https://api.zetaglobal.net/ver2/REPLACE_SITE_ID/activities",
+  "stageUrl": "https://REPLACE_CAPTURE_URL",
+  "bindUrl": false,
+  "requestType": "json",
+  "verb": "post",
+  "paramsType": "mapped",
+  "formatType": "structured",
+  "encoding": "UTF-8",
+  "ignoreEmpty": true,
+  "nullHandling": "omit",
+  "required": ["email"],
+  "sendEntitlements": false,
+  "verifyHost": true,
+  "trustAll": false,
+  "searchForParamsMapKeyword": true,
+  "header": {
+    "Authorization": "Basic REPLACE_WITH_BASE64(api:ZMP_REST_API_KEY)",
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+  },
+  "params": {
+    "activity": {
+      "subscriber": {
+        "uid": "${entry.uid ?: entry.email}"
+      },
+      "event": "REPLACE_EVENT_NAME",
+      "properties": {
+        "email": "${entry.email ?: ''}"
+      }
+    }
+  }
+}

@@ -2,7 +2,7 @@
 //
 // Live placeholders use Custom CSS (:focus opacity). If you paste Custom JS into
 // Grow Customize, wrap it in <script>…</script> (see Scripting Guide) or it
-// renders as page text. The live fromOnLoad gate is 9958-grow-fromonload-gate.js.
+// renders as page text. The live fromOnLoad gate is ../custom.js.
 (function () {
   function isFilled(input) {
     var v = (input.value || "").replace(/^\s+|\s+$/g, "");

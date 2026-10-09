@@ -1,6 +1,7 @@
 {
   "pattern": "official Grow On Load \u2014 single nc.ol encrypted JSON + encryptionKey + encryptedTokenMapping",
-  "aes_key_hex_string": "ba1accd01b6dec8daaf0cfd112d95913",
+  "aes_key_hex_string": "REPLACE_WITH_AES_KEY_HEX",
+  "key_note": "nc.ol below was encrypted with the pre-rotation key. Regenerate after rotating.",
   "plaintext_json": {
     "uid": "sei-test-uid-001",
     "email": "test.user@example.com",

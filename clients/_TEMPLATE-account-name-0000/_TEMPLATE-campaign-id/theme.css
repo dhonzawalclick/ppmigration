@@ -1,0 +1,15 @@
+/* Campaign Customize CSS */
+
+/* Pairs with custom.js: hide policy + submit while fromOnLoad is false */
+.xCustomClass-hide-cta {
+  display: none !important;
+}
+
+/* Hold error copy back 1s so a good link does not flash it */
+.xCustom-defaultError {
+  opacity: 0;
+  animation: showContent 0s ease 1s forwards;
+}
+@keyframes showContent {
+  to { opacity: 1; }
+}

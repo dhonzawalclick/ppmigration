@@ -1,0 +1,19 @@
+{
+  "encryptionKey": "REPLACE_WITH_AES_KEY_HEX",
+  "logDebug": true,
+  "onlySubSteps": true,
+  "subSteps": [
+    {
+      "return$": {
+        "data": {
+          "fromOnLoad": "${encryptedTokenMapping.fromOnLoad ?: 'true'}",
+          "uid": "${encryptedTokenMapping.uid ?: ''}",
+          "email": "${encryptedTokenMapping.email ?: ''}"
+        },
+        "piidata": {
+          "email": "${encryptedTokenMapping.email ?: ''}"
+        }
+      }
+    }
+  ]
+}

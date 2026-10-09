@@ -4,12 +4,12 @@ SEI Soccer preference-center migration details. General PushPlanet/Digioh → Gr
 
 | Asset | Path |
 | --- | --- |
-| PushPlanet script | [`SEI/9958-desktop.js`](../SEI/9958-desktop.js) |
-| Grow Custom CSS | [`SEI/9958-grow-theme-fix.css`](../SEI/9958-grow-theme-fix.css) |
-| Grow Custom JS | [`SEI/9958-grow-fromonload-gate.js`](../SEI/9958-grow-fromonload-gate.js) — **paste this only** (gate + URL decrypt) |
-| On Load (official `nc.ol`, optional) | [`SEI/9958-grow-onload.json`](../SEI/9958-grow-onload.json) + [`sample`](../SEI/9958-grow-onload-sample-input.json) |
-| On Load legacy Groovy template | [`SEI/grow-onload-decrypt-template.json`](../SEI/grow-onload-decrypt-template.json) — do not use; 503’d on staging |
-| Identify / Activity JSON | [`SEI/9958-grow-zmp-identify.json`](../SEI/9958-grow-zmp-identify.json), [`SEI/9958-grow-zmp-activity.json`](../SEI/9958-grow-zmp-activity.json) |
+| PushPlanet script | [`reference/pushplanet-9958-desktop.js`](../clients/SEI-Soccer-9958/22815/reference/pushplanet-9958-desktop.js) |
+| Grow Custom CSS | [`22815/theme.css`](../clients/SEI-Soccer-9958/22815/theme.css) |
+| Grow Custom JS | [`22815/custom.js`](../clients/SEI-Soccer-9958/22815/custom.js): CTA gate only, no AES key |
+| On Load (`nc.ol`) | [`22815/onload.json`](../clients/SEI-Soccer-9958/22815/onload.json) + [`sample`](../clients/SEI-Soccer-9958/22815/reference/onload-sample-input.json) |
+| On Load legacy Groovy template | [`reference/onload-dual-token-groovy.json`](../clients/SEI-Soccer-9958/22815/reference/onload-dual-token-groovy.json): do not use; 503’d on staging |
+| Identify / Activity JSON | [`templates/identify.json`](../clients/SEI-Soccer-9958/templates/identify.json), [`templates/activity.json`](../clients/SEI-Soccer-9958/templates/activity.json) |
 | Grow Experience | Campaign **22815** (staging) |
 
 ## Grow migration field notes
@@ -34,12 +34,11 @@ Most migrated forms have these modules for the integrations.
 #### a) `fromOnLoad` — radio (`true` / `false`)
 
 - Means “we resolved the user from the email link.” Starts **false**; when set to **true**, Grow conditionals show the real fields.
-- **SEI staging (current):** Custom JS decrypts `nc.ol_tok` / `nc.ol_tok2` and sets `fromOnLoad` to `"true"`. See [Customize](#sei-grow-experience-customize-campaign-22815).
-- **Optional later:** server On Load can return `fromOnLoad: "true"` instead (official `nc.ol` path). Submit/T&C still need Custom JS — submit modules cannot use display conditions.
+- **SEI:** server On Load decrypts `nc.ol` and returns `fromOnLoad: "true"`. Submit/T&C still need Custom JS because submit modules cannot use display conditions. See [Customize](#sei-grow-experience-customize-campaign-22815).
 
 #### b) `uid` and `email`
 
-Hidden/email fields that identify the user for ZMP. **SEI staging:** Custom JS decrypts URL tokens into these fields. Official On Load would fill them via `encryptedTokenMapping` / `return$.data` if that path is working.
+Hidden/email fields that identify the user for ZMP. **SEI:** On Load fills them via `encryptedTokenMapping` / `return$.data`.
 
 #### c) Other fields
 
@@ -65,9 +64,8 @@ We use these real fields (with the `hidden` class) because On Load does not alwa
 | --- | --- |
 | Param | What SEI uses it for |
 | --- | --- |
-| `nc.ol_tok` | Encrypted **uid** (AES). Custom JS decrypts → `input[name="uid"]`. |
-| `nc.ol_tok2` | Encrypted **email** (AES). Custom JS decrypts → `input[name="email"]`. |
-| `nc.ol` | Official single encrypted JSON blob (for server On Load). Custom JS also accepts it if present. |
+| `nc.ol` | Single encrypted JSON blob. Server On Load decrypts it with `encryptionKey`. |
+| `nc.ol_tok` / `nc.ol_tok2` | Earlier dual-token pattern (AES uid / AES email). Retired for SEI. |
 | `nc.pf_<fieldname>` | Grow prefills a field (`pf` = prefill). Value for radios/checkboxes must be the choice id. |
 | Other `nc.*` | Fires On Load if a server integration is configured; Custom JS can also read via `URLSearchParams`. |
 | No `nc.` prefix | Integrations ignore it; only Custom JS can read it. |
@@ -195,40 +193,32 @@ Each client has a similar unsubscribe form template in Grow; steps are usually s
 
 | File | Role |
 | --- | --- |
-| [`SEI/9958-grow-fromonload-gate.js`](../SEI/9958-grow-fromonload-gate.js) | **What staging uses** — client decrypt of `nc.ol_tok` / `nc.ol_tok2` + CTA gate |
-| [`SEI/9958-grow-onload.json`](../SEI/9958-grow-onload.json) | Optional official server On Load (`nc.ol` + `encryptedTokenMapping`) |
-| [`SEI/9958-grow-onload-sample-input.json`](../SEI/9958-grow-onload-sample-input.json) | Sample `nc.ol` JSON blob |
-| [`SEI/grow-onload-decrypt-template.json`](../SEI/grow-onload-decrypt-template.json) | Legacy Groovy dual-token On Load — caused 503; do not paste |
+| [`22815/onload.json`](../clients/SEI-Soccer-9958/22815/onload.json) | Server On Load (`nc.ol` + `encryptionKey` → `encryptedTokenMapping`) |
+| [`reference/onload-sample-input.json`](../clients/SEI-Soccer-9958/22815/reference/onload-sample-input.json) | Sample `nc.ol` JSON blob |
+| [`reference/onload-dual-token-groovy.json`](../clients/SEI-Soccer-9958/22815/reference/onload-dual-token-groovy.json) | Legacy Groovy dual-token On Load. Caused 503; do not paste. |
 
-10. Paste Custom JS + CSS from Customize section. Add HTTP entry integration(s) for ZMP (`paramsType: "mapped"`, `ignoreEmpty: true`). Optional: official On Load when encrypt format is confirmed with CSM.
-11. Email link (current SEI): `nc.ol_tok` = AES(uid), `nc.ol_tok2` = AES(email), same key as in Custom JS. Later/official: single `nc.ol` encrypted JSON.
+10. Paste Custom JS + CSS from Customize section. Paste On Load and set `encryptionKey` in Grow. Add HTTP entry integration(s) for ZMP (`paramsType: "mapped"`, `ignoreEmpty: true`).
+11. Email link: single `nc.ol` = AES-encrypted JSON (`uid`, `email`, `fromOnLoad`), same key as On Load `encryptionKey`.
 
 ---
 ---
 
 ## SEI Grow Experience Customize (campaign 22815)
 
-Staging preference-center form. Paste into **Customize** → **Apply / Save & Close** → experience **Save**. One Custom JS file only — do not paste a second decrypt script.
+Staging preference-center form. Paste into **Customize** → **Apply / Save & Close** → experience **Save**.
 
 | Slot | Repo file | Notes |
 | --- | --- | --- |
-| Custom Styles | [`SEI/9958-grow-theme-fix.css`](../SEI/9958-grow-theme-fix.css) | Layout, placeholders, name/email/DOB. Month dropdown stays working. |
-| Custom JavaScript | [`SEI/9958-grow-fromonload-gate.js`](../SEI/9958-grow-fromonload-gate.js) | **Both** behaviors below in one `<script>`. |
+| Custom Styles | [`22815/theme.css`](../clients/SEI-Soccer-9958/22815/theme.css) | Layout, placeholders, name/email/DOB. Month dropdown stays working. |
+| Custom JavaScript | [`22815/custom.js`](../clients/SEI-Soccer-9958/22815/custom.js) | `fromOnLoad` gate only. |
 
 Scripting Guide: `/admin/campaign/scripthelpmicro`. Custom JS **must** include `<script>` tags or Grow dumps source as page text. Prefer `NGX.api` over raw DOM for system modules.
 
 ### What the Custom JS does
 
-**A — URL decrypt fill (client fallback; On Load was 503)**
+It does not decrypt tokens and holds no AES key. On Load fills `uid`, `email`, `fromOnLoad`. An earlier version decrypted `nc.ol_tok` / `nc.ol_tok2` in the browser; that key was readable in page source and must be rotated.
 
-1. Read `nc.ol_tok` / `nc.ol_tok2` (or `nc.ol` JSON) from the query string.
-2. AES-256-CBC decrypt (IV = first 16 bytes of Base64 payload; key = UTF-8 of hex string `ba1accd01b6dec8daaf0cfd112d95913` — same as On Load `encryptionKey`).
-3. Write `uid`, `email`; set `fromOnLoad` radio to **true**.
-4. Re-apply after ~300ms / ~1200ms so Preact does not wipe the values; then re-sync the CTA gate.
-
-Sample tokens / plaintext: see earlier dual-token samples, or encrypt with that key. Staging URL must use `&nc.ol_tok=` / `&nc.ol_tok2=` (no extra `?`).
-
-**B — `fromOnLoad` gate (T&C + Sign up)**
+**`fromOnLoad` gate (T&C + Sign up)**
 
 | Value | Grow conditionals (name, email, DOB, multi opt-ins) | T&C + Sign up |
 | --- | --- | --- |
@@ -237,7 +227,7 @@ Sample tokens / plaintext: see earlier dual-token samples, or encrypt with that 
 
 Policy/submit modules cannot use Page Builder conditions, so JS toggles class `sei-hide-cta` on `policy_1790353974879` and `submit_1684917530454` via `module:add/remove:custom:classes`. Companion CSS in the theme file hides `.xCustomClass-sei-hide-cta`.
 
-In production, hide the True/False radio UI when you no longer need the staging toggle. AES key in Custom JS is visible in page source — acceptable for staging; prefer working server On Load for prod when CSM encrypt format is confirmed.
+In production, hide the True/False radio UI when you no longer need the staging toggle.
 
 ### Practical checklist for SEI prefs
 
@@ -256,7 +246,7 @@ Grow docs for the push path: [Different Ways to Export Entry Data](https://produ
 ---
 ---
 
-## Current PushPlanet integration (`SEI/9958-desktop.js`)
+## Current PushPlanet integration (`reference/pushplanet-9958-desktop.js`)
 
 Preference center for SEI Soccer. Hardcoded PushPlanet / Zeta client ids:
 
@@ -448,7 +438,7 @@ First subStep: `http$` GET to a third party with `queryParams$` from `encryptedT
 
 ### Why our first SEI On Load failed (re-check)
 
-We built [`9958-grow-onload.json`](../SEI/9958-grow-onload.json) (first version) like a **custom** migration: `nc.ol_tok` / `nc.ol_tok2` + Groovy `eval$` decrypt + `params.ol_tok`. Staging then called Grow’s runner and got:
+We built the first SEI On Load (now [`reference/onload-dual-token-groovy.json`](../clients/SEI-Soccer-9958/22815/reference/onload-dual-token-groovy.json)) like a **custom** migration: `nc.ol_tok` / `nc.ol_tok2` + Groovy `eval$` decrypt + `params.ol_tok`. Staging then called Grow’s runner and got:
 
 `POST /api/integration/d/onload` → **503** — `Failed to make onload integration request!`
 
@@ -463,7 +453,7 @@ Mismatch vs these docs:
 
 Likely 503 cause: with `encryptionKey` set, Grow expects a valid **`nc.ol`** blob. We never sent `nc.ol`, so built-in decrypt/mapping can fail hard before (or instead of) our Groovy path. Custom `eval$` decrypt is also outside the documented contract and can crash the runner.
 
-**Current SEI workaround:** skip relying on server On Load for fill. Use Custom JS in [`9958-grow-fromonload-gate.js`](../SEI/9958-grow-fromonload-gate.js) with **`nc.ol_tok` + `nc.ol_tok2`**. Optional: still paste official [`9958-grow-onload.json`](../SEI/9958-grow-onload.json) and test `nc.ol` with CSM encrypt guidance later.
+**Current SEI path:** official [`22815/onload.json`](../clients/SEI-Soccer-9958/22815/onload.json) with `nc.ol`. Retest on staging after rotating the key. The browser-decrypt workaround was removed because it exposed the key.
 
 ---
 
@@ -471,7 +461,7 @@ Likely 503 cause: with `encryptionKey` set, Grow expects a valid **`nc.ol`** blo
 
 ZMP `site_id` for SEI is `sei-soccer-com` (also used when loading `p13n.min.js`).
 
-Live draft configs: [`9958-grow-zmp-identify.json`](../SEI/9958-grow-zmp-identify.json), [`9958-grow-zmp-activity.json`](../SEI/9958-grow-zmp-activity.json).
+Live draft configs: [`templates/identify.json`](../clients/SEI-Soccer-9958/templates/identify.json), [`templates/activity.json`](../clients/SEI-Soccer-9958/templates/activity.json).
 
 ### Suggested Grow stubs for ZMP (to flesh out next)
 
