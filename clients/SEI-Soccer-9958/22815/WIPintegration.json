@@ -1,0 +1,110 @@
+{
+  "onlySubSteps": true,
+  "subSteps": [
+    {
+      "http$": {
+        "nullHandling": "omit",
+        "requestType": "json",
+        "verb": "post",
+        "verifyHost": true,
+        "trustAll": false,
+        "sendEntitlements": false,
+        "stageUrl": "https://api.zetaglobal.net/ver2/sei-soccer-com/subscribers/identify",
+        "encoding": "UTF-8",
+        "params": {
+          "subscriber": {
+            "uid": "${entry.uid ?: entry.email}",
+            "first_name": "${entry.firstname ?: entry.first_name ?: ''}",
+            "last_name": "${entry.lastname ?: entry.last_name ?: ''}",
+            "properties": {
+              "date_of_birth": "${entry.date_of_birth ?: ''}",
+              "email": "${entry.email ?: ''}",
+              "pref_center_parent": "${(entry.parent ?: entry.pref_center_parent) ? 'Y' : 'N'}",
+              "pref_center_coach_admin": "${(entry.coach_admin ?: entry.pref_center_coach_admin) ? 'Y' : 'N'}",
+              "pref_center_player": "${(entry.player ?: entry.pref_center_player) ? 'Y' : 'N'}",
+              "pref_center_fan": "${(entry.fan ?: entry.pref_center_fan) ? 'Y' : 'N'}",
+              "pref_center_cleats_and_shoes": "${(entry.cleats_and_shoes ?: entry.pref_center_cleats_and_shoes) ? 'Y' : 'N'}",
+              "pref_center_fan_jerseys_and_gear": "${(entry.fan_jerseys_and_gear ?: entry.pref_center_fan_jerseys_and_gear) ? 'Y' : 'N'}",
+              "pref_center_apparel": "${(entry.apparel ?: entry.pref_center_apparel) ? 'Y' : 'N'}",
+              "pref_center_soccer_balls_and_equipment": "${(entry.soccer_balls_and_equipment ?: entry.pref_center_soccer_balls_and_equipment) ? 'Y' : 'N'}",
+              "pref_center_goalkeeper": "${(entry.goalkeeper ?: entry.pref_center_goalkeeper) ? 'Y' : 'N'}",
+              "pref_center_new_content_and_articles": "${(entry.new_content_and_articles ?: entry.pref_center_new_content_and_articles) ? 'Y' : 'N'}",
+              "pref_center_deals_and_special_offers": "${(entry.deals_and_special_offers ?: entry.pref_center_deals_and_special_offers) ? 'Y' : 'N'}"
+            },
+            "contacts": [
+              {
+                "contact_type": "email",
+                "contact_value": "${entry.email}",
+                "subscription_status": "active"
+              }
+            ],
+            "source": "grow"
+          }
+        },
+        "url": "https://api.zetaglobal.net/ver2/sei-soccer-com/subscribers/identify",
+        "paramsType": "mapped",
+        "required": ["email"],
+        "searchForParamsMapKeyword": true,
+        "ignoreEmpty": true,
+        "header": {
+          "Authorization": "Basic REPLACE_WITH_BASE64(api:ZMP_REST_API_KEY)",
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        },
+        "formatType": "structured",
+        "bindUrl": false
+      }
+    },
+    {
+      "http$": {
+        "nullHandling": "omit",
+        "requestType": "json",
+        "verb": "post",
+        "verifyHost": true,
+        "trustAll": false,
+        "sendEntitlements": false,
+        "stageUrl": "https://api.zetaglobal.net/ver2/sei-soccer-com/activities",
+        "encoding": "UTF-8",
+        "params": {
+          "activity": {
+            "subscriber": {
+              "uid": "${entry.uid ?: entry.email}"
+            },
+            "event": "preference_center",
+            "properties": {
+              "source": "grow",
+              "subscription_status": "active",
+              "first_name": "${entry.firstname ?: entry.first_name ?: ''}",
+              "last_name": "${entry.lastname ?: entry.last_name ?: ''}",
+              "date_of_birth": "${entry.date_of_birth ?: ''}",
+              "email": "${entry.email ?: ''}",
+              "pref_center_parent": "${(entry.parent ?: entry.pref_center_parent) ? 'Y' : 'N'}",
+              "pref_center_coach_admin": "${(entry.coach_admin ?: entry.pref_center_coach_admin) ? 'Y' : 'N'}",
+              "pref_center_player": "${(entry.player ?: entry.pref_center_player) ? 'Y' : 'N'}",
+              "pref_center_fan": "${(entry.fan ?: entry.pref_center_fan) ? 'Y' : 'N'}",
+              "pref_center_cleats_and_shoes": "${(entry.cleats_and_shoes ?: entry.pref_center_cleats_and_shoes) ? 'Y' : 'N'}",
+              "pref_center_fan_jerseys_and_gear": "${(entry.fan_jerseys_and_gear ?: entry.pref_center_fan_jerseys_and_gear) ? 'Y' : 'N'}",
+              "pref_center_apparel": "${(entry.apparel ?: entry.pref_center_apparel) ? 'Y' : 'N'}",
+              "pref_center_soccer_balls_and_equipment": "${(entry.soccer_balls_and_equipment ?: entry.pref_center_soccer_balls_and_equipment) ? 'Y' : 'N'}",
+              "pref_center_goalkeeper": "${(entry.goalkeeper ?: entry.pref_center_goalkeeper) ? 'Y' : 'N'}",
+              "pref_center_new_content_and_articles": "${(entry.new_content_and_articles ?: entry.pref_center_new_content_and_articles) ? 'Y' : 'N'}",
+              "pref_center_deals_and_special_offers": "${(entry.deals_and_special_offers ?: entry.pref_center_deals_and_special_offers) ? 'Y' : 'N'}"
+            }
+          }
+        },
+        "url": "https://api.zetaglobal.net/ver2/sei-soccer-com/activities",
+        "paramsType": "mapped",
+        "required": ["email"],
+        "searchForParamsMapKeyword": true,
+        "ignoreEmpty": true,
+        "header": {
+          "Authorization": "Basic REPLACE_WITH_BASE64(api:ZMP_REST_API_KEY)",
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        },
+        "formatType": "structured",
+        "bindUrl": false
+      }
+    }
+  ]
+}
