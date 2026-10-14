@@ -1,0 +1,43 @@
+{
+  "encryptionKey": "REPLACE_WITH_AES_KEY_HEX",
+  "logDebug": true,
+  "onlySubSteps": true,
+  "subSteps": [
+    {
+      "when$": "${encryptedTokenMapping.uid ?: encryptedTokenMapping.email ?: ''}",
+      "http$": {
+        "url": "https://api.zetaglobal.net/ver2/sei-soccer-com/subscribers",
+        "stageUrl": "https://api.zetaglobal.net/ver2/sei-dev/subscribers",
+        "verb": "get",
+        "requestType": "querystring",
+        "bindUrl": false,
+        "header": {
+          "Authorization": "Basic REPLACE_WITH_BASE64(api:ZMP_REST_API_KEY)",
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        },
+        "params": {
+          "uid": "${encryptedTokenMapping.uid ?: encryptedTokenMapping.email}"
+        }
+      }
+    },
+    {
+      "return$": {
+        "data": {
+          "fromOnLoad": "true",
+          "uid": "${encryptedTokenMapping.uid ?: encryptedTokenMapping.email ?: ''}",
+          "email": "${encryptedTokenMapping.email ?: encryptedTokenMapping.uid ?: ''}",
+          "name_Firstname": "${executionResults.json?.first_name ?: executionResults.json?.properties?.first_name ?: ''}",
+          "name_Lastname": "${executionResults.json?.last_name ?: executionResults.json?.properties?.last_name ?: ''}",
+          "date_of_birth": "${executionResults.json?.properties?.date_of_birth ?: ''}",
+          "opt_down_ind": "${executionResults.json?.properties?.opt_down_ind ?: ''}",
+          "group_opt_in_list": "${{-> def p = executionResults.json?.properties ?: [:]; def ids = []; if (p.pref_center_parent == 'Y') ids << 'parent'; if (p.pref_center_coach_admin == 'Y') ids << 'coach_admin'; if (p.pref_center_player == 'Y') ids << 'player'; if (p.pref_center_fan == 'Y') ids << 'fan'; return ids}.call()}",
+          "multioptin_01": "${{-> def p = executionResults.json?.properties ?: [:]; def ids = []; if (p.pref_center_new_cleats == 'Y') ids << 'new_cleats'; if (p.pref_center_new_fan_jerseys == 'Y') ids << 'new_fan_jerseys'; if (p.pref_center_new_equipment == 'Y') ids << 'new_equipment'; if (p.pref_center_goalkeeper == 'Y') ids << 'goalkeeper'; if (p.pref_center_sale == 'Y') ids << 'sale'; return ids}.call()}"
+        },
+        "piidata": {
+          "email": "${encryptedTokenMapping.email ?: encryptedTokenMapping.uid ?: ''}"
+        }
+      }
+    }
+  ]
+}

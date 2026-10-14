@@ -1,6 +1,6 @@
 /* Campaign Customize CSS */
 
-/* Pairs with custom.js: hide policy + submit while fromOnLoad is false */
+/* Pairs with custom.html: hide policy + submit while fromOnLoad is false */
 .xCustomClass-hide-cta {
   display: none !important;
 }

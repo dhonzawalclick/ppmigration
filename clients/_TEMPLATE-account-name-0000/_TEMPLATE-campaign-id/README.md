@@ -6,7 +6,7 @@ Replace this folder name with the Grow campaign id (e.g. `22815`).
 
 | Grow UI | File |
 | --- | --- |
-| Customize → Custom JavaScript | `custom.js` |
+| Customize → Custom JavaScript | `custom.html` |
 | Customize → Custom Styles | `theme.css` |
 | Integrations → On Load | `onload.json` |
 

@@ -1,49 +1,78 @@
 {
-  "nullHandling": "omit",
+  "url": "https://api.zetaglobal.net/ver2/sei-soccer-com/activities",
+  "stageUrl": "https://api.zetaglobal.net/ver2/sei-dev/activities",
+  "bindUrl": false,
   "requestType": "json",
   "verb": "post",
+  "paramsType": "mapped",
+  "formatType": "structured",
+  "encoding": "UTF-8",
+  "ignoreEmpty": true,
+  "nullHandling": "omit",
+  "required": ["email"],
+  "sendEntitlements": false,
   "verifyHost": true,
   "trustAll": false,
-  "sendEntitlements": false,
-  "stageUrl": "https://api.zetaglobal.net/ver2/sei-soccer-com/activities",
-  "encoding": "UTF-8",
+  "logDebug": true,
   "searchForParamsMapKeyword": true,
+  "header": {
+    "Authorization": "Basic REPLACE_WITH_BASE64(api:ZMP_REST_API_KEY)",
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+  },
   "params": {
     "activity": {
+      "identify_person": true,
       "subscriber": {
-        "uid": "${entry.uid ?: entry.email}"
+        "uid": "${entry.email ?: entry.uid}",
+        "first_name": "${entry.firstname ?: entry.name_Firstname ?: entry.first_name ?: ''}",
+        "last_name": "${entry.lastname ?: entry.name_Lastname ?: entry.last_name ?: ''}",
+        "source": "grow",
+        "contacts": [
+          {
+            "contact_type": "email",
+            "contact_value": "${entry.email ?: entry.uid}",
+            "subscription_status": "active"
+          }
+        ],
+        "properties": {
+          "first_name": "${entry.firstname ?: entry.name_Firstname ?: entry.first_name ?: ''}",
+          "last_name": "${entry.lastname ?: entry.name_Lastname ?: entry.last_name ?: ''}",
+          "date_of_birth": "${entry.date_of_birth ?: params.date_of_birth ?: ''}",
+          "email": "${entry.email ?: ''}",
+          "pref_center_parent": "${((params.group_opt_in_list ?: params.multioptin ?: entry.group_opt_in_list ?: entry.multioptin ?: '') as String).contains('parent') ? 'Y' : 'N'}",
+          "pref_center_coach_admin": "${((params.group_opt_in_list ?: params.multioptin ?: entry.group_opt_in_list ?: entry.multioptin ?: '') as String).contains('coachadmin') ? 'Y' : 'N'}",
+          "pref_center_player": "${((params.group_opt_in_list ?: params.multioptin ?: entry.group_opt_in_list ?: entry.multioptin ?: '') as String).contains('player') ? 'Y' : 'N'}",
+          "pref_center_fan": "${((params.group_opt_in_list ?: params.multioptin ?: entry.group_opt_in_list ?: entry.multioptin ?: '') as String).contains('fan') ? 'Y' : 'N'}",
+          "pref_center_cleats_and_shoes": "${((params.multioptin_01 ?: entry.multioptin_01 ?: '') as String).contains('cleats_and_shoes') ? 'Y' : 'N'}",
+          "pref_center_fan_jerseys_and_gear": "${((params.multioptin_01 ?: entry.multioptin_01 ?: '') as String).contains('fan_jerseys_and_gear') ? 'Y' : 'N'}",
+          "pref_center_apparel": "${((params.multioptin_01 ?: entry.multioptin_01 ?: '') as String).contains('apparel') ? 'Y' : 'N'}",
+          "pref_center_soccer_balls_and_equipment": "${((params.multioptin_01 ?: entry.multioptin_01 ?: '') as String).contains('soccer_balls_and_equipment') ? 'Y' : 'N'}",
+          "pref_center_goalkeeper": "${((params.multioptin_01 ?: entry.multioptin_01 ?: '') as String).contains('goalkeeper') ? 'Y' : 'N'}",
+          "pref_center_new_content_and_articles": "${((params.multioptin_01 ?: entry.multioptin_01 ?: '') as String).contains('new_content_and_articles') ? 'Y' : 'N'}",
+          "pref_center_deals_and_special_offers": "${((params.multioptin_01 ?: entry.multioptin_01 ?: '') as String).contains('deals_and_special_offers') ? 'Y' : 'N'}"
+        }
       },
       "event": "preference_center",
       "properties": {
         "source": "grow",
         "subscription_status": "active",
-        "first_name": "${entry.firstname ?: entry.first_name ?: ''}",
-        "last_name": "${entry.lastname ?: entry.last_name ?: ''}",
+        "first_name": "${entry.firstname ?: entry.name_Firstname ?: entry.first_name ?: ''}",
+        "last_name": "${entry.lastname ?: entry.name_Lastname ?: entry.last_name ?: ''}",
         "email": "${entry.email ?: ''}",
-        "date_of_birth": "${entry.date_of_birth ?: ''}",
-        "pref_center_parent": "${(entry.parent ?: entry.pref_center_parent) ? 'Y' : 'N'}",
-        "pref_center_coach_admin": "${(entry.coach_admin ?: entry.pref_center_coach_admin) ? 'Y' : 'N'}",
-        "pref_center_player": "${(entry.player ?: entry.pref_center_player) ? 'Y' : 'N'}",
-        "pref_center_fan": "${(entry.fan ?: entry.pref_center_fan) ? 'Y' : 'N'}",
-        "pref_center_cleats_and_shoes": "${(entry.cleats_and_shoes ?: entry.pref_center_cleats_and_shoes) ? 'Y' : 'N'}",
-        "pref_center_fan_jerseys_and_gear": "${(entry.fan_jerseys_and_gear ?: entry.pref_center_fan_jerseys_and_gear) ? 'Y' : 'N'}",
-        "pref_center_apparel": "${(entry.apparel ?: entry.pref_center_apparel) ? 'Y' : 'N'}",
-        "pref_center_soccer_balls_and_equipment": "${(entry.soccer_balls_and_equipment ?: entry.pref_center_soccer_balls_and_equipment) ? 'Y' : 'N'}",
-        "pref_center_goalkeeper": "${(entry.goalkeeper ?: entry.pref_center_goalkeeper) ? 'Y' : 'N'}",
-        "pref_center_new_content_and_articles": "${(entry.new_content_and_articles ?: entry.pref_center_new_content_and_articles) ? 'Y' : 'N'}",
-        "pref_center_deals_and_special_offers": "${(entry.deals_and_special_offers ?: entry.pref_center_deals_and_special_offers) ? 'Y' : 'N'}"
+        "date_of_birth": "${entry.date_of_birth ?: params.date_of_birth ?: ''}",
+        "pref_center_parent": "${((params.group_opt_in_list ?: params.multioptin ?: entry.group_opt_in_list ?: entry.multioptin ?: '') as String).contains('parent') ? 'Y' : 'N'}",
+        "pref_center_coach_admin": "${((params.group_opt_in_list ?: params.multioptin ?: entry.group_opt_in_list ?: entry.multioptin ?: '') as String).contains('coachadmin') ? 'Y' : 'N'}",
+        "pref_center_player": "${((params.group_opt_in_list ?: params.multioptin ?: entry.group_opt_in_list ?: entry.multioptin ?: '') as String).contains('player') ? 'Y' : 'N'}",
+        "pref_center_fan": "${((params.group_opt_in_list ?: params.multioptin ?: entry.group_opt_in_list ?: entry.multioptin ?: '') as String).contains('fan') ? 'Y' : 'N'}",
+        "pref_center_cleats_and_shoes": "${((params.multioptin_01 ?: entry.multioptin_01 ?: '') as String).contains('cleats_and_shoes') ? 'Y' : 'N'}",
+        "pref_center_fan_jerseys_and_gear": "${((params.multioptin_01 ?: entry.multioptin_01 ?: '') as String).contains('fan_jerseys_and_gear') ? 'Y' : 'N'}",
+        "pref_center_apparel": "${((params.multioptin_01 ?: entry.multioptin_01 ?: '') as String).contains('apparel') ? 'Y' : 'N'}",
+        "pref_center_soccer_balls_and_equipment": "${((params.multioptin_01 ?: entry.multioptin_01 ?: '') as String).contains('soccer_balls_and_equipment') ? 'Y' : 'N'}",
+        "pref_center_goalkeeper": "${((params.multioptin_01 ?: entry.multioptin_01 ?: '') as String).contains('goalkeeper') ? 'Y' : 'N'}",
+        "pref_center_new_content_and_articles": "${((params.multioptin_01 ?: entry.multioptin_01 ?: '') as String).contains('new_content_and_articles') ? 'Y' : 'N'}",
+        "pref_center_deals_and_special_offers": "${((params.multioptin_01 ?: entry.multioptin_01 ?: '') as String).contains('deals_and_special_offers') ? 'Y' : 'N'}"
       }
     }
-  },
-  "url": "https://api.zetaglobal.net/ver2/sei-soccer-com/activities",
-  "paramsType": "mapped",
-  "required": ["email"],
-  "ignoreEmpty": true,
-  "header": {
-    "Authorization": "Basic REPLACE_WITH_BASE64(api:ZMP_REST_API_KEY)",
-    "Accept": "application/json",
-    "Content-Type": "application/json"
-  },
-  "formatType": "structured",
-  "bindUrl": false
+  }
 }

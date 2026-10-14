@@ -6,7 +6,7 @@ SEI Soccer preference-center migration details. General PushPlanet/Digioh → Gr
 | --- | --- |
 | PushPlanet script | [`reference/pushplanet-9958-desktop.js`](../clients/SEI-Soccer-9958/22815/reference/pushplanet-9958-desktop.js) |
 | Grow Custom CSS | [`22815/theme.css`](../clients/SEI-Soccer-9958/22815/theme.css) |
-| Grow Custom JS | [`22815/custom.js`](../clients/SEI-Soccer-9958/22815/custom.js): CTA gate only, no AES key |
+| Grow Custom JS | [`22815/custom.html`](../clients/SEI-Soccer-9958/22815/custom.html): CTA gate only, no AES key |
 | On Load (`nc.ol`) | [`22815/onload.json`](../clients/SEI-Soccer-9958/22815/onload.json) + [`sample`](../clients/SEI-Soccer-9958/22815/reference/onload-sample-input.json) |
 | On Load legacy Groovy template | [`reference/onload-dual-token-groovy.json`](../clients/SEI-Soccer-9958/22815/reference/onload-dual-token-groovy.json): do not use; 503’d on staging |
 | Identify / Activity JSON | [`templates/identify.json`](../clients/SEI-Soccer-9958/templates/identify.json), [`templates/activity.json`](../clients/SEI-Soccer-9958/templates/activity.json) |
@@ -210,7 +210,7 @@ Staging preference-center form. Paste into **Customize** → **Apply / Save & Cl
 | Slot | Repo file | Notes |
 | --- | --- | --- |
 | Custom Styles | [`22815/theme.css`](../clients/SEI-Soccer-9958/22815/theme.css) | Layout, placeholders, name/email/DOB. Month dropdown stays working. |
-| Custom JavaScript | [`22815/custom.js`](../clients/SEI-Soccer-9958/22815/custom.js) | `fromOnLoad` gate only. |
+| Custom JavaScript | [`22815/custom.html`](../clients/SEI-Soccer-9958/22815/custom.html) | `fromOnLoad` gate only. |
 
 Scripting Guide: `/admin/campaign/scripthelpmicro`. Custom JS **must** include `<script>` tags or Grow dumps source as page text. Prefer `NGX.api` over raw DOM for system modules.
 

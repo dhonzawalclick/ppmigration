@@ -1,1 +1,6 @@
 .DS_Store
+# Local Grow/ZMP configs with real credentials — never commit
+**/*.local.json
+**/WIPintegration.local.json
+**/WIP*.json
+

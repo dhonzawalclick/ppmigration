@@ -31,9 +31,9 @@ Field names work like HTML `name`. On Load `return$.data.<name>` fills the field
 - Generate a key: `openssl rand -hex 16` (or `-hex 32`). Enter it in Grow only; keep `REPLACE_WITH_AES_KEY_HEX` in the repo.
 - Link pipeline: encrypt → `base64_encode | strip_newlines | url_encode`. Use `&nc.ol=`, never `&?nc.ol=`.
 
-## 4. Customize (`custom.js`, `theme.css`)
+## 4. Customize (`custom.html`, `theme.css`)
 
-- `custom.js` must be wrapped in `<script>` tags.
+- `custom.html` must be wrapped in `<script>` tags.
 - Use JS for UI and for copying non-`nc.` URL params into hidden fields on `page:ready`. Do not decrypt tokens in JS.
 - On Load values arrive after `page:ready` and `form:ready`. React to the `fromOnLoad` radio changing instead of reading it once.
 - The submit module cannot take a display condition. Hide it with CSS or a custom class until `fromOnLoad` is true.

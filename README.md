@@ -13,7 +13,7 @@ clients/
       activity.json      HTTP entry → ZMP activity
     {campaign_id}/
       README.md          paste checklist, module ids, open items
-      custom.js          Customize → Custom JavaScript
+      custom.html        Customize → Custom JavaScript
       theme.css          Customize → Custom Styles
       onload.json        Integrations → On Load
       reference/         not pasted: originals, samples, retired attempts

@@ -3,12 +3,27 @@
  *
  * Built on the working “sizing fix” baseline:
  * - Does NOT override DOB/select padding or overflow (keeps Month dropdown working)
- * - Does NOT hide fromOnLoad True/False
+ * - Hides fromOnLoad True/False visually (module stays in DOM so value still posts)
  * - Email / Multi / DOB width aligned to name Medium column
  * - ::before labels above name / email / DOB
  * - Multi 2-col + compact checkbox hit-targets
  * - T&C + submit stay visible
  */
+
+/* Hide fromOnLoad True/False radios (keep in DOM for Custom JS + entry) */
+#xSectionDetails_radio_1784640642802 {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  pointer-events: none !important;
+}
 
 /* Keep T&C + submit visible (overridden by Custom JS class when fromOnLoad=false) */
 #xSectionDetails_policy_1790353974879,
@@ -127,20 +142,7 @@
 }
 
 /* Vertically center typed text — theme padding 30px 20px 10px pins values low.
-   Keep pad + line-height <= content box (height 48 - 2px*2 border = 44). */
-.xForm .xComponent.xName .xField,
-.xForm .xComponent.xEmail .xField,
-.xForm .xComponent.xDate_of_birth .xField,
-.xForm .xComponent.xDate_of_birth .select-container {
-  height: 48px !important;
-  min-height: 48px !important;
-  position: relative !important;
-}
-
-.xForm .xComponent.xName .xFieldItem .xField input,
-.xForm .xComponent.xEmail .xFieldItem .xField input,
-.xForm .xComponent.xDate_of_birth .xFieldItem .xField input,
-.xForm .xComponent.xDate_of_birth .xFieldItem .select-container > input.xSelectAutocompleteInput,
+   Keep pad + line-height  input.xSelectAutocompleteInput,
 .xForm .xComponent.xName .xField input.textField,
 .xForm .xComponent.xEmail .xField input.emailField,
 .xForm .xComponent.xDate_of_birth .xField input.textField,
@@ -202,7 +204,8 @@
   color: #000 !important;
 }
 
-/* Hide placeholder while typing / focused (no .sei-filled JS — CSS :focus is enough). */
+/* Hide placeholder while typing / focused (Grow Custom JS is not executable
+   in this experience — it dumps as page text — so no .sei-filled runtime). */
 #emailWrapper .xField input:focus + .xSubLabel,
 #emailWrapper .xField input.xFocused + .xSubLabel,
 #date_of_birthWrapper .xField input:focus + .xSubLabel,
