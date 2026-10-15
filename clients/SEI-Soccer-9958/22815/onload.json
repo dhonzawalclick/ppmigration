@@ -3,7 +3,7 @@
     {
       "eval$": {
         "encryptedMail": "${{->try{if(params.ol_tok2 == null){return null};return java.net.URLDecoder.decode(params.ol_tok2.trim().replace(' ', '+'), 'UTF-8').replace(' ', '+').replaceAll('[\\\\r\\\\n\\\\t]','').decodeBase64()}catch(Exception e){return null}}.call()}",
-        "keyBytes": "${'38a28af3961716052834610867d61c02'.getBytes('UTF-8')}",
+        "keyBytes": "${'REPLACE_WITH_AES_KEY_HEX'.getBytes('UTF-8')}",
         "encryptedUid": "${{->try{if(params.ol_tok == null){return null};return java.net.URLDecoder.decode(params.ol_tok.trim().replace(' ', '+'), 'UTF-8').replace(' ', '+').replaceAll('[\\\\r\\\\n\\\\t]','').decodeBase64()}catch(Exception e){return null}}.call()}"
       }
     },
@@ -22,16 +22,51 @@
       }
     },
     {
+      "when$": "${executionResults.uid}",
+      "http$": {
+        "header$": {
+          "Authorization": "Basic REPLACE_WITH_BASE64(api:ZMP_REST_API_KEY)",
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        },
+        "url$": "https://api.zetaglobal.net/ver2/sei-dev/subscribers",
+        "params$": {},
+        "queryParams$": {
+          "uid": "${executionResults.uid}"
+        },
+        "verb$": "GET",
+        "httpResponseAsJsonVar$": "json",
+        "requestType$": "json"
+      }
+    },
+    {
+      "eval$": {
+        "zmpEmail": "${{-> def raw = executionResults.json; def person = raw instanceof List ? (raw ? raw[0] : null) : raw; return person?.contacts?.find { it.contact_type == 'email' }?.contact_value ?: person?.email ?: '' }.call()}",
+        "firstName": "${{-> def raw = executionResults.json; def person = raw instanceof List ? (raw ? raw[0] : null) : raw; def props = (person instanceof Map && person.properties instanceof Map) ? person.properties : [:]; return props.first_name ?: person?.first_name ?: '' }.call()}",
+        "lastName": "${{-> def raw = executionResults.json; def person = raw instanceof List ? (raw ? raw[0] : null) : raw; def props = (person instanceof Map && person.properties instanceof Map) ? person.properties : [:]; return props.last_name ?: person?.last_name ?: '' }.call()}",
+        "dob": "${{-> def raw = executionResults.json; def person = raw instanceof List ? (raw ? raw[0] : null) : raw; def props = (person instanceof Map && person.properties instanceof Map) ? person.properties : [:]; def dob = (props.date_of_birth ?: '') as String; return dob.length() >= 10 ? dob.substring(0, 10) : dob }.call()}",
+        "roles": "${{-> def raw = executionResults.json; def person = raw instanceof List ? (raw ? raw[0] : null) : raw; def p = (person instanceof Map && person.properties instanceof Map) ? person.properties : [:]; def ids = []; if (p.pref_center_parent == 'Y') ids << 'parent'; if (p.pref_center_coach_admin == 'Y') ids << 'coachadmin'; if (p.pref_center_player == 'Y') ids << 'player'; if (p.pref_center_fan == 'Y') ids << 'fan'; return ids }.call()}",
+        "interests": "${{-> def raw = executionResults.json; def person = raw instanceof List ? (raw ? raw[0] : null) : raw; def p = (person instanceof Map && person.properties instanceof Map) ? person.properties : [:]; def ids = []; if (p.pref_center_cleats_and_shoes == 'Y') ids << 'cleats_and_shoes'; if (p.pref_center_fan_jerseys_and_gear == 'Y') ids << 'fan_jerseys_and_gear'; if (p.pref_center_apparel == 'Y') ids << 'apparel'; if (p.pref_center_soccer_balls_and_equipment == 'Y') ids << 'soccer_balls_and_equipment'; if (p.pref_center_goalkeeper == 'Y') ids << 'goalkeeper'; if (p.pref_center_new_content_and_articles == 'Y') ids << 'new_content_and_articles'; if (p.pref_center_deals_and_special_offers == 'Y') ids << 'deals_and_special_offers'; return ids }.call()}"
+      }
+    },
+    {
       "return$": {
         "data": {
           "uid": "${executionResults.uid ?: ''}",
-          "fromOnLoad": "${(executionResults.uid && executionResults.mail) ? 'true' : 'false'}",
-          "email": "${executionResults.mail ?: ''}",
-          "bu": "${params.ol_bu ?: ''}"
+          "email": "${executionResults.mail ?: executionResults.zmpEmail ?: ''}",
+          "fromOnLoad": "${(executionResults.uid && (executionResults.mail || executionResults.zmpEmail)) ? 'true' : 'false'}",
+          "name": {
+            "Firstname": "${executionResults.firstName ?: ''}",
+            "Lastname": "${executionResults.lastName ?: ''}"
+          },
+          "date_of_birth": "${executionResults.dob ?: ''}",
+          "multioptin": "${executionResults.roles ?: []}",
+          "multioptin_01": "${executionResults.interests ?: []}"
         }
       }
     }
   ],
+  "encryptionKey": "REPLACE_WITH_AES_KEY_HEX",
   "logDebug": true,
   "onlySubSteps": true
 }

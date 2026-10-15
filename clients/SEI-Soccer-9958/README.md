@@ -19,7 +19,13 @@ HTTP entry integrations that fire on submit. One file is one request. Grow runs 
 
 Auth is Basic `api:<REST key>` per [ZMP Getting Started](https://docs.zetaglobal.com/reference/getting-started). The repo keeps `REPLACE_WITH_BASE64(api:ZMP_REST_API_KEY)`; paste the real header only in Grow.
 
-For staging paste into campaign **22815**, use flat one-call configs (no `subSteps`): [`22815/WIPidentify.json`](22815/WIPidentify.json) and [`22815/WIPactivity.json`](22815/WIPactivity.json). Those WIP files may hold real Basic auth for Grow paste — do not commit them with secrets.
+For staging paste into campaign **22815** / display **22904**:
+- On Load: [`22815/WIPonload.json`](22815/WIPonload.json) — dual-token Groovy (`nc.ol_tok` / `nc.ol_tok2`) plus `GET /ver2/sei-dev/subscribers`. This is the shape that returned person data on 22904. [`22815/onload.json`](22815/onload.json) is the same file with the AES key and Basic auth replaced.
+- Decrypt-only smoke test (no ZMP): [`22815/WIPonload-decrypt-only.json`](22815/WIPonload-decrypt-only.json)
+- HTTP-only smoke test (no decrypt): [`22815/WIPonload-httpbin.json`](22815/WIPonload-httpbin.json) — `GET https://httpbin.org/get?probe=sei-onload`. Success puts that URL in the email field.
+- Submit: [`22815/WIPidentify.json`](22815/WIPidentify.json) and [`22815/WIPactivity.json`](22815/WIPactivity.json).
+
+WIP files may hold real Basic auth — do not commit secrets.
 
 ## Campaigns
 

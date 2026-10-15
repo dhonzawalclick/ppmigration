@@ -2,9 +2,9 @@
 
 ## 1. On Load
 
-On Load runs once when the URL has any `nc.*` param. Grow POSTs `/api/integration/d/onload`. Official path: encrypt a JSON blob, pass as `nc.ol`, set `encryptionKey` on the integration; Grow decrypts into `encryptedTokenMapping.*`. Map via `return$.data` (editable prefill) and `return$.piidata` (hidden PII). Optional `http$` can call ZMP/third parties first. At least one `nc.` is required to fire. If server On Load fails (e.g. 503), Custom JS can decrypt `nc.ol_tok`/`nc.ol_tok2` (or `nc.ol`) into form fields instead—key then lives in page source.
+On Load runs once when a query param name starts with `nc.ol`. Grow POSTs `/api/integration/d/onload`. The ZMP person read that returned data on SEI 22904 is `onload-dual-token-zmp-get.json`: decrypt `nc.ol_tok` / `nc.ol_tok2` in `eval$`, GET `/ver2/{site}/subscribers?uid=` only when that uid exists, map the person in a later `eval$`, and `return$` copies `executionResults`. A GET that read `encryptedTokenMapping` from `nc.ol` returned `{}` on that campaign. `onload.json` is decrypt-only and does not call ZMP. Do not decrypt tokens in Custom JS.
 
-**Checklist:** paste On Load JSON on the Experience → save → open staging with `&nc.ol=…` or dual tokens → Network tab `/onload` or `&debug=6`. Fix URL typos (`&?nc.…` breaks the param name).
+**Checklist:** paste On Load JSON on the Experience → save → open staging with `&nc.ol_tok=…&nc.ol_tok2=…` → Network tab `/onload` or `&debug=6`. Fix URL typos (`&?nc.…` breaks the param name).
 
 ## 3. ZMP integrations (on submit)
 
@@ -30,9 +30,9 @@ See [`readme.md`](readme.md) for payload shapes and the Grow JSON field referenc
 
 ## 4. Email / entry links
 
-- Prefer official **`nc.ol`** (one encrypted JSON) once CSM confirms encrypt format.
-- Dual-token pattern used in some migrations: `nc.ol_tok` = AES(uid), `nc.ol_tok2` = AES(email); same AES key as On Load / Custom JS.
-- Pipeline: encrypt → Base64 → URL-encode. Always use `&nc.…=` (never `&?nc.…=`).
+- ZMP person On Load: `nc.ol_tok` = AES(uid), `nc.ol_tok2` = AES(email). Same key as `encryptionKey` and the Groovy `keyBytes` string. AES-CBC, key = UTF-8 bytes of the hex string, 16-byte IV prepended, PKCS7, standard Base64, then URL-encode.
+- Decrypt-only On Load, no ZMP call: one `nc.ol` JSON blob.
+- Always use `&nc.…=` (never `&?nc.…=`).
 
 ## 5. Verify
 

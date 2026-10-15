@@ -23,13 +23,17 @@ Field names work like HTML `name`. On Load `return$.data.<name>` fills the field
 - Hide `uid` / `email` with CSS, not a display condition. A field closed by a display condition does not post.
 - Do not name a field `campaignid`. It collides with Grow's `campaignId`. Use `campaign_id`.
 
-## 3. On Load (`onload.json`)
+## 3. On Load
 
-- The URL must carry at least one `nc.` param or On Load does not run.
-- Encrypt a JSON blob (`uid`, `email`, `fromOnLoad`) and pass it as `nc.ol`. Grow decrypts it with `encryptionKey` into `encryptedTokenMapping.*`.
-- Return `fromOnLoad` as the string `"true"`.
-- Generate a key: `openssl rand -hex 16` (or `-hex 32`). Enter it in Grow only; keep `REPLACE_WITH_AES_KEY_HEX` in the repo.
-- Link pipeline: encrypt → `base64_encode | strip_newlines | url_encode`. Use `&nc.ol=`, never `&?nc.ol=`.
+Person prefill from ZMP uses `onload-dual-token-zmp-get.json`. Verified on SEI campaign 22815 / display 22904.
+
+- The URL must include `nc.ol_tok` and `nc.ol_tok2`, or On Load does not run. A param name has to start with `nc.ol`.
+- `nc.ol_tok` is the AES ciphertext of the uid string. `nc.ol_tok2` is the AES ciphertext of the email string. AES-CBC, key = UTF-8 bytes of the hex string, random 16-byte IV prepended, PKCS7, standard Base64, then URL-encode. The same key goes in `encryptionKey` and in the Groovy `keyBytes` string.
+- Step order: three `eval$` decrypts, `when$` on the uid, `http$` GET `/ver2/{site}/subscribers?uid=`, one `eval$` that reads the person, `return$` that copies `executionResults`.
+- `http$` keys that ran: `header$`, `url$`, `params$`, `queryParams$`, `verb$`, `httpResponseAsJsonVar$`, `requestType$`. The uid sent to ZMP is `${executionResults.uid}`.
+- A GET that read `encryptedTokenMapping` from `nc.ol` and mapped the person inside `return$` came back `{}` on this account.
+- `onload.json` is decrypt-only `nc.ol` with no ZMP call.
+- Generate a key with `openssl rand -hex 16`. The repo keeps `REPLACE_WITH_AES_KEY_HEX`. Use `&nc.ol_tok=`, never `&?nc.ol_tok=`.
 
 ## 4. Customize (`custom.html`, `theme.css`)
 
@@ -53,4 +57,4 @@ Field names work like HTML `name`. On Load `return$.data.<name>` fills the field
 | No / bad link | Error copy shown, Sign up hidden |
 | Submit | Integration Debug tab shows each request; ZMP profile and event updated |
 
-Staging URL shape: `?stageMode=true&ptk=...&nc.ol=...&debug=6`.
+Staging URL shape: `?stageMode=true&ptk=...&nc.ol_tok=...&nc.ol_tok2=...&debug=6`.
