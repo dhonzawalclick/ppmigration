@@ -44,7 +44,10 @@
         "zmpEmail": "${{-> def raw = executionResults.json; def person = raw instanceof List ? (raw ? raw[0] : null) : raw; return person?.contacts?.find { it.contact_type == 'email' }?.contact_value ?: person?.email ?: '' }.call()}",
         "firstName": "${{-> def raw = executionResults.json; def person = raw instanceof List ? (raw ? raw[0] : null) : raw; def props = (person instanceof Map && person.properties instanceof Map) ? person.properties : [:]; return props.first_name ?: person?.first_name ?: '' }.call()}",
         "lastName": "${{-> def raw = executionResults.json; def person = raw instanceof List ? (raw ? raw[0] : null) : raw; def props = (person instanceof Map && person.properties instanceof Map) ? person.properties : [:]; return props.last_name ?: person?.last_name ?: '' }.call()}",
-        "dob": "${{-> def raw = executionResults.json; def person = raw instanceof List ? (raw ? raw[0] : null) : raw; def props = (person instanceof Map && person.properties instanceof Map) ? person.properties : [:]; def dob = (props.date_of_birth ?: '') as String; return dob.length() >= 10 ? dob.substring(0, 10) : dob }.call()}",
+        "dob": "${{-> def raw = executionResults.json; def person = raw instanceof List ? (raw ? raw[0] : null) : raw; def props = (person instanceof Map && person.properties instanceof Map) ? person.properties : [:]; return (props.date_of_birth ?: '') as String }.call()}",
+        "dobYear": "${{-> def raw = executionResults.json; def person = raw instanceof List ? (raw ? raw[0] : null) : raw; def props = (person instanceof Map && person.properties instanceof Map) ? person.properties : [:]; def dob = (props.date_of_birth ?: '') as String; return dob.length() >= 4 ? dob.substring(0, 4) : '' }.call()}",
+        "dobMonth": "${{-> def raw = executionResults.json; def person = raw instanceof List ? (raw ? raw[0] : null) : raw; def props = (person instanceof Map && person.properties instanceof Map) ? person.properties : [:]; def dob = (props.date_of_birth ?: '') as String; def m = dob.length() >= 7 ? dob.substring(5, 7) : ''; return m ? String.valueOf(m.toInteger()) : '' }.call()}",
+        "dobDay": "${{-> def raw = executionResults.json; def person = raw instanceof List ? (raw ? raw[0] : null) : raw; def props = (person instanceof Map && person.properties instanceof Map) ? person.properties : [:]; def dob = (props.date_of_birth ?: '') as String; return dob.length() >= 10 ? dob.substring(8, 10) : '' }.call()}",
         "roles": "${{-> def raw = executionResults.json; def person = raw instanceof List ? (raw ? raw[0] : null) : raw; def p = (person instanceof Map && person.properties instanceof Map) ? person.properties : [:]; def ids = []; if (p.pref_center_parent == 'Y') ids << 'parent'; if (p.pref_center_coach_admin == 'Y') ids << 'coachadmin'; if (p.pref_center_player == 'Y') ids << 'player'; if (p.pref_center_fan == 'Y') ids << 'fan'; return ids }.call()}",
         "interests": "${{-> def raw = executionResults.json; def person = raw instanceof List ? (raw ? raw[0] : null) : raw; def p = (person instanceof Map && person.properties instanceof Map) ? person.properties : [:]; def ids = []; if (p.pref_center_cleats_and_shoes == 'Y') ids << 'cleats_and_shoes'; if (p.pref_center_fan_jerseys_and_gear == 'Y') ids << 'fan_jerseys_and_gear'; if (p.pref_center_apparel == 'Y') ids << 'apparel'; if (p.pref_center_soccer_balls_and_equipment == 'Y') ids << 'soccer_balls_and_equipment'; if (p.pref_center_goalkeeper == 'Y') ids << 'goalkeeper'; if (p.pref_center_new_content_and_articles == 'Y') ids << 'new_content_and_articles'; if (p.pref_center_deals_and_special_offers == 'Y') ids << 'deals_and_special_offers'; return ids }.call()}"
       }
@@ -55,11 +58,12 @@
           "uid": "${executionResults.uid ?: ''}",
           "email": "${executionResults.mail ?: executionResults.zmpEmail ?: ''}",
           "fromOnLoad": "${(executionResults.uid && (executionResults.mail || executionResults.zmpEmail)) ? 'true' : 'false'}",
-          "name": {
-            "Firstname": "${executionResults.firstName ?: ''}",
-            "Lastname": "${executionResults.lastName ?: ''}"
-          },
+          "name_Firstname": "${executionResults.firstName ?: ''}",
+          "name_Lastname": "${executionResults.lastName ?: ''}",
           "date_of_birth": "${executionResults.dob ?: ''}",
+          "date_of_birth_Year": "${executionResults.dobYear ?: ''}",
+          "date_of_birth_Month": "${executionResults.dobMonth ?: ''}",
+          "date_of_birth_Day": "${executionResults.dobDay ?: ''}",
           "multioptin": "${executionResults.roles ?: []}",
           "multioptin_01": "${executionResults.interests ?: []}"
         }

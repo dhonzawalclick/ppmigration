@@ -7,7 +7,50 @@
  *
  * uid / email / fromOnLoad come from the On Load integration (server-side
  * decrypt). Do not put encryptionKey / AES in this script.
+ *
+ * Name is one conditional module. Grow keeps a single prefilled value per
+ * module while it is hidden, so name_Lastname replaces name_Firstname.
+ * Month options are "1"–"12"; "02" does not match February. Re-apply both
+ * from the On Load response after the module opens.
  */
+(function () {
+  var pending = null;
+
+  function applyOnLoadFields(data) {
+    if (!data || !NGX || !NGX.api) return;
+    if (data.name_Firstname) {
+      NGX.api('form:set:field', { name: 'name_Firstname', value: String(data.name_Firstname) });
+    }
+    if (data.date_of_birth_Month) {
+      var month = String(parseInt(data.date_of_birth_Month, 10));
+      if (month && month !== 'NaN') {
+        NGX.api('form:set:field', { name: 'date_of_birth_Month', value: month });
+      }
+    }
+  }
+
+  var origOpen = XMLHttpRequest.prototype.open;
+  var origSend = XMLHttpRequest.prototype.send;
+  XMLHttpRequest.prototype.open = function (method, url) {
+    this.__seiUrl = url;
+    return origOpen.apply(this, arguments);
+  };
+  XMLHttpRequest.prototype.send = function () {
+    this.addEventListener('load', function () {
+      if (String(this.__seiUrl || '').indexOf('/onload') === -1) return;
+      try {
+        var body = JSON.parse(this.responseText || '{}');
+        pending = body && body.data;
+        applyOnLoadFields(pending);
+        setTimeout(function () { applyOnLoadFields(pending); }, 300);
+      } catch (e) {}
+    });
+    return origSend.apply(this, arguments);
+  };
+
+  window.__seiApplyOnLoadFields = function () { applyOnLoadFields(pending); };
+})();
+
 NGX.api('event:listen', 'page:ready', function () {
   var POLICY_ID = 'policy_1790353974879';
   var SUBMIT_ID = 'submit_1684917530454';
@@ -28,6 +71,10 @@ NGX.api('event:listen', 'page:ready', function () {
   }
 
   syncCtaVisibility();
+  if (window.__seiApplyOnLoadFields) {
+    window.__seiApplyOnLoadFields();
+    setTimeout(window.__seiApplyOnLoadFields, 300);
+  }
 
   // On Load fills fromOnLoad after page:ready; re-sync when the radio updates
   NGX.api('event:listen', 'module:component:didupdate', function (e) {
