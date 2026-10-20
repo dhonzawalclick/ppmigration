@@ -70,23 +70,47 @@ NGX.api('event:listen', 'page:ready', function () {
     NGX.api(method, { id: SUBMIT_ID, customClassNames: HIDE_CLASS });
   }
 
+  function syncPlaceholders() {
+    document
+      .querySelectorAll(
+        '.xForm .xComponent.xName input, .xForm .xComponent.xEmail input, .xForm .xComponent.xDate_of_birth input'
+      )
+      .forEach(function (input) {
+        var field = input.closest('.xField') || input.parentElement;
+        if (!field) return;
+        if (String(input.value || '').trim()) {
+          field.classList.add('sei-filled');
+        } else {
+          field.classList.remove('sei-filled');
+        }
+      });
+  }
+
   syncCtaVisibility();
+  syncPlaceholders();
   if (window.__seiApplyOnLoadFields) {
     window.__seiApplyOnLoadFields();
     setTimeout(window.__seiApplyOnLoadFields, 300);
   }
+  setTimeout(syncPlaceholders, 300);
+  setTimeout(syncPlaceholders, 1000);
 
   // On Load fills fromOnLoad after page:ready; re-sync when the radio updates
   NGX.api('event:listen', 'module:component:didupdate', function (e) {
     if (e && e.id === RADIO_ID) syncCtaVisibility();
+    syncPlaceholders();
   });
 
   document.addEventListener(
     'change',
     function (e) {
       if (e.target && e.target.name === 'fromOnLoad') syncCtaVisibility();
+      syncPlaceholders();
     },
     true
   );
+
+  document.addEventListener('input', syncPlaceholders, true);
+  document.addEventListener('blur', syncPlaceholders, true);
 });
 </script>
