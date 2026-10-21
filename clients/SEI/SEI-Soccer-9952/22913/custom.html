@@ -1,0 +1,162 @@
+<script>
+/**
+ * SEI 9952 / Grow 22913 — Custom JavaScript (single paste for Customize).
+ *
+ * 1) Hide T&C + Sign up while fromOnLoad is false.
+ *    Companion CSS: .xCustomClass-sei-hide-cta on policy/submit modules.
+ * 2) Dual submit path (shared form):
+ *    - Sign up  → params.sei_action = preference_center
+ *      PushPlanet: updateSubscriber (prefs Y/N). Track event was commented out.
+ *    - Unsubscribe HTML button → params.sei_action = unsubscribe, then form submit
+ *      PushPlanet: updateSubscriber (contact inactive) + zetaTrackEvent(event: unsubscribe)
+ *
+ * HTTP entry integrations should use flat executeIf on params.sei_action
+ * (see templates/*-unsubscribe.json and templates with preference_center guard).
+ *
+ * uid / email / fromOnLoad come from the On Load integration (server-side
+ * decrypt). Do not put encryptionKey / AES in this script.
+ *
+ * NOTE: Grow still runs native required-field validation on Sign up click.
+ * For Unsubscribe to succeed without filling the prefs form, leave name / DOB /
+ * T&C / prefs modules NOT required in Page Builder, and enforce prefs rules in
+ * the preference_center submitHandler below (or only when sei_action is prefs).
+ */
+NGX.api('event:listen', 'page:ready', function () {
+  var POLICY_ID = 'policy_1790353974879';
+  var SUBMIT_ID = 'submit_1684917530454';
+  var RADIO_ID = 'radio_1784640642802';
+  var HIDE_CLASS = 'sei-hide-cta';
+  var UNSUB_ROOT = '#xSectionDetails_html_1791984597437';
+  var ACTION_PREFS = 'preference_center';
+  var ACTION_UNSUB = 'unsubscribe';
+
+  // Remember which CTA started the submit (submitHandler runs later).
+  var pendingAction = ACTION_PREFS;
+
+  function isFromOnLoadFalse() {
+    var checked = document.querySelector('input[name="fromOnLoad"]:checked');
+    return !checked || String(checked.value).toLowerCase() === 'false';
+  }
+
+  function syncCtaVisibility() {
+    var method = isFromOnLoadFalse()
+      ? 'module:add:custom:classes'
+      : 'module:remove:custom:classes';
+    NGX.api(method, { id: POLICY_ID, customClassNames: HIDE_CLASS });
+    NGX.api(method, { id: SUBMIT_ID, customClassNames: HIDE_CLASS });
+  }
+
+  function setSubmitAction(action) {
+    pendingAction = action;
+    NGX.api('form:add:data', { name: 'sei_action', value: action });
+    NGX.api('form:set:hidden:field', { name: 'sei_action', value: action });
+  }
+
+  function readUnsubEmail() {
+    var root = document.querySelector(UNSUB_ROOT);
+    if (!root) return '';
+    var input =
+      root.querySelector('input[name="unsub_email"]') ||
+      root.querySelector('input[type="email"]') ||
+      root.querySelector('input');
+    return input && input.value ? String(input.value).trim() : '';
+  }
+
+  function triggerGrowSubmit() {
+    var cta = document.querySelector('#xSubmitContainer .xButton');
+    if (cta) {
+      cta.click();
+      return;
+    }
+    // Fallback if CTA markup differs
+    try {
+      NGX.api('form:submit');
+    } catch (err) {
+      console.warn('[sei] could not trigger Grow submit', err);
+    }
+  }
+
+  function onUnsubscribeClick(e) {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
+    var email = readUnsubEmail();
+    if (!email) {
+      alert('Email is required to unsubscribe.');
+      return;
+    }
+
+    // Prefer the HTML-module email for this path; On Load email stays as fallback.
+    NGX.api('form:set:field', { name: 'email', value: email });
+    setSubmitAction(ACTION_UNSUB);
+    triggerGrowSubmit();
+  }
+
+  function bindUnsubscribeButton() {
+    var root = document.querySelector(UNSUB_ROOT);
+    if (!root) return;
+    var btn =
+      root.querySelector('#sei-unsub-btn') ||
+      root.querySelector('button') ||
+      root.querySelector('a.xButton');
+    if (!btn || btn.getAttribute('data-sei-unsub-bound') === '1') return;
+    btn.setAttribute('data-sei-unsub-bound', '1');
+    btn.addEventListener('click', onUnsubscribeClick, true);
+  }
+
+  // Default path when the real Sign up CTA is used
+  var submitCta = document.querySelector('#xSubmitContainer .xButton');
+  if (submitCta) {
+    submitCta.addEventListener(
+      'click',
+      function () {
+        setSubmitAction(ACTION_PREFS);
+      },
+      true
+    );
+  }
+
+  // Re-assert action immediately before entry post
+  NGX.api('form:add:submitHandler', {
+    id: 'seiDualPathAction',
+    handler: function () {
+      setSubmitAction(pendingAction || ACTION_PREFS);
+
+      if (pendingAction === ACTION_UNSUB) {
+        var email = readUnsubEmail();
+        if (email) {
+          NGX.api('form:set:field', { name: 'email', value: email });
+        }
+        // Unsub path: do not enforce prefs / T&C here (native required still applies).
+        return true;
+      }
+
+      // Prefs path: optional extra checks can go here.
+      return true;
+    }
+  });
+
+  syncCtaVisibility();
+  bindUnsubscribeButton();
+
+  // On Load fills fromOnLoad after page:ready; re-sync when the radio updates
+  NGX.api('event:listen', 'module:component:didupdate', function (e) {
+    if (e && e.id === RADIO_ID) syncCtaVisibility();
+  });
+
+  // HTML module may paint slightly after page:ready
+  NGX.api('event:listen', 'form:ready', function () {
+    bindUnsubscribeButton();
+  });
+
+  document.addEventListener(
+    'change',
+    function (e) {
+      if (e.target && e.target.name === 'fromOnLoad') syncCtaVisibility();
+    },
+    true
+  );
+});
+</script>

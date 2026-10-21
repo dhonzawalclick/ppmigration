@@ -1,0 +1,75 @@
+{
+  "url": "https://api.zetaglobal.net/ver2/sei-soccer-com/activities",
+  "stageUrl": "https://api.zetaglobal.net/ver2/sei-dev/activities",
+  "bindUrl": false,
+  "requestType": "json",
+  "verb": "post",
+  "paramsType": "mapped",
+  "formatType": "structured",
+  "encoding": "UTF-8",
+  "ignoreEmpty": true,
+  "nullHandling": "omit",
+  "required": ["email"],
+  "sendEntitlements": false,
+  "verifyHost": true,
+  "trustAll": false,
+  "logDebug": true,
+  "searchForParamsMapKeyword": true,
+  "header": {
+    "Authorization": "Basic REPLACE_WITH_BASE64(api:ZMP_REST_API_KEY)",
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+  },
+  "params": {
+    "activity": {
+      "identify_person": true,
+      "subscriber": {
+        "uid": "${entry.uid ?: entry.email}",
+        "first_name": "${(params?.sei_action ?: '') == 'unsubscribe' ? null : (entry.firstname ?: entry.name_Firstname ?: entry.first_name ?: '')}",
+        "last_name": "${(params?.sei_action ?: '') == 'unsubscribe' ? null : (entry.lastname ?: entry.name_Lastname ?: entry.last_name ?: '')}",
+        "source": "grow",
+        "contacts": [
+          {
+            "contact_type": "email",
+            "contact_value": "${entry.email ?: entry.uid}",
+            "subscription_status": "${(params?.sei_action ?: '') == 'unsubscribe' ? 'inactive' : 'active'}"
+          }
+        ],
+        "properties": {
+          "first_name": "${(params?.sei_action ?: '') == 'unsubscribe' ? null : (entry.firstname ?: entry.name_Firstname ?: entry.first_name ?: '')}",
+          "last_name": "${(params?.sei_action ?: '') == 'unsubscribe' ? null : (entry.lastname ?: entry.name_Lastname ?: entry.last_name ?: '')}",
+          "date_of_birth": "${(params?.sei_action ?: '') == 'unsubscribe' ? null : (entry.date_of_birth ?: params.date_of_birth ?: '')}",
+          "email": "${entry.email ?: ''}",
+          "opt_down_ind": "${(params?.sei_action ?: '') == 'unsubscribe' ? null : (entry.opt_down_ind ?: params.opt_down_ind ?: '')}",
+          "pref_center_parent": "${(params?.sei_action ?: '') == 'unsubscribe' ? null : (((params.group_opt_in_list ?: params.multioptin ?: entry.group_opt_in_list ?: entry.multioptin ?: '') as String).contains('parent') ? 'Y' : 'N')}",
+          "pref_center_coach_admin": "${(params?.sei_action ?: '') == 'unsubscribe' ? null : (((params.group_opt_in_list ?: params.multioptin ?: entry.group_opt_in_list ?: entry.multioptin ?: '') as String).contains('coach') ? 'Y' : 'N')}",
+          "pref_center_player": "${(params?.sei_action ?: '') == 'unsubscribe' ? null : (((params.group_opt_in_list ?: params.multioptin ?: entry.group_opt_in_list ?: entry.multioptin ?: '') as String).contains('player') ? 'Y' : 'N')}",
+          "pref_center_fan": "${(params?.sei_action ?: '') == 'unsubscribe' ? null : (((params.group_opt_in_list ?: params.multioptin ?: entry.group_opt_in_list ?: entry.multioptin ?: '') as String).contains('fan') ? 'Y' : 'N')}",
+          "pref_center_new_cleats": "${(params?.sei_action ?: '') == 'unsubscribe' ? null : (((params.multioptin_01 ?: entry.multioptin_01 ?: '') as String).contains('new_cleats') ? 'Y' : 'N')}",
+          "pref_center_new_fan_jerseys": "${(params?.sei_action ?: '') == 'unsubscribe' ? null : (((params.multioptin_01 ?: entry.multioptin_01 ?: '') as String).contains('new_fan_jerseys') ? 'Y' : 'N')}",
+          "pref_center_new_equipment": "${(params?.sei_action ?: '') == 'unsubscribe' ? null : (((params.multioptin_01 ?: entry.multioptin_01 ?: '') as String).contains('new_equipment') ? 'Y' : 'N')}",
+          "pref_center_goalkeeper": "${(params?.sei_action ?: '') == 'unsubscribe' ? null : (((params.multioptin_01 ?: entry.multioptin_01 ?: '') as String).contains('goalkeeper') ? 'Y' : 'N')}",
+          "pref_center_sale": "${(params?.sei_action ?: '') == 'unsubscribe' ? null : (((params.multioptin_01 ?: entry.multioptin_01 ?: '') as String).contains('sale') ? 'Y' : 'N')}"
+        }
+      },
+      "event": "${(params?.sei_action ?: '') == 'unsubscribe' ? 'unsubscribe' : 'preference_center'}",
+      "properties": {
+        "source": "grow",
+        "subscription_status": "${(params?.sei_action ?: '') == 'unsubscribe' ? 'inactive' : 'active'}",
+        "email": "${entry.email ?: ''}",
+        "first_name": "${(params?.sei_action ?: '') == 'unsubscribe' ? null : (entry.firstname ?: entry.name_Firstname ?: entry.first_name ?: '')}",
+        "last_name": "${(params?.sei_action ?: '') == 'unsubscribe' ? null : (entry.lastname ?: entry.name_Lastname ?: entry.last_name ?: '')}",
+        "date_of_birth": "${(params?.sei_action ?: '') == 'unsubscribe' ? null : (entry.date_of_birth ?: params.date_of_birth ?: '')}",
+        "pref_center_parent": "${(params?.sei_action ?: '') == 'unsubscribe' ? null : (((params.group_opt_in_list ?: params.multioptin ?: entry.group_opt_in_list ?: entry.multioptin ?: '') as String).contains('parent') ? 'Y' : 'N')}",
+        "pref_center_coach_admin": "${(params?.sei_action ?: '') == 'unsubscribe' ? null : (((params.group_opt_in_list ?: params.multioptin ?: entry.group_opt_in_list ?: entry.multioptin ?: '') as String).contains('coach') ? 'Y' : 'N')}",
+        "pref_center_player": "${(params?.sei_action ?: '') == 'unsubscribe' ? null : (((params.group_opt_in_list ?: params.multioptin ?: entry.group_opt_in_list ?: entry.multioptin ?: '') as String).contains('player') ? 'Y' : 'N')}",
+        "pref_center_fan": "${(params?.sei_action ?: '') == 'unsubscribe' ? null : (((params.group_opt_in_list ?: params.multioptin ?: entry.group_opt_in_list ?: entry.multioptin ?: '') as String).contains('fan') ? 'Y' : 'N')}",
+        "pref_center_new_cleats": "${(params?.sei_action ?: '') == 'unsubscribe' ? null : (((params.multioptin_01 ?: entry.multioptin_01 ?: '') as String).contains('new_cleats') ? 'Y' : 'N')}",
+        "pref_center_new_fan_jerseys": "${(params?.sei_action ?: '') == 'unsubscribe' ? null : (((params.multioptin_01 ?: entry.multioptin_01 ?: '') as String).contains('new_fan_jerseys') ? 'Y' : 'N')}",
+        "pref_center_new_equipment": "${(params?.sei_action ?: '') == 'unsubscribe' ? null : (((params.multioptin_01 ?: entry.multioptin_01 ?: '') as String).contains('new_equipment') ? 'Y' : 'N')}",
+        "pref_center_goalkeeper": "${(params?.sei_action ?: '') == 'unsubscribe' ? null : (((params.multioptin_01 ?: entry.multioptin_01 ?: '') as String).contains('goalkeeper') ? 'Y' : 'N')}",
+        "pref_center_sale": "${(params?.sei_action ?: '') == 'unsubscribe' ? null : (((params.multioptin_01 ?: entry.multioptin_01 ?: '') as String).contains('sale') ? 'Y' : 'N')}"
+      }
+    }
+  }
+}

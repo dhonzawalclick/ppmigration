@@ -1,0 +1,26 @@
+{
+  "url": "https://api.zetaglobal.net/ver2/sei-soccer-com/subscribers",
+  "stageUrl": "https://api.zetaglobal.net/ver2/sei-dev/subscribers",
+  "bindUrl": false,
+  "requestType": "querystring",
+  "verb": "get",
+  "paramsType": "mapped",
+  "formatType": "structured",
+  "encoding": "UTF-8",
+  "ignoreEmpty": true,
+  "nullHandling": "omit",
+  "required": [],
+  "sendEntitlements": false,
+  "verifyHost": true,
+  "trustAll": false,
+  "logDebug": true,
+  "searchForParamsMapKeyword": false,
+  "header": {
+    "Authorization": "Basic REPLACE_WITH_BASE64(api:ZMP_REST_API_KEY)",
+    "Accept": "application/json",
+    "Content-Type": "application/json"
+  },
+  "params": {
+    "uid": "${encryptedTokenMapping.uid ?: encryptedTokenMapping.email ?: entry.uid ?: entry.email}"
+  }
+}

@@ -1,0 +1,492 @@
+/* SEI Soccer 9952 / Grow 22913 — theme polish (function-safe)
+ * Paste into Grow Customize → Custom CSS (replace prior SEI blocks entirely).
+ *
+ * Built on the SEI 9958 “sizing fix” baseline:
+ * - Does NOT override DOB/select padding or overflow (keeps Month dropdown working)
+ * - fromOnLoad True/False hide is commented out for now
+ * - Email / Multi / DOB width aligned to name Medium column
+ * - ::before labels above name / email / DOB
+ * - Multi 2-col + compact checkbox hit-targets
+ * - T&C + submit stay visible
+ * - Unsubscribe HTML module card
+ */
+
+/* Hide fromOnLoad True/False radios (keep in DOM for Custom JS + entry)
+#xSectionDetails_radio_1784640642802 {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  pointer-events: none !important;
+}
+*/
+
+/* Keep T&C + submit visible (overridden by Custom JS class when fromOnLoad=false) */
+#xSectionDetails_policy_1790353974879,
+#xSectionDetails_submit_1684917530454,
+#xSubmitContainer {
+  display: flex !important;
+  height: auto !important;
+  min-height: 0 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* NGX module:add:custom:classes → xCustomClass-sei-hide-cta (fromOnLoad False) */
+#xSectionDetails_policy_1790353974879.xCustomClass-sei-hide-cta,
+#xSectionDetails_submit_1684917530454.xCustomClass-sei-hide-cta {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Shared Medium column — name / email / DOB / multi / policy
+   Same width + auto side margins so left edges line up (email must include DOB). */
+.xForm .xComponent.xName .xFieldItem.xControlName,
+.xForm .xComponent.xEmail .xFieldItem.xControlEmail,
+.xForm .xComponent.xEmail .xFieldItem.xFieldWidthExtralarge,
+.xForm .xComponent.xEmail .xFieldItem.xFieldWidthLarge,
+.xForm .xComponent.xEmail .xFieldItem.xFieldWidthMedium,
+#emailWrapper,
+.xForm .xComponent.xDate_of_birth .xFieldItem.xControlDate,
+#date_of_birthWrapper,
+.xForm .xComponent.xMultioptin .xFieldItem.xControlMultiOptIn,
+.xForm .xComponent.xPolicy .xFieldItem {
+  width: 50% !important;
+  max-width: 50% !important;
+  min-width: 16rem !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box !important;
+  align-self: center !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.xForm .xComponent.xEmail .xFieldContainer,
+.xForm .xComponent.xMultioptin .xFieldContainer,
+.xForm .xComponent.xName .xFieldContainer,
+.xForm .xComponent.xDate_of_birth .xFieldContainer,
+.xForm .xComponent.xDate_of_birth .xCompositeItemWrapper,
+.xForm .xComponent.xPolicy .xFieldContainer,
+.xForm .xComponent.xEmail .xField,
+.xForm .xControlEmail .xField input.emailField,
+.xForm .xControlEmail .xField input[type="email"] {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* Email input fills the shared column (kills Grow's ~191px fixed control width) */
+.xForm .xComponent.xEmail input.emailField,
+.xForm .xComponent.xEmail input[type="email"] {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* Top labels (::before) — name / email / DOB */
+#nameWrapper .xCompositeItem-FirstName::before {
+  content: "First name:";
+}
+
+#nameWrapper .xCompositeItem-LastName::before {
+  content: "Last name:";
+}
+
+#emailWrapper::before {
+  content: "Email:";
+}
+
+#date_of_birthWrapper::before {
+  content: "Date of birth:";
+}
+
+#nameWrapper .xCompositeItem-FirstName::before,
+#nameWrapper .xCompositeItem-LastName::before,
+#emailWrapper::before,
+#date_of_birthWrapper::before {
+  display: block !important;
+  margin-bottom: 6px !important;
+  text-align: left !important;
+  font-size: 14px !important;
+  line-height: 1.2 !important;
+  font-weight: 500 !important;
+}
+
+/* Name: labels only via ::before (First name: / Last name:).
+   Hide theme xSubLabel — repeating "First Name" inside the box looks wrong;
+   email keeps its example placeholder (me@email.com). */
+#nameWrapper .xSubLabel {
+  display: none !important;
+}
+
+/* Email / DOB wrappers: stack label above theme field row.
+   Keep overflow visible so Month select menu can open. */
+#emailWrapper,
+#date_of_birthWrapper {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  overflow: visible !important;
+}
+
+/* DOB row — let theme lay out Day/Month/Year; just keep menu unclipped */
+.xForm .xComponent.xDate_of_birth .xFieldItem.xControlDate,
+.xForm .xComponent.xDate_of_birth .xFieldContainer,
+.xForm .xComponent.xDate_of_birth .xCompositeItemWrapper,
+.xForm .xComponent.xDate_of_birth .xCompositeItem-Month,
+.xForm .xComponent.xDate_of_birth .select-container,
+.xForm .xComponent.xDate_of_birth .xSelect {
+  overflow: visible !important;
+}
+
+.xForm .xComponent.xDate_of_birth .xSelectOptionsContainer {
+  z-index: 20 !important;
+}
+
+/* Vertically center typed text — theme padding 30px 20px 10px pins values low. */
+.xForm .xComponent.xName .xField input.textField,
+.xForm .xComponent.xEmail .xField input.emailField,
+.xForm .xComponent.xDate_of_birth .xField input.textField,
+.xForm .xComponent.xDate_of_birth .select-container > input.selectField,
+.xForm .xComponent.xDate_of_birth .select-container > input.xSelectAutocompleteInput {
+  display: block !important;
+  box-sizing: border-box !important;
+  height: 48px !important;
+  min-height: 48px !important;
+  max-height: 48px !important;
+  padding: 0 20px !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  line-height: 44px !important;
+}
+
+.xForm .xComponent.xDate_of_birth .select-container > input.xSelectAutocompleteInput {
+  padding-right: 2.5rem !important;
+}
+
+/* Anchor for absolute .xSubLabel (Grow fake placeholders). */
+.xForm .xComponent.xEmail .xField,
+.xForm .xComponent.xDate_of_birth .xField,
+.xForm .xComponent.xDate_of_birth .select-container {
+  position: relative !important;
+}
+
+/* Center floating placeholders in the middle of the field.
+   top/bottom + margin:auto beats theme top:22px and :focus float-up.
+   Do NOT leave theme padding 30/10 with a short height — text sits on the underline. */
+.xForm .xComponent.xEmail .xSubLabel,
+.xForm .xComponent.xDate_of_birth .xSubLabel,
+.xForm .xComponent.xEmail .xField input:focus + .xSubLabel,
+.xForm .xComponent.xEmail .xField input.xFocused + .xSubLabel,
+.xForm .xComponent.xDate_of_birth .xField input:focus + .xSubLabel,
+.xForm .xComponent.xDate_of_birth .xField input.xFocused + .xSubLabel,
+.xForm .xComponent.xDate_of_birth .select-container > input:focus + .xSubLabel,
+.xForm .xComponent.xDate_of_birth .select-container > input.xFocused + .xSubLabel {
+  position: absolute !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  left: 50% !important;
+  right: auto !important;
+  height: fit-content !important;
+  margin-top: auto !important;
+  margin-bottom: auto !important;
+  transform: translateX(-50%) !important;
+  text-align: center !important;
+  width: max-content !important;
+  max-width: calc(100% - 2.5rem) !important;
+  line-height: 1.2 !important;
+  font-size: 14px !important;
+  white-space: nowrap !important;
+}
+
+/* Keep floating placeholders visible when empty.
+   Do NOT use :not(:placeholder-shown) — Grow inputs have no placeholder attr,
+   so that selector always matched and hid every xSubLabel.
+   Theme also sets opacity:0 on .xSelectAutocompleteInput + .xSubLabel (Month). */
+#emailWrapper .xSubLabel,
+#date_of_birthWrapper .xSubLabel,
+.xForm .xComponent.xEmail .xSubLabel,
+.xForm .xComponent.xDate_of_birth .xSubLabel,
+.xForm .xComponent.xDate_of_birth .select-container > input + .xSubLabel,
+.xForm .xComponent.xDate_of_birth .xSelect input.xSelectAutocompleteInput + .xSubLabel {
+  opacity: 0.55 !important;
+  visibility: visible !important;
+  display: block !important;
+  pointer-events: none !important;
+  color: #000 !important;
+}
+
+/* Hide placeholder while typing / focused (Grow Custom JS is not executable
+   in this experience — it dumps as page text — so no .sei-filled runtime). */
+#emailWrapper .xField input:focus + .xSubLabel,
+#emailWrapper .xField input.xFocused + .xSubLabel,
+#date_of_birthWrapper .xField input:focus + .xSubLabel,
+#date_of_birthWrapper .xField input.xFocused + .xSubLabel,
+#date_of_birthWrapper .select-container > input:focus + .xSubLabel,
+#date_of_birthWrapper .select-container > input.xFocused + .xSubLabel {
+  opacity: 0 !important;
+}
+
+/* Multi 2-col */
+.xForm .xControlMultiOptIn .xMultichoiceContainer {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  width: 100% !important;
+  gap: 0.35rem 1rem !important;
+  justify-items: start !important;
+  box-sizing: border-box !important;
+}
+
+.xForm .xControlMultiOptIn .xFieldCheckboxChoice,
+.xForm .xControlMultiOptIn .xFieldRadioChoice {
+  display: flex !important;
+  align-items: center !important;
+  width: auto !important;
+  max-width: 100% !important;
+  min-height: 0 !important;
+  padding: 0.15rem 0 !important;
+  margin: 0 !important;
+}
+
+.xForm .xControlMultiOptIn .xFieldLabelWrapper {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.55rem !important;
+}
+
+.xForm .xControlMultiOptIn .xFieldLabel,
+.xForm .xControlMultiOptIn .xFieldLabel span,
+.xForm .xControlMultiOptIn .xFieldLabel p {
+  margin: 0 !important;
+  line-height: 1.3 !important;
+  text-align: left !important;
+  white-space: normal !important;
+  overflow: visible !important;
+}
+
+/* Invisible input over theme checkbox/radio span */
+.xForm .xFieldCheckboxChoice .xCheckbox,
+.xForm .xFieldRadioChoice .xRadio {
+  position: relative !important;
+  flex-shrink: 0 !important;
+}
+
+.xForm .xFieldCheckboxChoice .xCheckbox input[type="checkbox"],
+.xForm .xFieldRadioChoice .xRadio input[type="radio"] {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  opacity: 0 !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  cursor: pointer !important;
+  z-index: 2 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Policy alignment */
+.xForm .xComponent.xPolicy .xFieldLabelWrapper,
+.xForm .xComponent.xPolicy .xFieldCheckboxChoice {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 0.6rem !important;
+}
+
+.xForm .xComponent.xPolicy .xCheckbox {
+  margin-top: 0.15rem !important;
+  flex-shrink: 0 !important;
+}
+
+.xForm .xComponent.xPolicy .xFieldLabel,
+.xForm .xComponent.xPolicy .xFieldLabel p {
+  margin: 0 !important;
+  line-height: 1.4 !important;
+  text-align: left !important;
+}
+
+/* Slightly tighter modules — height only, no padding overrides on inputs */
+.xForm .xComponent.xMultioptin,
+.xForm .xComponent.xEmail,
+.xForm .xComponent.xName,
+.xForm .xComponent.xDate_of_birth,
+.xForm .xComponent.xPolicy,
+.xForm .xComponent.xSubmit,
+.xForm .xComponent.xHeadline {
+  padding-top: 0.15rem !important;
+  padding-bottom: 0.15rem !important;
+  margin: 0 !important;
+}
+
+.xForm .xComponent.xSubmit .xButton,
+.xForm #xSubmitContainer .xButton {
+  min-height: 2.35rem !important;
+  padding: 0.45rem 1.25rem !important;
+}
+
+#nameWrapper input,
+#emailWrapper input,
+#date_of_birthWrapper input {
+  display: block !important;
+  box-sizing: border-box !important;
+  height: 48px !important;
+  min-height: 48px !important;
+  padding: 0 20px !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  line-height: 44px !important;
+}
+
+#date_of_birthWrapper .select-container > input {
+  padding-right: 2.5rem !important;
+  line-height: 44px !important;
+}
+
+#emailWrapper .xField,
+#date_of_birthWrapper .xField,
+#date_of_birthWrapper .select-container {
+  position: relative !important;
+}
+
+#emailWrapper .xSubLabel,
+#date_of_birthWrapper .xSubLabel {
+  position: absolute !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  left: 50% !important;
+  right: auto !important;
+  height: fit-content !important;
+  margin-top: auto !important;
+  margin-bottom: auto !important;
+  transform: translateX(-50%) !important;
+  font-size: 14px !important;
+  line-height: normal !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  opacity: 0.55 !important;
+}
+
+#emailWrapper .xField input:focus + .xSubLabel,
+#emailWrapper .xField input.xFocused + .xSubLabel,
+#date_of_birthWrapper .xField input:focus + .xSubLabel,
+#date_of_birthWrapper .xField input.xFocused + .xSubLabel,
+#date_of_birthWrapper .select-container > input:focus + .xSubLabel,
+#date_of_birthWrapper .select-container > input.xFocused + .xSubLabel {
+  opacity: 0 !important;
+}
+
+/* Unsubscribe — same Medium column as name/email/DOB (50%), no card chrome */
+#xSectionDetails_html_1791984597437 {
+  box-sizing: border-box !important;
+  width: 50% !important;
+  max-width: 50% !important;
+  min-width: 16rem !important;
+  margin: 0.35rem auto !important;
+  padding: 0.15rem 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+#xSectionDetails_html_1791984597437 .xComponentInner,
+#xSectionDetails_html_1791984597437 .xFieldItem,
+#xSectionDetails_html_1791984597437 .xFieldContainer,
+#xSectionDetails_html_1791984597437 .xHtmlContainer {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  text-align: left !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+#xSectionDetails_html_1791984597437 .xHtmlContainer > p {
+  margin: 0 0 0.75rem !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 1.2 !important;
+  color: #000 !important;
+}
+
+#xSectionDetails_html_1791984597437 .xHtmlContainer label {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 6px !important;
+  margin: 0 0 0.75rem !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 1.2 !important;
+  color: #000 !important;
+}
+
+/* Same 48px field chrome as #emailWrapper inputs */
+#xSectionDetails_html_1791984597437 .xHtmlContainer input {
+  display: block !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  height: 48px !important;
+  min-height: 48px !important;
+  max-height: 48px !important;
+  padding: 0 20px !important;
+  border: 1px solid rgba(0, 0, 0, 0.2) !important;
+  border-radius: 4px !important;
+  background: #fff !important;
+  color: #000 !important;
+  font-family: "DM Sans", sans-serif !important;
+  font-size: 14px !important;
+  line-height: 44px !important;
+}
+
+/* Mirror live Sign up (.xButton): same 178×56 box, blue fill, white text */
+#xSectionDetails_html_1791984597437 .xHtmlContainer button {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+  width: 178px !important;
+  min-width: 178px !important;
+  max-width: 178px !important;
+  min-height: 56px !important;
+  height: 56px !important;
+  margin: 0.15rem auto 0 !important;
+  padding: 4.5px 12.5px !important;
+  border: 0 !important;
+  border-radius: 4px !important;
+  background: #1063fe !important;
+  color: #ffffff !important;
+  font-family: "DM Sans", sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: normal !important;
+  text-transform: none !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+}
+
+#xSectionDetails_html_1791984597437 .xHtmlContainer button:hover {
+  background: #0d56db !important;
+  color: #ffffff !important;
+}

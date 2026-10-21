@@ -6,7 +6,7 @@
     {
       "when$": "${encryptedTokenMapping.uid ?: encryptedTokenMapping.email ?: ''}",
       "http$": {
-        "url": "https://api.zetaglobal.net/ver2/sei-soccer-com/subscribers",
+        "url$": "${'https://api.zetaglobal.net/ver2/sei-soccer-com/subscribers'}",
         "stageUrl": "https://api.zetaglobal.net/ver2/sei-dev/subscribers",
         "verb": "get",
         "requestType": "querystring",
