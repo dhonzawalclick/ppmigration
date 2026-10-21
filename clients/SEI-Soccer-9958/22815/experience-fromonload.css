@@ -1,0 +1,58 @@
+/* SEI 22904 experience-only — hide fromOnLoad radios; hide T&C + submit when False
+ * Paste into Grow Customize → Custom CSS (append after theme.css, or paste alone).
+ * Module IDs are this experience only.
+ */
+
+/* Hide True/False radios (stay in DOM for On Load / entry) */
+#xSectionDetails_radio_1784640642802 {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Name module has no Grow display condition: a hidden conditional module keeps
+   only one prefilled value, so On Load would lose name_Firstname. Hide it here
+   until fromOnLoad = True instead. */
+.xForm:not(:has(#fromOnLoadWrapper input#true:checked)) #xSectionDetails_name_1790351350860 {
+  display: none !important;
+}
+
+/* Hide T&C + submit when fromOnLoad = False */
+.xForm:has(#fromOnLoadWrapper input#false:checked) #xSectionDetails_policy_1790353974879,
+.xForm:has(#fromOnLoadWrapper input#false:checked) #xSectionDetails_submit_1684917530454,
+.xForm:has(#fromOnLoadWrapper input#false:checked) #xSubmitContainer,
+#xSectionDetails_policy_1790353974879.xCustomClass-sei-hide-cta,
+#xSectionDetails_submit_1684917530454.xCustomClass-sei-hide-cta {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Show T&C + submit when fromOnLoad = True */
+.xForm:has(#fromOnLoadWrapper input#true:checked) #xSectionDetails_policy_1790353974879,
+.xForm:has(#fromOnLoadWrapper input#true:checked) #xSectionDetails_submit_1684917530454,
+.xForm:has(#fromOnLoadWrapper input#true:checked) #xSubmitContainer {
+  display: flex !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  overflow: visible !important;
+  pointer-events: auto !important;
+}

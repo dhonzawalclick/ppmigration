@@ -38,17 +38,18 @@
         "last_name": "${entry.lastname ?: entry.name_Lastname ?: entry.last_name ?: ''}",
         "date_of_birth": "${entry.date_of_birth ?: params.date_of_birth ?: ''}",
         "email": "${entry.email ?: ''}",
-        "pref_center_parent": "${((params.group_opt_in_list ?: params.multioptin ?: entry.group_opt_in_list ?: entry.multioptin ?: '') as String).contains('parent') ? 'Y' : 'N'}",
-        "pref_center_coach_admin": "${((params.group_opt_in_list ?: params.multioptin ?: entry.group_opt_in_list ?: entry.multioptin ?: '') as String).contains('coachadmin') ? 'Y' : 'N'}",
-        "pref_center_player": "${((params.group_opt_in_list ?: params.multioptin ?: entry.group_opt_in_list ?: entry.multioptin ?: '') as String).contains('player') ? 'Y' : 'N'}",
-        "pref_center_fan": "${((params.group_opt_in_list ?: params.multioptin ?: entry.group_opt_in_list ?: entry.multioptin ?: '') as String).contains('fan') ? 'Y' : 'N'}",
-        "pref_center_cleats_and_shoes": "${((params.multioptin_01 ?: entry.multioptin_01 ?: '') as String).contains('cleats_and_shoes') ? 'Y' : 'N'}",
-        "pref_center_fan_jerseys_and_gear": "${((params.multioptin_01 ?: entry.multioptin_01 ?: '') as String).contains('fan_jerseys_and_gear') ? 'Y' : 'N'}",
-        "pref_center_apparel": "${((params.multioptin_01 ?: entry.multioptin_01 ?: '') as String).contains('apparel') ? 'Y' : 'N'}",
-        "pref_center_soccer_balls_and_equipment": "${((params.multioptin_01 ?: entry.multioptin_01 ?: '') as String).contains('soccer_balls_and_equipment') ? 'Y' : 'N'}",
-        "pref_center_goalkeeper": "${((params.multioptin_01 ?: entry.multioptin_01 ?: '') as String).contains('goalkeeper') ? 'Y' : 'N'}",
-        "pref_center_new_content_and_articles": "${((params.multioptin_01 ?: entry.multioptin_01 ?: '') as String).contains('new_content_and_articles') ? 'Y' : 'N'}",
-        "pref_center_deals_and_special_offers": "${((params.multioptin_01 ?: entry.multioptin_01 ?: '') as String).contains('deals_and_special_offers') ? 'Y' : 'N'}"
+        "pref_center_parent": "${((params.I_am_a ?: entry.I_am_a ?: '') as String).contains('parent') ? 'Y' : 'N'}",
+        "pref_center_coach_admin": "${((params.I_am_a ?: entry.I_am_a ?: '') as String).contains('coachadmin') ? 'Y' : 'N'}",
+        "pref_center_player": "${((params.I_am_a ?: entry.I_am_a ?: '') as String).contains('player') ? 'Y' : 'N'}",
+        "pref_center_fan": "${((params.I_am_a ?: entry.I_am_a ?: '') as String).contains('fan') ? 'Y' : 'N'}",
+        "pref_center_latest_product_drops": "${((params.My_preferences ?: entry.My_preferences ?: '') as String).contains('latest_product_drops') ? 'Y' : 'N'}",
+        "pref_center_cleats_and_shoes": "${((params.My_preferences ?: entry.My_preferences ?: '') as String).contains('cleats_and_shoes') ? 'Y' : 'N'}",
+        "pref_center_fan_jerseys_and_gear": "${((params.My_preferences ?: entry.My_preferences ?: '') as String).contains('fan_jerseys_and_gear') ? 'Y' : 'N'}",
+        "pref_center_apparel": "${((params.My_preferences ?: entry.My_preferences ?: '') as String).contains('apparel') ? 'Y' : 'N'}",
+        "pref_center_soccer_balls_and_equipment": "${((params.My_preferences ?: entry.My_preferences ?: '') as String).contains('soccer_balls_and_equipment') ? 'Y' : 'N'}",
+        "pref_center_goalkeeper": "${((params.My_preferences ?: entry.My_preferences ?: '') as String).contains('goalkeeper') ? 'Y' : 'N'}",
+        "pref_center_new_content_and_articles": "${((params.My_preferences ?: entry.My_preferences ?: '') as String).contains('new_content_and_articles') ? 'Y' : 'N'}",
+        "pref_center_deals_and_special_offers": "${((params.My_preferences ?: entry.My_preferences ?: '') as String).contains('deals_and_special_offers') ? 'Y' : 'N'}"
       }
     }
   }

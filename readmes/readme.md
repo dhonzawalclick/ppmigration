@@ -9,6 +9,8 @@ This repo tracks migrating preference-center (and related) experiences from **Pu
 | **This file** | Shared architecture, form→entry→JSON flow, ZMP API shape, Grow HTTP JSON reference |
 | [`sei-pushplanet-grow-migration.md`](sei-pushplanet-grow-migration.md) | Client workstream: SEI Soccer PushPlanet → Grow (includes official On Load / `nc.ol` docs) |
 | [`grow-preference-center-process.md`](grow-preference-center-process.md) | How to build a Grow preference center (On Load, ZMP, Customize) |
+| [`sei-onload-integration.md`](sei-onload-integration.md) | SEI On Load: what it is, each step, known failure causes |
+| [`sei-activity-integration.md`](sei-activity-integration.md) | SEI submit integration: ZMP activity + identify, field mapping |
 | [`grow-json-from-custom-js.md`](grow-json-from-custom-js.md) | Prompt/process: Custom JS → Grow ZMP JSON configs |
 | [`nathan-lpo-api-notes.md`](nathan-lpo-api-notes.md) | Nathan Vranicar’s LPO / PushPlanet API notes |
 
