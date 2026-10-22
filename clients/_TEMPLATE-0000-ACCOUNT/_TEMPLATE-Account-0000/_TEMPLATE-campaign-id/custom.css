@@ -1,0 +1,64 @@
+/* Campaign Custom CSS — paste into Grow Customize → Custom CSS.
+ * Module ids are per experience: read them from the live page
+ * (#xSectionDetails_<type>_<number>) and replace every REPLACE_ id below.
+ */
+
+/* Hide the fromOnLoad True/False radios (they stay in the DOM so the value posts) */
+#xSectionDetails_radio_REPLACE {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Modules that receive more than one On Load value (Name) must not have a
+   Grow display condition: a hidden conditional module keeps only one
+   prefilled value. Hide them here until fromOnLoad = True instead. */
+.xForm:not(:has(#fromOnLoadWrapper input#true:checked)) #xSectionDetails_name_REPLACE {
+  display: none !important;
+}
+
+/* Submit modules cannot take a display condition: hide T&C + submit while fromOnLoad = False */
+.xForm:has(#fromOnLoadWrapper input#false:checked) #xSectionDetails_policy_REPLACE,
+.xForm:has(#fromOnLoadWrapper input#false:checked) #xSectionDetails_submit_REPLACE,
+.xForm:has(#fromOnLoadWrapper input#false:checked) #xSubmitContainer {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  pointer-events: none !important;
+}
+
+.xForm:has(#fromOnLoadWrapper input#true:checked) #xSectionDetails_policy_REPLACE,
+.xForm:has(#fromOnLoadWrapper input#true:checked) #xSectionDetails_submit_REPLACE,
+.xForm:has(#fromOnLoadWrapper input#true:checked) #xSubmitContainer {
+  display: flex !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  overflow: visible !important;
+  pointer-events: auto !important;
+}
+
+/* Hold error copy back 1s so a good link does not flash it */
+.xCustom-defaultError {
+  opacity: 0;
+  animation: showContent 0s ease 1s forwards;
+}
+@keyframes showContent {
+  to { opacity: 1; }
+}

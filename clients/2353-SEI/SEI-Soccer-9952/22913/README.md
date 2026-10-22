@@ -24,7 +24,7 @@ Shared form. Custom JS tags the submit:
 | Sign up | `preference_center` | `updateSubscriber` (prefs). PP had `zetaTrackEvent(preference_center)` commented out. |
 | Unsubscribe | `unsubscribe` | `updateSubscriber` (contact `inactive`) + `zetaTrackEvent(event: "unsubscribe")` |
 
-Flat entry integrations gate with `executeIf` on `params.sei_action` (see templates). Scripting notes: [`../../../readmes/grow-scripting-guide.md`](../../../readmes/grow-scripting-guide.md).
+Flat entry integrations gate with `executeIf` on `params.sei_action` (see templates). Scripting notes: [`readmes/grow-scripting-guide.md`](../../../../readmes/grow-scripting-guide.md).
 
 **Validation:** Grow still validates native required fields when the Sign up CTA is clicked for unsub. Prefer not marking name/DOB/T&C/prefs as required if unsub must work without filling them; enforce prefs rules in a `form:add:submitHandler` for the prefs path only.
 

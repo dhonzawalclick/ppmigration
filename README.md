@@ -1,26 +1,31 @@
 # PushPlanet → Grow migration
 
-Custom code (JS, CSS, integration JSON) for migrating PushPlanet / Digioh forms to Zeta Grow, organized by Grow account and campaign.
+Custom code (JS, CSS, integration JSON) for migrating PushPlanet / Digioh forms to Zeta Grow, organized by Grow account, PushPlanet experience and Grow campaign.
 
 ## Layout
 
 ```
+templates/                          shared submit integrations
+  activity.json                     HTTP entry → ZMP activity (+ identify_person)
+  identify.json                     HTTP entry → ZMP identify
+  get-contact.json                  ZMP person read
 clients/
-  {acc.name}-{account.number}/
-    README.md            account facts: name, number, ZMP site_id
-    templates/
-      identify.json      HTTP entry → ZMP identify
-      activity.json      HTTP entry → ZMP activity
-    {campaign_id}/
-      README.md          paste checklist, module ids, open items
-      custom.html        Customize → Custom JavaScript
-      theme.css          Customize → Custom Styles
-      onload.json        Integrations → On Load
-      reference/         not pasted: originals, samples, retired attempts
-readmes/                 background docs and per-client notes
+  {grow_tenant_id}-{ACCOUNT}/       e.g. 2353-SEI
+    README.md                       account facts: tenant id, ZMP site ids
+    {Account}-{pushplanet_id}/      e.g. SEI-Soccer-9958, one per migrated experience
+      README.md
+      templates/                    optional, experience-specific integrations
+      {grow_campaign_id}/           e.g. 22815
+        README.md                   paste checklist, ids, staging link
+        custom.css                  Customize → Custom CSS
+        custom.html                 Customize → Custom JavaScript
+        onload.json                 Integrations → On Load
+        WIP*.json                   same configs with real credentials (gitignored)
+        reference/                  not pasted: originals, samples, retired attempts
+readmes/                            background docs and per-client notes
 ```
 
-Start a new account or campaign by copying [`clients/_TEMPLATE-account-name-0000/`](clients/_TEMPLATE-account-name-0000/).
+Start a new account, experience or campaign by copying [`clients/_TEMPLATE-0000-ACCOUNT/`](clients/_TEMPLATE-0000-ACCOUNT/).
 
 ## Guides
 
@@ -34,6 +39,7 @@ Start a new account or campaign by copying [`clients/_TEMPLATE-account-name-0000
 
 ## Clients
 
-| Account | Campaigns |
-| --- | --- |
-| [`SEI-Soccer-9958`](clients/SEI-Soccer-9958/) | [`22815`](clients/SEI-Soccer-9958/22815/) preference center |
+| Account | Experience | Campaigns |
+| --- | --- | --- |
+| [`2353-SEI`](clients/2353-SEI/) | [`SEI-Soccer-9958`](clients/2353-SEI/SEI-Soccer-9958/) | [`22815`](clients/2353-SEI/SEI-Soccer-9958/22815/) preference center |
+| [`2353-SEI`](clients/2353-SEI/) | [`SEI-Soccer-9952`](clients/2353-SEI/SEI-Soccer-9952/) | [`22913`](clients/2353-SEI/SEI-Soccer-9952/22913/) preferences + unsubscribe |

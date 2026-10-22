@@ -4,12 +4,12 @@ SEI Soccer preference-center migration details. General PushPlanet/Digioh → Gr
 
 | Asset | Path |
 | --- | --- |
-| PushPlanet script | [`reference/pushplanet-9958-desktop.js`](../clients/SEI-Soccer-9958/22815/reference/pushplanet-9958-desktop.js) |
-| Grow Custom CSS | [`22815/theme.css`](../clients/SEI-Soccer-9958/22815/theme.css) |
-| Grow Custom JS | [`22815/custom.html`](../clients/SEI-Soccer-9958/22815/custom.html): CTA gate only, no AES key |
-| On Load | [`22815/onload.json`](../clients/SEI-Soccer-9958/22815/onload.json): `nc.ol_tok` / `nc.ol_tok2`, then GET `/ver2/sei-dev/subscribers`. Returned person data on display 22904. |
-| On Load template | [`onload-dual-token-zmp-get.json`](../clients/_TEMPLATE-account-name-0000/_TEMPLATE-campaign-id/onload-dual-token-zmp-get.json) |
-| Identify / Activity JSON | [`templates/identify.json`](../clients/SEI-Soccer-9958/templates/identify.json), [`templates/activity.json`](../clients/SEI-Soccer-9958/templates/activity.json) |
+| PushPlanet script | [`reference/pushplanet-9958-desktop.js`](../clients/2353-SEI/SEI-Soccer-9958/22815/reference/pushplanet-9958-desktop.js) |
+| Grow Custom CSS | [`22815/custom.css`](../clients/2353-SEI/SEI-Soccer-9958/22815/custom.css) |
+| Grow Custom JS | [`22815/custom.html`](../clients/2353-SEI/SEI-Soccer-9958/22815/custom.html): CTA gate only, no AES key |
+| On Load | [`22815/onload.json`](../clients/2353-SEI/SEI-Soccer-9958/22815/onload.json): `nc.ol_tok` / `nc.ol_tok2`, then GET `/ver2/sei-dev/subscribers`. Returned person data on display 22904. |
+| On Load template | [`onload.json` (template)](../clients/_TEMPLATE-0000-ACCOUNT/_TEMPLATE-Account-0000/_TEMPLATE-campaign-id/onload.json) |
+| Identify / Activity JSON | [`templates/identify.json`](../templates/identify.json), [`templates/activity.json`](../templates/activity.json) |
 | Grow Experience | Campaign **22815** (staging) |
 
 ## Grow migration field notes
@@ -193,9 +193,9 @@ Each client has a similar unsubscribe form template in Grow; steps are usually s
 
 | File | Role |
 | --- | --- |
-| [`22815/onload.json`](../clients/SEI-Soccer-9958/22815/onload.json) | On Load that returned a ZMP person: decrypt `nc.ol_tok` / `nc.ol_tok2`, GET subscribers, map fields, `return$` |
-| [`reference/onload-sample-input.json`](../clients/SEI-Soccer-9958/22815/reference/onload-sample-input.json) | Sample `nc.ol` JSON blob for the decrypt-only path |
-| [`reference/onload-dual-token-groovy.json`](../clients/SEI-Soccer-9958/22815/reference/onload-dual-token-groovy.json) | Earlier Groovy paste. 503’d. Not the file in `onload.json`. |
+| [`22815/onload.json`](../clients/2353-SEI/SEI-Soccer-9958/22815/onload.json) | On Load that returned a ZMP person: decrypt `nc.ol_tok` / `nc.ol_tok2`, GET subscribers, map fields, `return$` |
+| [`reference/onload-sample-input.json`](../clients/2353-SEI/SEI-Soccer-9958/22815/reference/onload-sample-input.json) | Sample `nc.ol` JSON blob for the decrypt-only path |
+| [`reference/onload-dual-token-groovy.json`](../clients/2353-SEI/SEI-Soccer-9958/22815/reference/onload-dual-token-groovy.json) | Earlier Groovy paste. 503’d. Not the file in `onload.json`. |
 
 10. Paste Custom JS + CSS from Customize section. Paste `onload.json` and set the AES key and Basic auth in Grow. Add HTTP entry integration(s) for submit (`paramsType: "mapped"`, `ignoreEmpty: true`).
 11. Email link: `nc.ol_tok` = AES(uid), `nc.ol_tok2` = AES(email). Same key as `encryptionKey` and the Groovy `keyBytes` string.
@@ -209,8 +209,8 @@ Staging preference-center form. Paste into **Customize** → **Apply / Save & Cl
 
 | Slot | Repo file | Notes |
 | --- | --- | --- |
-| Custom Styles | [`22815/theme.css`](../clients/SEI-Soccer-9958/22815/theme.css) | Layout, placeholders, name/email/DOB. Month dropdown stays working. |
-| Custom JavaScript | [`22815/custom.html`](../clients/SEI-Soccer-9958/22815/custom.html) | `fromOnLoad` gate only. |
+| Custom Styles | [`22815/custom.css`](../clients/2353-SEI/SEI-Soccer-9958/22815/custom.css) | Layout, placeholders, name/email/DOB. Month dropdown stays working. |
+| Custom JavaScript | [`22815/custom.html`](../clients/2353-SEI/SEI-Soccer-9958/22815/custom.html) | `fromOnLoad` gate only. |
 
 Scripting Guide: `/admin/campaign/scripthelpmicro`. Custom JS **must** include `<script>` tags or Grow dumps source as page text. Prefer `NGX.api` over raw DOM for system modules.
 
@@ -436,7 +436,7 @@ First subStep: `http$` GET to a third party with `queryParams$` from `encryptedT
 
 ### Why our first SEI On Load failed (re-check)
 
-We built the first SEI On Load (now [`reference/onload-dual-token-groovy.json`](../clients/SEI-Soccer-9958/22815/reference/onload-dual-token-groovy.json)) like a **custom** migration: `nc.ol_tok` / `nc.ol_tok2` + Groovy `eval$` decrypt + `params.ol_tok`. Staging then called Grow’s runner and got:
+We built the first SEI On Load (now [`reference/onload-dual-token-groovy.json`](../clients/2353-SEI/SEI-Soccer-9958/22815/reference/onload-dual-token-groovy.json)) like a **custom** migration: `nc.ol_tok` / `nc.ol_tok2` + Groovy `eval$` decrypt + `params.ol_tok`. Staging then called Grow’s runner and got:
 
 `POST /api/integration/d/onload` → **503** — `Failed to make onload integration request!`
 
@@ -451,7 +451,7 @@ Mismatch vs these docs:
 
 Likely 503 cause: with `encryptionKey` set, Grow expects a valid **`nc.ol`** blob. We never sent `nc.ol`, so built-in decrypt/mapping can fail hard before (or instead of) our Groovy path. Custom `eval$` decrypt is also outside the documented contract and can crash the runner.
 
-**Current SEI path:** [`22815/onload.json`](../clients/SEI-Soccer-9958/22815/onload.json). Decrypt `nc.ol_tok` / `nc.ol_tok2`, GET `/ver2/sei-dev/subscribers` when the uid is present, map the person in a later `eval$`, and `return$` copies `executionResults`. That returned person data on display 22904. An `http$` that read `encryptedTokenMapping` from `nc.ol` returned `{}`. The browser-decrypt workaround stays out of Custom JS.
+**Current SEI path:** [`22815/onload.json`](../clients/2353-SEI/SEI-Soccer-9958/22815/onload.json). Decrypt `nc.ol_tok` / `nc.ol_tok2`, GET `/ver2/sei-dev/subscribers` when the uid is present, map the person in a later `eval$`, and `return$` copies `executionResults`. That returned person data on display 22904. An `http$` that read `encryptedTokenMapping` from `nc.ol` returned `{}`. The browser-decrypt workaround stays out of Custom JS.
 
 ---
 
@@ -459,7 +459,7 @@ Likely 503 cause: with `encryptionKey` set, Grow expects a valid **`nc.ol`** blo
 
 ZMP `site_id` for SEI is `sei-soccer-com` (also used when loading `p13n.min.js`).
 
-Live draft configs: [`templates/identify.json`](../clients/SEI-Soccer-9958/templates/identify.json), [`templates/activity.json`](../clients/SEI-Soccer-9958/templates/activity.json).
+Live draft configs: [`templates/identify.json`](../templates/identify.json), [`templates/activity.json`](../templates/activity.json).
 
 ### Suggested Grow stubs for ZMP (to flesh out next)
 

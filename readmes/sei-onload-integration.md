@@ -149,8 +149,8 @@ fromOnLoad = (uid && (mail || zmpEmail)) ? 'true' : 'false'
 ## After the response
 
 - Grow applies `response.data` only when it is non-empty. An empty `{}` means the runner stopped before `return$`.
-- The name, DOB, and preference modules are conditional on `fromOnLoad`. While a conditional module is hidden, Grow stores one prefilled value per module. When there are several values (first and last name), the last one wins. `[custom.html](../clients/SEI-Soccer-9958/22815/custom.html)` re-applies `name_Firstname` and the month from the `/onload` response after the module opens.
-- Custom JS shows or hides T&C and Sign up based on `fromOnLoad`. Custom JS never decrypts tokens.
+- While a conditional module is hidden, Grow stores one prefilled value per module, and the last one wins. That is fine for one-value modules (email, a checkbox group). The Name module gets two (`name_Firstname`, `name_Lastname`), so it has no display condition; [`custom.css`](../clients/2353-SEI/SEI-Soccer-9958/22815/custom.css) hides it until `fromOnLoad` is true.
+- `custom.css` also hides the `fromOnLoad` radios and hides T&C and Sign up while `fromOnLoad` is false. Nothing decrypts tokens in the browser.
 
 
 
@@ -166,7 +166,7 @@ fromOnLoad = (uid && (mail || zmpEmail)) ? 'true' : 'false'
 | uid/email empty, no ZMP call                                              | Wrong or empty AES key (one test pasted `''.getBytes`). Or `keyBytes` and `encryptionKey` differ. Or tokens were encrypted with a different key. Decrypt errors return `''`, so `when$` skips the GET silently.        |
 | Decrypt fails on some links                                               | `+` became a space in transit. Step 1 replaces spaces with `+`. Hand-built URLs must still URL-encode `+`, `/`, and `=`.                                                                                               |
 | Email filled, everything else blank                                       | That ZMP person has no data. `sei.dev.pc.003`–`008` were email-only in later checks. Only 001 and 002 had name, DOB, and prefs.                                                                                        |
-| Last name fills, first name blank                                         | Hidden conditional name module keeps one prefilled value; `name_Lastname` overwrites `name_Firstname`. Handled in Custom JS.                                                                                           |
+| Last name fills, first name blank                                         | Hidden conditional name module keeps one prefilled value; `name_Lastname` overwrites `name_Firstname`. Remove the Name module's display condition and hide it with CSS.                                                                                           |
 | Month blank                                                               | ZMP gives `02`; the select options are `1`–`12`. Step 5 now strips the leading zero.                                                                                                                                   |
 | Nested `name` object or single `date_of_birth` string did not fill inputs | Grow needs the flat keys `name_Firstname`, `name_Lastname`, `date_of_birth_Year/Month/Day`.                                                                                                                            |
 | Direct ZMP curl works but the form is empty                               | The failure is in Grow's runner, not ZMP. Check the `/onload` response body.                                                                                                                                           |
@@ -181,4 +181,4 @@ fromOnLoad = (uid && (mail || zmpEmail)) ? 'true' : 'false'
 3. In DevTools → Network, open `/api/integration/d/onload` and read the response `data`.
 4. Compare it with `GET /ver2/sei-dev/subscribers?uid=…` for the same user.
 
-Test users: `[clients/SEI-Soccer-9958/sei-dev-test-users.md](../clients/SEI-Soccer-9958/sei-dev-test-users.md)`. Each new link needs fresh tokens encrypted with the current key. Old tokens keep working as long as the key is unchanged.
+Test users: [`clients/2353-SEI/SEI-Soccer-9958/sei-dev-test-users.md`](../clients/2353-SEI/SEI-Soccer-9958/sei-dev-test-users.md). Each new link needs fresh tokens encrypted with the current key. Old tokens keep working as long as the key is unchanged.

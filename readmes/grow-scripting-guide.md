@@ -108,7 +108,7 @@ Grow pattern used on campaign **22913**:
 2. Flat HTTP entry integrations use `executeIf` on `params.sei_action` (ignored when `onlySubSteps: true`).
 3. Prefs configs: `executeIf` → preference_center. Unsub configs: `executeIf` → unsubscribe.
 
-See `clients/SEI-Soccer-9952/22913/custom.html` and `clients/SEI-Soccer-9952/templates/*unsubscribe*.json`.
+See `clients/2353-SEI/SEI-Soccer-9952/22913/custom.html` and `clients/2353-SEI/SEI-Soccer-9952/templates/activity-identify.json`.
 
 ## Debug
 
