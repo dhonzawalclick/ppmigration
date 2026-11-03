@@ -1,5 +1,5 @@
 {
-  "url": "https://api.zetaglobal.net/ver2/sei-soccer-com/activities",
+  "url": "https://api.zetaglobal.net/ver2/sei-dev/activities",
   "stageUrl": "https://api.zetaglobal.net/ver2/sei-dev/activities",
   "bindUrl": false,
   "requestType": "json",

@@ -1,4 +1,6 @@
-# SEI On Load integration (display 22904)
+# SEI On Load integration (display 22904 / campaign 22913)
+
+Primary write-up is for SEI Soccer **9958** (Grow campaign **22815**, display **22904**). Campaign **22913** (PushPlanet **9952**) uses the **same** decrypt → `sei-dev` GET → `return$` model; paste files live under [`clients/2353-SEI/SEI-Soccer-9952/22913/`](../clients/2353-SEI/SEI-Soccer-9952/22913/) (`onload.json` / gitignored `WIPonload.json`). Staging form field names on 22913 match 22904 (`I_am_a`, `My_preferences`, flat DOB parts).
 
 ## What an On Load integration is
 
@@ -162,7 +164,7 @@ fromOnLoad = (uid && (mail || zmpEmail)) ? 'true' : 'false'
 | No `/onload` request in Network                                           | No `nc.ol*` param in the URL (`nc.pf_*` only, or none). Or the integration is not saved on this display.                                                                                                               |
 | No request, or empty fields                                               | URL typo `&?nc.ol_tok=`. The extra `?` changes the param name.                                                                                                                                                         |
 | `/onload` returns 200 `{}`                                                | An `http$` that read uid from `encryptedTokenMapping` (official `nc.ol` blob) stopped before `return$`. Seen with ZMP, httpbin, and the official sample shape. The fix was to decrypt in `eval$` first, then call ZMP. |
-| `/onload` returns 503 "Failed to make onload integration request!"        | Earlier Groovy shape combined with a bad URL. Also seen with an httpbin variant that had `requestType$` and an empty `params$` and no `encryptionKey`.                                                                 |
+| `/onload` returns 503 "Failed to make onload integration request!"        | Earlier Groovy shape combined with a bad URL. Also seen with an httpbin variant that had `requestType$` and an empty `params$` and no `encryptionKey`. Also when `http$` hits a ZMP site the REST key cannot auth (`sei-soccer-com` / `sei-soccer-com-dev` → 401 with the sei-dev key); keep On Load on `sei-dev` while testing. |
 | uid/email empty, no ZMP call                                              | Wrong or empty AES key (one test pasted `''.getBytes`). Or `keyBytes` and `encryptionKey` differ. Or tokens were encrypted with a different key. Decrypt errors return `''`, so `when$` skips the GET silently.        |
 | Decrypt fails on some links                                               | `+` became a space in transit. Step 1 replaces spaces with `+`. Hand-built URLs must still URL-encode `+`, `/`, and `=`.                                                                                               |
 | Email filled, everything else blank                                       | That ZMP person has no data. `sei.dev.pc.003`–`008` were email-only in later checks. Only 001 and 002 had name, DOB, and prefs.                                                                                        |

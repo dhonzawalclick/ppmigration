@@ -1,5 +1,5 @@
 {
-  "url": "https://api.zetaglobal.net/ver2/sei-soccer-com/subscribers",
+  "url": "https://api.zetaglobal.net/ver2/sei-dev/subscribers",
   "stageUrl": "https://api.zetaglobal.net/ver2/sei-dev/subscribers",
   "bindUrl": false,
   "requestType": "querystring",

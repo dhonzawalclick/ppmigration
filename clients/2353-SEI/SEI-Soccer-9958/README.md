@@ -5,7 +5,7 @@
 | PushPlanet experience | `9958` |
 | Grow campaign id | `22815` |
 | Grow display id | `22904` |
-| ZMP site_id | staging: `sei-dev` (see the [account README](../README.md) for prod) |
+| ZMP site_id | testing: `sei-dev` (On Load + submit; see the [account README](../README.md) for prod) |
 | Staging preview | `https://us-displayx.wayin.com/preview/experience/4362b713-5988-4221-b9a3-13ea2e60e144/22904/details?stageMode=true&ptk=7ee526a35be6a749ee2ce60769b73d21` |
 
 ## Paste checklist (campaign `22815`)

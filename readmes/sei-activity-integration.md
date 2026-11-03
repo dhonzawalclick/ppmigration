@@ -10,8 +10,8 @@ An HTTP entry integration. Grow runs it on the server each time someone submits 
 
 | Mode | URL |
 | --- | --- |
-| Live | `POST https://api.zetaglobal.net/ver2/sei-soccer-com/activities` |
-| Staging preview (`stageMode=true`) | `POST https://api.zetaglobal.net/ver2/sei-dev/activities` |
+| Live / staging (testing) | `POST https://api.zetaglobal.net/ver2/sei-dev/activities` — both `url` and `stageUrl` until go-live |
+| Prod (go-live) | Switch both to `…/ver2/sei-soccer-com/activities` |
 
 Auth is a ZMP Basic header, `Basic base64("api:<ZMP REST key>")`. The repo copy has a placeholder; the real header lives only in Grow and the gitignored `WIPactivity.json`.
 
@@ -34,10 +34,10 @@ Shape only; `…` stands for the mapped fields below.
     "identify_person": true,
     "event": "preference_center",
     "subscriber": {
-      "uid": "<email>",
+      "uid": "<uid from link, else email>",
       "first_name": "…", "last_name": "…", "source": "grow",
       "contacts": [{
-        "contact_type": "email", "contact_value": "<email>", "subscription_status": "active"
+        "contact_type": "email", "contact_value": "<email, else uid>", "subscription_status": "active"
       }],
       "properties": { "first_name", "last_name", "date_of_birth", "email", "pref_center_* …" }
     },
@@ -52,7 +52,8 @@ The person's fields go in `subscriber.properties`. The event gets a copy in `act
 
 | ZMP field | Form field |
 | --- | --- |
-| `uid`, email contact | `email` (falls back to `uid`) |
+| `subscriber.uid` | `uid` (falls back to `email`) — matches PP `encbu`; editing the email field must not retarget the profile |
+| email `contact_value` | `email` (falls back to `uid`) — `contact_type` is `email`, so keep a real email here |
 | `first_name` | `name_Firstname` |
 | `last_name` | `name_Lastname` |
 | `date_of_birth` | `date_of_birth` |
@@ -74,7 +75,7 @@ Every flag is always sent, so unchecking a box writes `N`.
 | Every `pref_center_*` is `N` | The checkbox field names changed in Grow. The JSON must read `I_am_a` / `My_preferences`; it used to read `multioptin` / `multioptin_01`. |
 | Name or DOB missing in ZMP | The form field was empty. Empty values are omitted, so ZMP keeps the old value. |
 | Nothing reaches ZMP | No email in the entry (`required`), or the integration is not attached to this display. |
-| Wrong site written | Staging previews post to `sei-dev`; live traffic posts to `sei-soccer-com`. |
+| Wrong site written | During testing both On Load and submit must hit `sei-dev`. Prod is `sei-soccer-com` — only after go-live. |
 | "Latest product drops" not saved | `latest_product_drops` has no ZMP property yet, so it is not mapped. |
 
 ## Checking a submit

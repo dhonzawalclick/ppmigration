@@ -1,5 +1,5 @@
 {
-  "url": "https://api.zetaglobal.net/ver2/sei-soccer-com/subscribers/identify",
+  "url": "https://api.zetaglobal.net/ver2/sei-dev/subscribers/identify",
   "stageUrl": "https://api.zetaglobal.net/ver2/sei-dev/subscribers/identify",
   "bindUrl": false,
   "requestType": "json",
@@ -22,7 +22,7 @@
   },
   "params": {
     "subscriber": {
-      "uid": "${entry.email ?: entry.uid}",
+      "uid": "${entry.uid ?: entry.email}",
       "first_name": "${entry.firstname ?: entry.name_Firstname ?: entry.first_name ?: ''}",
       "last_name": "${entry.lastname ?: entry.name_Lastname ?: entry.last_name ?: ''}",
       "source": "grow",

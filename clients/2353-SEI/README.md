@@ -4,7 +4,7 @@
 | --- | --- |
 | Grow tenant id | `2353` |
 | Grow account name | SEI (Sports Endeavors) |
-| ZMP site_id | staging: `sei-dev`. Prod: the integrations use `sei-soccer-com`, but the prod REST key only authenticates on `sei` — confirm before go-live. |
+| ZMP site_id | Testing: all integrations use `sei-dev` (read + write). The current REST key returns **401** on `sei-soccer-com` and `sei-soccer-com-dev`; Grow often shows that as a **503** on On Load. Prod target is `sei-soccer-com` with a prod key. |
 
 Full migration notes: [`readmes/sei-pushplanet-grow-migration.md`](../../readmes/sei-pushplanet-grow-migration.md).
 

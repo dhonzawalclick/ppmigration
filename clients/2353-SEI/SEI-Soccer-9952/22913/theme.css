@@ -8,7 +8,7 @@
  * - ::before labels above name / email / DOB
  * - Multi 2-col + compact checkbox hit-targets
  * - T&C + submit stay visible
- * - Unsubscribe HTML module card
+ * - Removeme labels centered via .xCustom-removeme; #unsub_btn matches Sign up
  */
 
 /* Hide fromOnLoad True/False radios (keep in DOM for Custom JS + entry)
@@ -26,6 +26,14 @@
   pointer-events: none !important;
 }
 */
+
+/* Name module MUST have no Grow display condition. A hidden conditional module
+   keeps only one prefilled value, so On Load loses name_Firstname (last wins).
+   Remove the condition in Page Builder, then hide with CSS until fromOnLoad=true.
+   Hook: field name + .xName — never #xSectionDetails_name_* (Grow IDs change). */
+.xForm:not(:has(input[name="fromOnLoad"][value="true"]:checked)) .xComponent.xName {
+  display: none !important;
+}
 
 /* Keep T&C + submit visible (overridden by Custom JS class when fromOnLoad=false) */
 #xSectionDetails_policy_1790353974879,
@@ -396,97 +404,55 @@
   opacity: 0 !important;
 }
 
-/* Unsubscribe — same Medium column as name/email/DOB (50%), no card chrome */
-#xSectionDetails_html_1791984597437 {
-  box-sizing: border-box !important;
-  width: 50% !important;
-  max-width: 50% !important;
-  min-width: 16rem !important;
-  margin: 0.35rem auto !important;
-  padding: 0.15rem 0 !important;
-  background: transparent !important;
-  border: 0 !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
+/* Removeme Text module — center every label/copy line (no Grow module IDs) */
+.xCustom-removeme label,
+.xCustom-removeme label p,
+.xCustom-removeme .xHelpLabel,
+.xCustom-removeme .xHelpLabel p,
+.xCustom-removeme .xHelpContainer,
+.xCustom-removeme .xErrorContainer,
+.xCustom-removeme .xSizingMsg {
+  align-self: center !important;
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
-#xSectionDetails_html_1791984597437 .xComponentInner,
-#xSectionDetails_html_1791984597437 .xFieldItem,
-#xSectionDetails_html_1791984597437 .xFieldContainer,
-#xSectionDetails_html_1791984597437 .xHtmlContainer {
-  width: 100% !important;
+/* Let the tag sit on one line when the column allows (theme caps label at 50%) */
+.xCustom-removeme label {
+  width: auto !important;
   max-width: 100% !important;
-  box-sizing: border-box !important;
-  text-align: left !important;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
 }
 
-#xSectionDetails_html_1791984597437 .xHtmlContainer > p {
-  margin: 0 0 0.75rem !important;
-  font-size: 14px !important;
-  font-weight: 500 !important;
-  line-height: 1.2 !important;
-  color: #000 !important;
-}
-
-#xSectionDetails_html_1791984597437 .xHtmlContainer label {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: stretch !important;
-  gap: 6px !important;
-  margin: 0 0 0.75rem !important;
-  font-size: 14px !important;
-  font-weight: 500 !important;
-  line-height: 1.2 !important;
-  color: #000 !important;
-}
-
-/* Same 48px field chrome as #emailWrapper inputs */
-#xSectionDetails_html_1791984597437 .xHtmlContainer input {
-  display: block !important;
-  box-sizing: border-box !important;
-  width: 100% !important;
-  height: 48px !important;
-  min-height: 48px !important;
-  max-height: 48px !important;
-  padding: 0 20px !important;
-  border: 1px solid rgba(0, 0, 0, 0.2) !important;
-  border-radius: 4px !important;
-  background: #fff !important;
-  color: #000 !important;
-  font-family: "DM Sans", sans-serif !important;
-  font-size: 14px !important;
-  line-height: 44px !important;
-}
-
-/* Mirror live Sign up (.xButton): same 178×56 box, blue fill, white text */
-#xSectionDetails_html_1791984597437 .xHtmlContainer button {
+/* Unsubscribe HTML button — mirror live Sign up (.xButton / .xTextContainer) */
+#unsub_btn {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   box-sizing: border-box !important;
-  width: 178px !important;
-  min-width: 178px !important;
-  max-width: 178px !important;
-  min-height: 56px !important;
-  height: 56px !important;
-  margin: 0.15rem auto 0 !important;
-  padding: 4.5px 12.5px !important;
+  width: auto !important;
+  min-width: 165px !important;
+  height: auto !important;
+  min-height: 52px !important;
+  margin: 0.35rem auto !important;
+  padding: 14px 50px !important;
   border: 0 !important;
   border-radius: 4px !important;
-  background: #1063fe !important;
-  color: #ffffff !important;
+  background: #ffffff !important;
+  color: #04072a !important;
   font-family: "DM Sans", sans-serif !important;
-  font-size: 14px !important;
-  font-weight: 400 !important;
+  font-size: 18px !important;
+  font-weight: 900 !important;
   line-height: normal !important;
   text-transform: none !important;
+  text-align: center !important;
   box-shadow: none !important;
   cursor: pointer !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
 }
 
-#xSectionDetails_html_1791984597437 .xHtmlContainer button:hover {
-  background: #0d56db !important;
-  color: #ffffff !important;
+#unsub_btn:hover {
+  background: #f2f2f2 !important;
+  color: #04072a !important;
 }

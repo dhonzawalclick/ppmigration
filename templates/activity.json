@@ -1,5 +1,5 @@
 {
-  "url": "https://api.zetaglobal.net/ver2/sei-soccer-com/activities",
+  "url": "https://api.zetaglobal.net/ver2/sei-dev/activities",
   "stageUrl": "https://api.zetaglobal.net/ver2/sei-dev/activities",
   "bindUrl": false,
   "requestType": "json",
@@ -24,7 +24,7 @@
     "activity": {
       "identify_person": true,
       "subscriber": {
-        "uid": "${entry.email ?: entry.uid}",
+        "uid": "${entry.uid ?: entry.email}",
         "first_name": "${entry.firstname ?: entry.name_Firstname ?: entry.first_name ?: ''}",
         "last_name": "${entry.lastname ?: entry.name_Lastname ?: entry.last_name ?: ''}",
         "source": "grow",
