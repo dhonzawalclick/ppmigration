@@ -17,10 +17,10 @@ Experience-specific integrations (one file = one request). 9952 needs its own be
 
 | File | Endpoint |
 | --- | --- |
-| [`activity-identify.json`](templates/activity-identify.json) | `POST /ver2/sei-soccer-com/activities` with `identify_person: true`; branches on `params.sei_action` |
-| [`get-contact.json`](templates/get-contact.json) | `GET /ver2/sei-soccer-com/subscribers?uid=` |
+| [`activity-identify.json`](templates/activity-identify.json) | `POST /ver2/sei-dev/activities` with `identify_person: true`; branches on `params.sei_action`. Email-only payload (PP unsub shape). Paste-ready: `22913/WIPactivity-identify.json` |
+| [`get-contact.json`](templates/get-contact.json) | `GET /ver2/sei-dev/subscribers?uid=` |
 
-Auth placeholder: `REPLACE_WITH_BASE64(api:ZMP_REST_API_KEY)`. Real Basic headers only in Grow / local WIP files — do not commit secrets.
+Auth placeholder: `REPLACE_WITH_BASE64(api:ZMP_REST_API_KEY)`. Real Basic headers only in Grow / local `WIP*.json` (gitignored) — do not commit secrets. Until go-live, keep `url` and `stageUrl` on `sei-dev`.
 
 ## Campaigns
 

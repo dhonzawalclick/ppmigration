@@ -1,0 +1,47 @@
+{
+  "url": "https://api.zetaglobal.net/ver2/sei-dev/activities",
+  "stageUrl": "https://api.zetaglobal.net/ver2/sei-dev/activities",
+  "bindUrl": false,
+  "requestType": "json",
+  "verb": "post",
+  "paramsType": "mapped",
+  "formatType": "structured",
+  "encoding": "UTF-8",
+  "ignoreEmpty": true,
+  "nullHandling": "omit",
+  "required": ["email"],
+  "sendEntitlements": false,
+  "verifyHost": true,
+  "trustAll": false,
+  "logDebug": true,
+  "searchForParamsMapKeyword": true,
+  "header": {
+    "Authorization": "Basic REPLACE_WITH_BASE64(api:ZMP_REST_API_KEY)",
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+  },
+  "params": {
+    "activity": {
+      "identify_person": true,
+      "subscriber": {
+        "uid": "${entry.uid ?: entry.email}",
+        "source": "grow",
+        "contacts": [
+          {
+            "contact_type": "email",
+            "contact_value": "${entry.email}",
+            "subscription_status": "${(params?.sei_action ?: '') == 'unsubscribe' ? 'inactive' : 'active'}"
+          }
+        ],
+        "properties": {
+          "email": "${entry.email}"
+        }
+      },
+      "event": "${(params?.sei_action ?: '') == 'unsubscribe' ? 'unsubscribe' : 'preference_center'}",
+      "properties": {
+        "subscription_status": "${(params?.sei_action ?: '') == 'unsubscribe' ? 'inactive' : 'active'}",
+        "email": "${entry.email}"
+      }
+    }
+  }
+}
