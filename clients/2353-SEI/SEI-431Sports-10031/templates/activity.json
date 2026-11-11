@@ -27,8 +27,8 @@
       "identify_person": true,
       "subscriber": {
         "uid": "${entry.uid ?: entry.email}",
-        "first_name": "${entry.name_Firstname ?: entry.first_name ?: ''}",
-        "last_name": "${entry.name_Lastname ?: entry.last_name ?: ''}",
+        "first_name": "${params.name_Firstname ?: entry.name_Firstname ?: entry.firstname ?: entry.first_name ?: ''}",
+        "last_name": "${params.name_Lastname ?: entry.name_Lastname ?: entry.lastname ?: entry.last_name ?: ''}",
         "source": "grow",
         "contacts": [
           {
@@ -38,8 +38,8 @@
           }
         ],
         "properties": {
-          "first_name": "${entry.name_Firstname ?: entry.first_name ?: ''}",
-          "last_name": "${entry.name_Lastname ?: entry.last_name ?: ''}",
+          "first_name": "${params.name_Firstname ?: entry.name_Firstname ?: entry.firstname ?: entry.first_name ?: ''}",
+          "last_name": "${params.name_Lastname ?: entry.name_Lastname ?: entry.lastname ?: entry.last_name ?: ''}",
           "date_of_birth": "${entry.date_of_birth ?: params.date_of_birth ?: ''}",
           "email": "${entry.email ?: ''}",
           "pref_center_parent": "${((params.I_am_a ?: entry.I_am_a ?: '') as String).contains('parent') ? 'Y' : 'N'}",
@@ -58,8 +58,8 @@
       "properties": {
         "source": "grow",
         "subscription_status": "active",
-        "first_name": "${entry.name_Firstname ?: entry.first_name ?: ''}",
-        "last_name": "${entry.name_Lastname ?: entry.last_name ?: ''}",
+        "first_name": "${params.name_Firstname ?: entry.name_Firstname ?: entry.firstname ?: entry.first_name ?: ''}",
+        "last_name": "${params.name_Lastname ?: entry.name_Lastname ?: entry.lastname ?: entry.last_name ?: ''}",
         "email": "${entry.email ?: ''}",
         "date_of_birth": "${entry.date_of_birth ?: params.date_of_birth ?: ''}",
         "pref_center_parent": "${((params.I_am_a ?: entry.I_am_a ?: '') as String).contains('parent') ? 'Y' : 'N'}",

@@ -49,13 +49,14 @@
         "dobMonth": "${{-> def raw = executionResults.json; def person = raw instanceof List ? (raw ? raw[0] : null) : raw; def props = (person instanceof Map && person.properties instanceof Map) ? person.properties : [:]; def dob = (props.date_of_birth ?: '') as String; def m = dob.length() >= 7 ? dob.substring(5, 7) : ''; return m ? String.valueOf(m.toInteger()) : '' }.call()}",
         "dobDay": "${{-> def raw = executionResults.json; def person = raw instanceof List ? (raw ? raw[0] : null) : raw; def props = (person instanceof Map && person.properties instanceof Map) ? person.properties : [:]; def dob = (props.date_of_birth ?: '') as String; return dob.length() >= 10 ? dob.substring(8, 10) : '' }.call()}",
         "roles": "${{-> def raw = executionResults.json; def person = raw instanceof List ? (raw ? raw[0] : null) : raw; def p = (person instanceof Map && person.properties instanceof Map) ? person.properties : [:]; def ids = []; if (p.pref_center_parent == 'Y') ids << 'parent'; if (p.pref_center_coach_admin == 'Y') ids << 'coachadmin'; if (p.pref_center_player == 'Y') ids << 'player'; if (p.pref_center_fan == 'Y') ids << 'fan'; if (p.pref_center_referee == 'Y') ids << 'option'; return ids }.call()}",
-        "sports": "${{-> def raw = executionResults.json; def person = raw instanceof List ? (raw ? raw[0] : null) : raw; def p = (person instanceof Map && person.properties instanceof Map) ? person.properties : [:]; def ids = []; if (p.pref_center_volleyball == 'Y') ids << 'volleyball'; if (p.pref_center_baseball == 'Y') ids << 'baseball'; if (p.pref_center_softball == 'Y') ids << 'softball'; if (p.pref_center_soccer == 'Y') ids << 'soccer'; if (p.pref_center_sports_referee == 'Y') ids << 'sports_referee'; return ids }.call()}"
+        "sports": "${{-> def raw = executionResults.json; def person = raw instanceof List ? (raw ? raw[0] : null) : raw; def p = (person instanceof Map && person.properties instanceof Map) ? person.properties : [:]; def ids = []; if (p.pref_center_volleyball == 'Y') ids << 'volleyball'; if (p.pref_center_baseball == 'Y') ids << 'baseball'; if (p.pref_center_softball == 'Y') ids << 'softball'; if (p.pref_center_soccer == 'Y') ids << 'soccer'; if (p.pref_center_sports_referee == 'Y') ids << 'sports_referee'; return ids }.call()}",
+        "zmpUid": "${{-> def raw = executionResults.json; def person = raw instanceof List ? (raw ? raw[0] : null) : raw; return person?.uid ?: person?.id ?: '' }.call()}"
       }
     },
     {
       "return$": {
         "data": {
-          "uid": "${executionResults.uid ?: ''}",
+          "uid": "${executionResults.zmpUid ?: executionResults.uid ?: ''}",
           "email": "${executionResults.mail ?: executionResults.zmpEmail ?: ''}",
           "fromOnLoad": "${(executionResults.uid && (executionResults.mail || executionResults.zmpEmail)) ? 'true' : 'false'}",
           "date_of_birth": "${executionResults.dob ?: ''}",
@@ -65,7 +66,8 @@
           "I_am_a": "${executionResults.roles ?: []}",
           "name_Firstname": "${executionResults.firstName ?: ''}",
           "name_Lastname": "${executionResults.lastName ?: ''}",
-          "My_preferences": "${executionResults.sports ?: []}"
+          "My_preferences": "${executionResults.sports ?: []}",
+          "link_uid": "${executionResults.uid ?: ''}"
         }
       }
     }
