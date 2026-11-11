@@ -1,0 +1,6 @@
+id,label,selected,imageAssetRef,imageAssetRefAltText,embedCode
+volleyball,Volleyball,false,,,
+baseball,Baseball,false,,,
+softball,Softball,false,,,
+soccer,Soccer,false,,,
+sports_referee,Referee,false,,,

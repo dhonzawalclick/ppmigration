@@ -1,0 +1,393 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <title>Preferences</title>
+    <meta name="keywords" content="Landing Page">
+    <meta name="description" content="PushPlanet is a drag-and-drop landing page builder with beautiful templates, forms, and is integrated with your Email Marketing and CRM software providers.">
+
+
+
+
+        <link rel="shortcut icon" href="https://cdn.pushplanet.com/images/favicon/favicon-96x96.png" type="image/png">
+    <!--CSS-->
+
+    <link rel="stylesheet" href="//cdn.pushplanet.com/editor/widget_hosted.css?cb=0076a8704e35445790aaeb754898d2a9">
+
+
+    
+
+    
+
+
+
+    <!--JS-->
+        <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css">
+        <script async="" src="https://cdn.boomtrain.com/p13n/sei-431sports/p13n.min.js"></script><script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+    <script type="text/javascript">if (window.jQuery && $.holdReady) $.holdReady(true);</script>
+
+
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+
+    <script type="text/javascript" src="//cdn.pushplanet.com/static/lz-string-1.4.4-mod.min.js"></script>
+    <script type="text/javascript" src="//cdn.pushplanet.com/editor/device-detection.js?cb=0076a8704e35445790aaeb754898d2a9"></script>
+    <script type="text/javascript">
+        var settings = '';
+        var PP_MODE = 'hosted';
+        var PP_CACHE_VERSION = '0076a8704e35445790aaeb754898d2a9';
+        var PP_STAGE = '';
+        var IS_DEV = false;
+        var IS_PREVIEW = false;
+        var USER_ID = '829';
+        var USER_GUID = '__IwMwHMCmlmCGoDGAWZB2AnAIzgEw3IriHGAKwDMkuADJEA__';
+        var PAGE_ID = '10031';
+        var PAGE_GUID = '11381d9518774d37bdae7a1867532f76';
+        var PAGE_NAME = 'sei-431sports-prod-preference page updated';
+        var PP_KWK = '';
+        var GEO = {};
+        var DEVICE = "";
+        var DEVICE_TYPE = "";
+        var DEVICE_TYPE_MOBILE_OVERRIDE = '';
+        var UserPixelsSettings = '';
+        var PixelsSettingsOverride = false;
+        // Preview-only: if controller provided a device_type, expose it here
+        var PREVIEW_FORCED_DEVICE = '';
+
+        var usePC_Z_Prof = "";
+        var btGlobalSubscriptionStatus = "";
+        var isValidParse = true;
+        var btSubscriberJson = {};
+        var itSubscriberJson = {};
+        var itMessageTypePolicy = '';
+        var itProjectType = '';
+        var it_lz = '';
+        var bt_lz = '';
+
+        var PP_COUPON_GROUP_POPULATE_OBJ = JSON.parse('{}');
+
+        var PAGE_MODE = 'LP';
+        var PC_PARTNER = '';
+        var PC_LINK_VERSION = '';
+        var PC_LISTS_OBJ = '';
+        var PC_PROFILE_OBJ = '';
+        var PC_EXTRA_OBJ = '';
+        var PC_ALL_OBJ = '';
+        var PC_INTEGRATION_ID = '3391';
+        var PC_ERROR_PAGE = '';
+        var DATA_STORAGE_TYPE = 'none';
+        var PP_TURNSTILE_ENABLED = false;
+
+        //parse PixelsJSONConfigs
+
+        try {
+            if (UserPixelsSettings != '' && typeof UserPixelsSettings === 'object') {
+                let pageMobilePixelThreshold = UserPixelsSettings[PAGE_ID] || UserPixelsSettings["all"] || "";
+                let currentWindowWidth = window.innerWidth;
+                if (pageMobilePixelThreshold && typeof pageMobilePixelThreshold == 'number' && currentWindowWidth <= pageMobilePixelThreshold) {
+                    DEVICE_TYPE = 'mobile';
+                    PixelsSettingsOverride = true;
+                }
+            }
+        } catch(err) {
+            logger('ERROR: ' + e.message);
+        }
+
+        var window_loc_base = window.location.href.toLowerCase();
+        if (window_loc_base.indexOf('http://') == 0) {
+            window.location.href = "https://" + window.location.href.substring(7);
+        }
+
+        var LogIsPrinted = false;
+        var LogDeferredArr = [];
+
+        var logger = function(msg) {
+            if (LogIsPrinted || localStorage.getItem('pp_show_logs') == '1') {
+                console.log(msg);
+                LogIsPrinted = true;
+            }
+            else {
+                LogDeferredArr.push(msg);
+            }
+        };
+
+        var logErrorText = function(function_name, msg) {
+            if (function_name && function_name !== "logger") {
+                logger('ERROR: ' + function_name + '() - ' + msg);
+            }
+        };
+
+        var logError = function(e, function_name) {
+            if (function_name && function_name !== "logger") {
+                logger('ERROR: ' + function_name + '() - ' + e.message);
+            }
+        };
+
+        var hideAllLogs = function () {
+            LogIsPrinted = false;
+            localStorage.removeItem("pp_show_logs");
+        };
+
+        var printAll = function() {
+            if (typeof console !== "undefined") { 
+                LogIsPrinted = true;
+                for (var i = 0; i < LogDeferredArr.length; i++) {
+                    console.log(LogDeferredArr[i]);
+                }
+                LogDeferredArr = [];
+                localStorage.setItem('pp_show_logs', '1');
+            }
+        };
+
+
+
+            PAGE_MODE = 'PC';
+            
+
+            try {
+                PC_LISTS_OBJ = JSON.parse(atob('e30='));
+                //logger("PC_LISTS_OBJ");
+                //logger(PC_LISTS_OBJ);
+            } catch (e) {
+                logger('Error parsing PC_LISTS_OBJ: ' + e.message);
+            }
+            
+
+            try {
+                PC_PROFILE_OBJ = JSON.parse(atob('e30='));
+                //logger("PC_PROFILE_OBJ");
+                //logger(PC_PROFILE_OBJ);
+            } catch (e) {
+                logger('Error parsing PC_PROFILE_OBJ: ' + e.message);
+            }
+            
+
+            try {
+                PC_EXTRA_OBJ = JSON.parse(atob('e30='));
+                //logger("PC_EXTRA_OBJ");
+                //logger(PC_EXTRA_OBJ);
+            } catch (e) {
+                logger('Error parsing PC_EXTRA_OBJ: ' + e.message);
+            }
+            
+
+            try {
+                PC_ALL_OBJ = JSON.parse(atob('e30='));
+                //logger("PC_ALL_OBJ");
+                //logger(PC_ALL_OBJ);
+            } catch (e) {
+                logger('Error parsing PC_ALL_OBJ: ' + e.message);
+            }
+            
+
+                logger('PC_ERRORS: ==> ERROR::::PC Boomtrain Integration encountered an error (3): uid and email were emptyERROR::::PC Boomtrain Integration encountered an error (2): ');
+            
+
+            PC_ERROR_PAGE = 'extra_page_1';
+               
+
+        var customJS = '';
+        var customCSS = '';
+
+        var masterCustomJS = {};
+        masterCustomJS.CustomJSReady = '';
+        masterCustomJS.CustomJSBeforeValidation = '';
+        masterCustomJS.CustomJSBeforeSubmit = '';
+        masterCustomJS.CustomJSAfterSubmit = '';
+        masterCustomJS.CustomJSBeforeRedirect = '';
+        masterCustomJS.CustomJSBeforeDownload = '';
+        masterCustomJS.CustomJSBeforeChangePages = '';
+        masterCustomJS.CustomJSAfterChangePages = '';
+        masterCustomJS.CustomJSBeforeExit = '';
+
+
+        if ('success' !== 'success') {
+            logger('Controller Failure Step: ' + 'success');
+            logger('HostedPagesName: ' + '431sports');
+        }
+
+
+
+
+        logger('PageMode: ' + PAGE_MODE);
+        logger('CacheBreakerSource: Cache_prod');
+        logger('UserSource: ');
+        logger('PageSource: ');
+        logger('LZENC: true');
+    </script>
+
+    <!--Widget (deferred until device info is ready) -->
+    <script type="text/javascript">
+        (function(){
+            // Defer deviceDetected event until all widgets finish loading
+            window.__deferDeviceEvent = true;
+            function loadScript(src) {
+                return new Promise(function(resolve, reject){
+                    var s = document.createElement('script');
+                    s.type = 'text/javascript';
+                    s.src = src;
+                    // Ensure classic script execution semantics
+                    s.async = false;
+                    s.onload = function(){ resolve(); };
+                    s.onerror = function(){ reject(new Error('Failed to load ' + src)); };
+                    document.head.appendChild(s);
+                });
+            }
+
+            var DEVICE_DETECT_CONFIG = {
+                geoDeviceUrl: 'https://gdapi.pushplanet.com/', //'https://lightboxapi.azurewebsites.net/Event/GeoDeviceInternal',
+                timeout: 3000
+            };
+
+            function detect() {
+                return new Promise(function(resolve){
+                    try {
+                        // In preview, honor the device_type URL param (provided via ViewBag.DeviceType)
+                        if (IS_PREVIEW === true || IS_PREVIEW === 'true') {
+                            if (typeof PREVIEW_FORCED_DEVICE === 'string' && PREVIEW_FORCED_DEVICE.length > 0) {
+                                var forced = PREVIEW_FORCED_DEVICE.toLowerCase() === 'mobile' ? 'mobile' : 'desktop';
+                                return resolve({ deviceType: forced, isMobilePhone: forced === 'mobile', isTablet: false, source: 'preview' });
+                            }
+                        }
+                        if (window.DeviceDetection) {
+                            var d = new window.DeviceDetection(DEVICE_DETECT_CONFIG);
+                            d.getDeviceInfo().then(resolve).catch(function(){ resolve(d.getUserAgentDeviceType()); });
+                        } else {
+                            resolve({ deviceType: (typeof DEVICE_TYPE === 'string' && DEVICE_TYPE) ? DEVICE_TYPE : 'desktop' });
+                        }
+                    } catch(e) { resolve({ deviceType: 'desktop' }); }
+                });
+            }
+
+            function adjustFromDetection(info){
+                try { window.DeviceInfo = info; } catch(e) {}
+                try { if (window.DeviceDetection && typeof DeviceDetection.prototype.setDeviceInfo === 'function') { (new DeviceDetection(DEVICE_DETECT_CONFIG)).setDeviceInfo(info); } } catch(e) {}
+                try { if (info && info.geo) { GEO = info.geo; } } catch(e) {}
+                try { if (info && typeof info.device === 'string') { DEVICE = info.device; } } catch(e) {}
+                try {
+                    // pixel override check moved here from Razor block
+                    if (typeof UserPixelsSettings !== 'undefined' && UserPixelsSettings && typeof UserPixelsSettings === 'object') {
+                        var pageMobilePixelThreshold = UserPixelsSettings[PAGE_ID] || UserPixelsSettings["all"] || "";
+                        var currentWindowWidth = window.innerWidth;
+                        if (pageMobilePixelThreshold && typeof pageMobilePixelThreshold == 'number' && currentWindowWidth <= pageMobilePixelThreshold) {
+                            DEVICE_TYPE = 'mobile';
+                            PixelsSettingsOverride = true;
+                        }
+                    }
+                } catch(e) { logger('pixels override move error: ' + e.message); }
+                
+                try {
+                    var __pageWidth = '500';
+                    if (__pageWidth && (info && (info.isMobilePhone === true || info.isTablet === true))) {
+                        var __vp = document.querySelector('meta[name="viewport"]');
+                        if (!__vp) { __vp = document.createElement('meta'); __vp.setAttribute('name', 'viewport'); document.head.appendChild(__vp); }
+                        __vp.setAttribute('content', 'width=' + __pageWidth);
+                    }
+                } catch(e) { logger('viewport set error: ' + e.message); }
+                // Re-apply original device selection logic using client DeviceType
+                try {
+                    var clientDt = 'desktop';
+                    if (info) {
+                        if (info.deviceType) clientDt = info.deviceType;
+                        else if (info.isMobilePhone === true || info.isTablet === true) clientDt = 'mobile';
+                    }
+
+                    if (clientDt === 'desktop' && '1' === '1') {
+                        settings = 'N4IgNghgng9grgFxALlAcwE4EsAmB9HDCNNCAIzAFMUBGAGhE1zw0oGcsAvcq2hp.GwAWMAO4oQlAG6UAdkgYQwWNLIkBjOQkoYQDUbgRCUAVgAMZhkMoqhSZDQBMFhgFsIGNFll4EMAA4oliBkEOoA1pjwsjgooOowYDC6yCAAxABmWdl6jEQ4WFoSmdlZuVjuaNSpuaz-lBD2ILIwALR1DQog.jAcCFgwaqlUGQgABH6BDHBslHiYEAVFyBlKs9OzeBXE1atgswC-DKERUXAxePDaKfGJycWlZfz5hfIPj-WV1SC1lPWNEha7T-nVyPT6AyG4EoowmAVyMzmCyWbxWa0oGzm2yqKD2h2OyRwOjiIAMOCMfBACSSKXSFnpZlybAQUF4qRasmoDBeMyCRxA1kWOjwdlcYAkuQyMBg1xFCDFEv5RgAHpBYIgSQICEQSDxqvQ8sxWBxuBR9c9mMIxBJpEVFMpVBotMT9IZjMgAJzmKw2NB2Wj0tweLw-SZBY5hSIYaKxVBUu60kqlXLI15NJM5BjY76.f5NIEdAEMcFYfqDCQjcZhzHzF7LPEYkCIrZfXHo.knKMxy6IYlx6n3VIZp55RZp97JrOtmrckEA9ltQtdEtlqGVuFTJubVP19E17Nt.aUDuEvugMkUhwMAeJhkWJkstkgNiJXC1Me85BmA78v40NVXJq2D4IQxCkGalJasaXB6pBwF4Fa4ipLabz2ioUKaPILqkm6KBesE1i2PYNCBiA7ieN4vjwl-EanNG5yxrcNITpmo4oumjwZJ8OwSrOeaAouc7Lr0paQhWMJVvCNY7qiDb7tODYdpGZwXFcZ7xsxQ6cSmdaouk2lTjxM4gEuAnAvxxYiau4mwtWW5Irp9hyfZLZGYpBIYESNw4eS7oGjexR3oyDDMqy3wvsosTch-bB8r-.iOABGpxlqoG6hBV6Gvg0GmmyBpaohNoyKhIBKOhTpYborq-Xh3oCr6.oOKR5EhlRgQ0SEyn0TEJIBVpHzPGOyz6QNIAHsZpkLuZoKWRC5bDBJG4ItujmHusLnje5nV0d2aneX1I2Tmx479Ud40.HxoJTaZs2ifN0K2VJLkyU5e4bQp7YeV5JIXn514JoFd4PmFEgRW-0UFJ-37xQAzEl9joPBaXgXlFrZewMEZfl8GFchxVdGVjqpJh1y5L9tUEQ1xHNcGlFhh1nYqYxGmDodrEvSxI7nbmV3NIJFndFZYkLY9m7NhzaJHvJbmfdtXYMT2pP9gDp3s6tqtc9OF0mUJZk3YLc1rotdni-rznNptstkKe3nk5lB1pEFwNPmDUUmTFcUMH8AAs8NAcwyOwZlUEY7l5pZQhIhIZI-O5ITGHOlVPmXvhPpEQGLhkbTobUcEjPdczDsGcdw3Dlxhk4hNuvXbrt3WSLkliytQ2yW9FsfUeSk7Qre29SrbMjhLA.l2NWs8.OfPTUWBt3UbovLQ5LevVL70y53X3qXb.n947QMhY-4Wvm7PKxV-P4hZQMAkv0CBPrk4SUFAoiEqf2tEmw6jYP49fa6sUhYAkKEIB-SIm8mgOAb5Ug0AyAADhoJQSgMCYEQGgeob23sADsHpQg4A9GEHAqwYEmBhpQHAZhqD8k4N4Ikyo8CuG8BnYIVCYiUFoe4ZUjCzAwwYNoZUCA8AJHOPw9wDDkCOGOIgPwPhBHyDoRAURwRswCOiMI-RQwCLyjAMooRcjREmAYFKDArhtGyJEeogxhQwD4BkaohRPDWEIBoCSKUqJQCrHoWAKAEgADkAAZOA6hcAQDGAAYUGBFSg3i6BjAALKDDCDAaJrhBi9H8GELkLNbx71Kg6BOlUmRcG-N7GBuRrZWJQAgDAcBGyljKuoNajYGI6GUJyBpDApBsDSZoPk1VLwmAAGzezTn6YijgYEMA4Q4fp.SGBeIcB6IZIBeFNBCVQCAsgxgAGVIDaHKLGJZDinEMAKJ0tUFSqmNmYTQzh.k2Cv1yESKg2hYyVOqfyUUYAnFxg-RIAAPAUKQYxcAAF5vHeLGKFKgoLfrIDGCRMwABSAA3GMQiIzYUQEQDAJF4KyBoBvKCtIAAxElpLwW.VBfChF3iAB8vzglCFYBkUFdgED-DYMgAA9Jy0QvKAB03sYY0E6ckBAbA-UJFcJy8FCBgyUAQKCvAFB1nhFpb8ioaAIUYHUCyhAbKOXcrYDDPl.gZhCH8JATkCAJUwClaAtgnLoFwIQUglBGQ0GYOwYsPB6gCEQCISQshlBOVwAtTARYDqnDELMBgmg6h-nqAsN7Zw3sIDezMOocw.SPTIKITAnA6gMGcsFTQXxAB5AA4mW9NZhlTODMCa2QaBwWQsoNCt0sKqUovYa0GFYwxlmH8MqFFaK7AYqxTizldLOUQGnQCmlZNcJiJgZTdOyA6qTOcLM8MY19kfKOSAE5FroDnOqQwK5rDOHiKpHcxU9i-GOGcYMBGIB3FYE8RIAAgtgJQ0SAASlAwAyH6OoCA0S2DrLYK0WY2AR4OydmhImVJE4FM4N8GGwUQiJBeRcrMsrlD1MlutJpGAWm7Deh0rp1Rvy9PdP0zOo77AbpQFukAczHD6IOXwiQABNeAGAxikFcJQMYAAKdZOAgWyGtsqAAlGMd-OgZBjDIPK64fK9kSGWY-45WBTknuQK8y51DL1NXpNwm99zjmAflaQ09x4rCaMfd8zRfyAVApwKC5ZAAhGAyoaAtoPqClxCBWhvs8bC79WBf1jAAGo6BwOssDELIPQZ0FgDIKKQvQcKZ2.pQ6UVkdaIx2FzgCtjDSTgAoTbWjWz1ba0rg7h0qa6jGVoN5YUoutp5HQ7QYqwpMAV3F-KEygvJW6SlFhqU0oADobLGL82VZoxgUu8R6RFuKbagrMLSubYx9sLYQNbHAUBZvzYO4djAZ2LsXcW5J-OoLKyBbCqCo9apYXeCKxQGAEQUV9q7aiqm46.Aosq9VtArRJiNfK9l0QQOVPYay8-sLEAPFQEiz-sA0T4ueSS-B1LMGMtI.kDltDpWYHlaKyVsYMNHBDZpZsuAZAP7YFU3CMYlARH7D5b8zlCAcDXZu7zypgv9vC-O6dvbC2-d6jO7z-di6arIHo6ukZphgibuCHMmgNAZm7okB8nTh69PHrmUZ89JnJnwosNe9Qt6ajvM0TDEkPzUj.KwICkF3ifN-ccM9qF3jsvhfR2MKLMWceJdkMliDsgoOE8y2MbLJpKB5cp94SgxX4dlea2D7wEO6t-FcND5r3WvJ9chhysYg3h3DYJWClbE3vFUt2.NxbeoG--VBet6lCOesYG2y327R2YAndFwdxbV2pc3cO.d3Jj2JL-7bd4t70APuyC-0kX7HejCdqmyO-HmKQcVcWODyHARi.E9C8HjH0WsdxYS3jlLse0uwcv6TlPcKKfNap1nunNeGfoRjChrs5XAZClhjDqgCbaCo4N5GATDWAc7Kj1AYBirC4C5T7j586T7nbS7D6j5S7C6y5zby4e4Lq0YoAq7DKNTMZiJa60ArpZh7pO4PIm5nKGa4YgAXpW4Mi2724.CO5ijewu6uZu7ubqCQB3JjYeagpsBM5ErJCuCL7BbI7X6h6Y7Y4P5R747P7x5v7J6p7f7p6Z5EQX7H5VZ561YyiF6mG95l4nwDZDYqYjY0hSGrbN6C5t7Larbd6bZ94D5j6LYS5j5i4i4YFD5CBjAPbeJPYQpBbL6sGr5SYb4.bhDdoQDKi9odr9rmDlZ9rmDIqA4mGRETpmGn5Q79pNZv5w5FFlI4Bv6qFh534R6P4x5x7pYJ5J65Zwr5aGGcjGHooVH06.KQCqZgCJ7JDBZYAYDMh4BR7Ca0pEpTHMhjAAByqOKevOIxgGwRQuZA2B0-t23gpqVYUA9QXmDi4KXuYB0x.CcxkSYwdxkxNxsx6x4KUgSg1SUhra7avkjWlRaqfOQgOxIRERURMR3x8R-mIen2Rh32W-PafaHGlR2-QgA2iK--RRh-2KpRFh5R2eVR8OtR9RqO76IejRGhuOWhT-bRr-4xJO-h3RaefR1O-JaqWxYxhij2EAMxdxtKvi3J4waxwmyAmx5A2xYRux-xBxYuRxiAEwpxS-yylxnm0RApLx8xDx6xXJPJrxYw7xYAnx9eEJiJFgQxgJOxwuUpYufOQRBBMuZoHhS2VAKJXeG2thOg.hGBgRI-kuOBIRVpQucBYJC-sRL23ifaGC6JhRAxWJoOJ-uJ5-gxzWsOhJiOdJV-JJEWaht-FJke0eBO7RehXRuuTJGeLJ.xdK7J4x.e3ishZAAAolzrSo2fImACKZyuycCePnsV2TKbIMcfKWcd7hcdIbWUzi2e-uCo8WOQ2U2XqR8UvnWROWAOCicnqJJsaVkRhhWcLkCRKZaQETaT6R4faVQI6e3t4W6aXh6d4jtgEXgb6dPhPl2YtqCXPtESGZub8WMJGQUdTrGTiTVniciSmTUWmUHpmWSeoffpSfmToYWeme.gYYVkYeWUMVWZycvo0HMDABkEqlMUYLSgACLYVjC4VjDeYEWomimjG9kLY9kSmHH9lykshDmJbaDKmvbYWXB4VkBUVTlalYXaA8X4UoFCBvELlcXCW4WiWEWhkB4mk7nmn7lYGHkPknlOmUDnleGN4-Huk1l3lenqX7mhF-nj786RHvnglxEr4h5wmpEomwq.kYkxklEQVo437h6aFwU0lE6IUMklm9FllZ47n-DyVL6gUDFEmIUNHQXNFUmtEv5-WdFk6MlBX9FjpJk4o0oACSkRrgkR7Z.gdF6qzFJxQ56g1gEQMmnF3iaSrA8gAlwmoK9VWgElBpS-rVjVJVGFExdVHgbV4VyhJOsVOZMFeZ2hvlHRyOAV3spZGVCAnaX-2VvynS6yQ1geKhkFnlTR3lk1SV019JxZc16V1ONAy1tKAACgNfILzmtbINOp2Yxd2QGU-QxWZUxQOaxUvpVZQNVX5rVQkGEEIHgIsPQrIE1T9eGpVaDTgODe1YaUDTDWDd4IPtKQtr1TWUjSDSjRDXSvdRte5aSTtbmS0QWbSSlR.jQCdShcyfDudfTmEsDZyp-nDd4HdWkg9TReKR9S9SVe9ejQtrKeVT9VVeEDVaOabjoJDS1WqNLfOR1bLdANLT1WKRyX1VLRgGqgTRCUTVmeSeNWTfBRTTNcdfNWdRdTSpdXLRgBzeso9Wrfza9ZKSVcLYOaLX9eLQDaOasBDZqc1YHusgjRFUHaraMdWcFqHatZzYTVtR5dmV5bBftbof5WbadfTZbUSusnbVzR2Y7XNjNggIXWLnsVOr8qXWdoXcXULWVe7aCr9f9cqLVUyjoAgjLd4i3awPcfqYaZ3W3WHYBhHR3TCK3ZEvjTHbrXHcTQnbtUndSQdUWaldTebRnfTgAEoj1d050O20VoEWmqVelHn4Gt6nlaUEGaUulrZXlba3lo0hG2lmXPnPV3aWXoTz6jBKGQmm6wr2V.ZZHOXRmZUAV61QVjXxU-UL2p1L09G03BVFH4mAX55WENZwqhWx0jXbUz2k0JXk3JWm3QMr3wM7nMjRhNo0oADqQgjQEKPQKBombA8mOAMAEB8AFWaoAA.HdZUoMGgNOsVc9X2V9QqfXWLRLV7lIIkFQFAKEGACuf7UvhI7I4.DI3Iz3Qo5I8o0oCuQPerTWYo1Iyo5.SAyTYbTg8bXg0dUvTTWMD.kUQzf.tHetZPRg.HQbeA8nQhZTZ2tY7YwMfY9lbFho9I1o9vdzWAE7REwIzXUIxVaI97V7qELMIY.I6Cok5QMk2o6k9yek1o3fQccMWrUPWk4Y-PU43EcY1g6YxAynV43Cj46havf.t5tkyo6E3nbRVE-Xc7bdgLejaVTEx7Y3bVS-KMMk9OSM0drkwrYaRMyU505jTIbhZM7I9rRPeU1PfrXFXtfPTU.g1TfU3TXY5bZsks605yvdTvTzYLV05E7zYIyxcI94g3V7U3aOS-OoJoFrSk7WT9p88HYsx8yrfM4U5he8386Uxss4xma41s3PYlbs5Y.s4Q348c78zoG009bIFXeMPRRgGXRXQXUXTi.0w87E57WIyqSKigWwCwJvW3d81S2KrSxkKPf87WbQ0y33WPcC-HaCxyzS1y6s2U2GRU249s.C543s948i5lf47ShvSy1vec5zZc-E3vSpaZbdkfY-bgUQa3hfZeT3teQZXk96cfU-Zq.kxZcGR.RtbZT.Zvg5RGVGf-W5Rs6A4nRNTs5K4i8hTYw00Q0MWQJIoMG80zvQggJ.fnG1h1mMI7BkP0o4Cy3GeYTVpWKVtY7njVtgAMY4Jm.GTVgXig04OVlmxDuUSW81rG8SqSiSovVTTA4hdUQMS0EYkoNlZsoAaGrzsG.VrnfzvvZa0Pt0zPq.aoO.ZG3awkXZY63.d-QA660fqK7C16xKybb62lbAwtaYWW2fv4BfrSt5lAGMOIQAuEHnmMN4p26oEAf4OCnlcQF3ezkYCJvSqikyrqvqlyjyvymCzoDalKoAtoPIHzjoK4FBrha0IiJ.dWySvSN7Cissq0ESAkEQKuLChyJQDihMHKgqt4kqpaqqvjdw2QwACpgdsAABk0mnSSKlHqO.gdHNHjHYSMQs8VHzHSKuF1HzOjHAAqrMFw6Q7w7zrOpETEAtgyh-94qyuyt-7yqIHyn-xgAB5ykB1oJyv4NgO8eoFAK0D0ARlADBwmLCjW.B4hw4sh39ckI0JCBh4MFhzKrh4qsqrIER6tSR7w5ddp2EFADx7R5da-Lp0Jzw9OrOuq4.QfTgeLseXaZpXLpygruQcrgxlTLQCYNeprtumIjDBgowQbpokIbplCfZhbiwtwfSLwfcgIWACYMIQqKIR7qOT7sqDDJ.faw8Q58STC2A-K7g4daFgFY2745lQg7u0W0XllS1t3DEO1iZ2MF1jbOXlgDMA4TXk4XXuNp3k3lNmjZ4c6Ya74V5J6dF8ZY.UO4GbPm.R-baxCR1zCX0b.Y5agy6wfiUbu8BTDsjs25ldFcu713C.1.W-TjK4tTTn.tlaR1Q25yw3ANWSe4MNceDZqpARVn3bIJoGwAAIQRdPlRdatnfWnxfEGJekGK6XiUH1Rro0Gsba6675epAfJ1fFem6lecGW5XrXh8HAIHBAA';
+                        DEVICE_TYPE = 'desktop';
+                        DEVICE_TYPE_MOBILE_OVERRIDE = '';
+                        customJS = '//load p13n.js\nvar site_id = \u0027sei-431sports\u0027;\n(function (b, t, r, a, i, n) {\n  b[\u0027bt\u0027] = b[\u0027bt\u0027] || function () {\n    (b[\u0027_bt\u0027] = b[\u0027_bt\u0027] || []).push(arguments);\n  }, i = t.createElement(r), n = t.getElementsByTagName(r)[0];\n  i.async = 1;\n  i.src = a;\n  n.parentNode.insertBefore(i, n);\n})(window, document, \u0027script\u0027, \u0027https://cdn.boomtrain.com/p13n/\u0027 \u002B site_id \u002B \u0027/p13n.min.js\u0027);\n\nvar pp_int_id = \u00273391\u0027;\nvar pp_guid = \u00271f81ee88a1fc4479bad9acdfa853ed0e\u0027;\nvar regExp = /[a-zA-Z]/;\nvar regExpNum = /[^0-9-]/;\nvar regNumAndChar = /[^0-9.,#@%\u0026\\/\\-]/;\nvar regSpecialChars = /[^A-Za-z0-9 .,\u0027#@%\u0026\\/\\-]/;\nvar specialChars = \u0022. \u0027 - # @ % \u0026 /\u0022\nvar uid_enc = getUrlParam(\u0027encbu\u0027);\nvar email_enc = getUrlParam(\u0027ence\u0027);\nvar email = atob(email_enc);\nvar uid = atob(uid_enc);\nvar eid = getUrlParam(\u0027eid\u0027);\n// logger(\u0022eid\u0022);\n// logger(eid);\n//var uEmail = atob(email_enc);\nvar opt_in_status = PC_EXTRA_OBJ[\u0022boomtrain_all\u0022];\n\nvar foundMatch = false;\nvar matchedContact;\nvar matchedPhoneContact;\n\nwhile (!foundMatch) {\n  btSubscriberJson.contacts.forEach(contact =\u003E {\n    // swap to uEmail during prod\n    //    logger(contact);\n    if (contact.contact_value == email) {\n      matchedContact = contact;\n      foundMatch = true;\n    }\n  });\n}\n\nif (matchedContact.contact_properties.phone_number) {\n  phone = matchedContact.contact_properties.phone_number;\n} else if (btSubscriberJson.properties.phone_writable) {\n  phone = btSubscriberJson.properties.phone_writable;\n} else {\n  phone = btSubscriberJson.properties.phone;\n}\n\n// logger(\u0022look here\u0022)\n// logger(btSubscriberJson.properties)\n\n//block1\nif (btSubscriberJson.properties.pref_center_parent == \u0027Y\u0027) {\n  $(\u0022#parent\u0022).prop(\u0027checked\u0027, true);\n}\n\nif (btSubscriberJson.properties.pref_center_coach_admin == \u0027Y\u0027) {\n  $(\u0022#coach_admin\u0022).prop(\u0027checked\u0027, true);\n}\n\nif (btSubscriberJson.properties.pref_center_player == \u0027Y\u0027) {\n  $(\u0022#player\u0022).prop(\u0027checked\u0027, true);\n}\n\nif (btSubscriberJson.properties.pref_center_fan == \u0027Y\u0027) {\n  $(\u0022#fan\u0022).prop(\u0027checked\u0027, true);\n}\n\nif (btSubscriberJson.properties.pref_center_referee == \u0027Y\u0027) {\n  $(\u0022#referee\u0022).prop(\u0027checked\u0027, true);\n}\n\n//block2\nif (btSubscriberJson.properties.pref_center_volleyball == \u0027Y\u0027) {\n  $(\u0022#volleyball\u0022).prop(\u0027checked\u0027, true);\n}\n\nif (btSubscriberJson.properties.pref_center_baseball == \u0027Y\u0027) {\n  $(\u0022#baseball\u0022).prop(\u0027checked\u0027, true);\n}\n\nif (btSubscriberJson.properties.pref_center_softball == \u0027Y\u0027) {\n  $(\u0022#softball\u0022).prop(\u0027checked\u0027, true);\n}\n\nif (btSubscriberJson.properties.pref_center_soccer == \u0027Y\u0027) {\n  $(\u0022#soccer\u0022).prop(\u0027checked\u0027, true);\n}\n\nif (btSubscriberJson.properties.pref_center_sports_referee == \u0027Y\u0027) {\n  $(\u0022#sports_referee\u0022).prop(\u0027checked\u0027, true);\n}\n\n$(\u0022#subEmail\u0022).val(email);\n\n$(\u0027#submit\u0027).click(function () {\n  var email_value = email;\n  var failure = false;\n  var first_name_value = $(\u0027#first_name\u0027).val();\n  var last_name_value = $(\u0027#last_name\u0027).val();\n  var date_of_birth_value = $(\u0027#date_of_birth\u0027).val();\n  //   var date_of_birth_value_converted = date_of_birth_value.toISOString().split(\u0027T\u0027)[0\n\n  if ($(\u0027#prefer_all\u0027).is(\u0027:checked\u0027)) {\n    $(\u0027.checkbox-group\u0027).prop(\u0027checked\u0027, true);\n  }\n\n\n  //block1\n  var parent_value = $(\u0027#parent\u0027).prop(\u0022checked\u0022) ? true : false;\n  var coach_admin_value = $(\u0027#coach_admin\u0027).prop(\u0022checked\u0022) ? true : false;\n  var player_value = $(\u0027#player\u0027).prop(\u0022checked\u0022) ? true : false;\n  var fan_value = $(\u0027#fan\u0027).prop(\u0022checked\u0022) ? true : false;\n  var referee_value = $(\u0027#referee\u0027).prop(\u0022checked\u0022) ? true : false;\n  //block2\n  var volleyball_value = $(\u0027#volleyball\u0027).prop(\u0022checked\u0022) ? true : false;\n  var baseball_value = $(\u0027#baseball\u0027).prop(\u0022checked\u0022) ? true : false;\n  var softball_value = $(\u0027#softball\u0027).prop(\u0022checked\u0022) ? true : false;\n  var soccer_value = $(\u0027#soccer\u0027).prop(\u0022checked\u0022) ? true : false;\n  var sports_referee_value = $(\u0027#sports_referee\u0027).prop(\u0022checked\u0022) ? true : false;\n\n  var current_date = new Date();\n  var date_of_birth_not_converted = Date.parse(date_of_birth_value);\n  var date_of_birth_converted = Math.round(Date.parse(date_of_birth_value) / 1000);\n  var current_date_compare = Date.now();\n  var current_date_compare_formatted = Math.round(current_date_compare / 1000);\n  var subtract_this = 12 * 31556926;\n  var twelve_and_up = current_date_compare_formatted - subtract_this;\n\n  if (isBlank(first_name_value)) {\n    alert(\u0027First Name is required.\u0027);\n    failure = true;\n  }\n\n  if (isBlank(last_name_value)) {\n    alert(\u0027Last Name is required.\u0027);\n    failure = true;\n  }\n\n  if (isBlank(date_of_birth_value)) {\n    alert(\u0027Date of Birth is required.\u0027);\n    failure = true;\n  }\n\n  if (twelve_and_up \u003C date_of_birth_converted) {\n    alert(\u0027Must be ages 12 and up.\u0027);\n    failure = true;\n  }\n\n  if (failure) {\n    return;\n  }\n\n  var user_json = {\n    \u0022uid\u0022: uid,\n    \u0022properties\u0022: {\n      \u0022first_name\u0022: first_name_value,\n      \u0022last_name\u0022: last_name_value,\n      \u0022date_of_birth\u0022: date_of_birth_value,\n      \u0022email\u0022: email_value\n    },\n    \u0022contacts\u0022: [{\n      \u0022contact_type\u0022: \u0022email\u0022,\n      \u0022contact_value\u0022: uid,\n      \u0022subscription_status\u0022: \u0022active\u0022,\n      \u0022contact_properties\u0022: {}\n    }],\n  };\n\n  //block1\n  var parent_value_zmp;\n  var coach_admin_value_zmp;\n  var player_value_zmp;\n  var fan_value_zmp;\n  var referee_value_zmp;\n  var volleyball_value_zmp;\n  var baseball_value_zmp;\n  var softball_value_zmp;\n  var soccer_value_zmp;\n  var sports_referee_value_zmp;\n  if (parent_value === true) {\n    user_json[\u0027pref_center_parent\u0027] = \u0027Y\u0027;\n\tvar parent_value_zmp = \u0027Y\u0027;\n  } else {\n    user_json[\u0027pref_center_parent\u0027] = \u0027N\u0027;\n\tvar parent_value_zmp = \u0027N\u0027;\n  }\n\n  if (coach_admin_value === true) {\n    user_json[\u0027pref_center_coach_admin\u0027] = \u0027Y\u0027;\n\tvar coach_admin_value_zmp = \u0027Y\u0027;\n  } else {\n    user_json[\u0027pref_center_coach_admin\u0027] = \u0027N\u0027;\n\tvar coach_admin_value_zmp = \u0027N\u0027;\n  }\n\n  if (player_value === true) {\n    user_json[\u0027pref_center_player\u0027] = \u0027Y\u0027;\n\tvar player_value_zmp = \u0027Y\u0027;\n  } else {\n    user_json[\u0027pref_center_player\u0027] = \u0027N\u0027;\n\tvar player_value_zmp = \u0027N\u0027;\n  }\n\n  if (fan_value === true) {\n    user_json[\u0027pref_center_fan\u0027] = \u0027Y\u0027;\n\tvar fan_value_zmp = \u0027Y\u0027;\n  } else {\n    user_json[\u0027pref_center_fan\u0027] = \u0027N\u0027;\n\tvar fan_value_zmp = \u0027N\u0027;\n  }\n\n  if (referee_value === true) {\n    user_json[\u0027pref_center_referee\u0027] = \u0027Y\u0027;\n\tvar referee_value_zmp = \u0027Y\u0027;\n  } else {\n    user_json[\u0027pref_center_referee\u0027] = \u0027N\u0027;\n\tvar referee_value_zmp = \u0027N\u0027;\n  }\n\n  //block2\n  if (volleyball_value === true) {\n    user_json[\u0027pref_center_volleyball\u0027] = \u0027Y\u0027;\n\tvar volleyball_value_zmp = \u0027Y\u0027;\n  } else {\n    user_json[\u0027pref_center_volleyball\u0027] = \u0027N\u0027;\n\tvar volleyball_value_zmp = \u0027N\u0027;\n  }\n\n  if (baseball_value === true) {\n    user_json[\u0027pref_center_baseball\u0027] = \u0027Y\u0027;\n\tvar baseball_value_zmp = \u0027Y\u0027;\n  } else {\n    user_json[\u0027pref_center_baseball\u0027] = \u0027N\u0027;\n\tvar baseball_value_zmp = \u0027N\u0027;\n  }\n\n  if (softball_value === true) {\n    user_json[\u0027pref_center_softball\u0027] = \u0027Y\u0027;\n\tvar softball_value_zmp = \u0027Y\u0027;\n  } else {\n    user_json[\u0027pref_center_softball\u0027] = \u0027N\u0027;\n\tvar softball_value_zmp = \u0027N\u0027;\n  }\n\n  if (soccer_value === true) {\n    user_json[\u0027pref_center_soccer\u0027] = \u0027Y\u0027;\n\tvar soccer_value_zmp = \u0027Y\u0027;\n  } else {\n    user_json[\u0027pref_center_soccer\u0027] = \u0027N\u0027;\n\tvar soccer_value_zmp = \u0027N\u0027;\n  }\n\n  if (sports_referee_value === true) {\n    user_json[\u0027pref_center_sports_referee\u0027] = \u0027Y\u0027;\n\tvar sports_referee_value_zmp = \u0027Y\u0027;\n  } else {\n    user_json[\u0027pref_center_sports_referee\u0027] = \u0027N\u0027;\n\tvar sports_referee_value_zmp = \u0027N\u0027;\n  }\n\n  var user_event_json = {\n    \u0022activity\u0022: {\n      \u0022subscriber\u0022: {\n        \u0022uid\u0022: uid\n      },\n      \u0022event\u0022: \u0022preference_center\u0022,\n      \u0022properties\u0022: {\n        \u0022subscription_status\u0022: \u0022active\u0022,\n        \u0022first_name\u0022: first_name_value,\n        \u0022last_name\u0022: last_name_value,\n        \u0022date_of_birth\u0022: date_of_birth_value,\n        \u0022email\u0022: email_value,\n        \u0022pref_center_parent\u0022: parent_value_zmp,\n        \u0022pref_center_coach_admin\u0022: coach_admin_value_zmp,\n        \u0022pref_center_player\u0022: player_value_zmp,\n        \u0022pref_center_fan\u0022: fan_value_zmp,\n        \u0022pref_center_referee\u0022: referee_value_zmp,\n        \u0022pref_center_volleyball\u0022: volleyball_value_zmp,\n        \u0022pref_center_baseball\u0022: baseball_value_zmp,\n        \u0022pref_center_softball\u0022: softball_value_zmp,\n        \u0022pref_center_soccer\u0022: soccer_value_zmp,\n        \u0022pref_center_sports_referee\u0022: sports_referee_value_zmp\n      }\n    }\n  };\n\t\n  window.updateSubscriber(pp_guid, pp_int_id, user_json, function (res) {\n    window.zetaTrackEvent(pp_guid, pp_int_id, user_event_json, function (status, data) {\n      setTimeout(function () {\n        window.scrollTo(0, 0);\n        $(\u0027#textBox1\u0027).hide();\n        $(\u0027#textBox2\u0027).hide();\n        $(\u0027#subForm\u0027).hide();\n        $(\u0027#textBox3\u0027).show();\n      }, 1000);\n    });\n  });\n\n});\n\n//check for valid email\nfunction validateEmail(email) {\n  var reg = /^[a-zA-Z0-9.!#$%\u0026\u0027*\u002B/=?^_\u0060{|}~-]\u002B@[a-zA-Z0-9-]\u002B(?:\\.[a-zA-Z0-9-]\u002B)\u002B$/;\n  return reg.test(email);\n}\n\n//check for a blank\nfunction isBlank(str) {\n  return (!str || /^\\s*$/.test(str));\n}\n';
+                        customCSS = '@media only screen and (min-width: 480px) {\n    #layout, #html1, #html2, #html3, #html4, #html1_wrapper, #html2_wrapper, #html3_wrapper, #html4_wrapper {\n        width: 100%!important;\n        height: auto important;\n    }\n}';
+                        logger('DesktopSettings_1');
+                    }
+                    else if (clientDt === 'mobile' && '0' === '1') {
+                        settings = 'Q___';
+                        DEVICE_TYPE = 'mobile';
+                        DEVICE_TYPE_MOBILE_OVERRIDE = '';
+                        customJS = '';
+                        customCSS = '';
+                        logger('MobileSettings_1');
+                    }
+                    else if (clientDt === 'mobile' && '1' === '1') {
+                        settings = 'N4IgNghgng9grgFxALlAcwE4EsAmB9HDCNNCAIzAFMUBGAGhE1zw0oGcsAvcq2hp.GwAWMAO4oQlAG6UAdkgYQwWNLIkBjOQkoYQDUbgRCUAVgAMZhkMoqhSZDQBMFhgFsIGNFll4EMAA4oliBkEOoA1pjwsjgooOowYDC6yCAAxABmWdl6jEQ4WFoSmdlZuVjuaNSpuaz-lBD2ILIwALR1DQog.jAcCFgwaqlUGQgABH6BDHBslHiYEAVFyBlKs9OzeBXE1atgswC-DKERUXAxePDaKfGJycWlZfz5hfIPj-WV1SC1lPWNEha7T-nVyPT6AyG4EoowmAVyMzmCyWbxWa0oGzm2yqKD2h2OyRwOjiIAMOCMfBACSSKXSFnpZlybAQUF4qRasmoDBeMyCRxA1kWOjwdlcYAkuQyMBg1xFCDFEv5RgAHpBYIgSQICEQSDxqvQ8sxWBxuBR9c9mMIxBJpEVFMpVBotMT9IZjMgAJzmKw2NB2Wj0tweLw-SZBY5hSIYaKxVBUu60kqlXLI15NJM5BjY76.f5NIEdAEMcFYfqDCQjcZhzHzF7LPEYkCIrZfXHo.knKMxy6IYlx6n3VIZp55RZp97JrOtmrckEA9ltQtdEtlqGVuFTJubVP19E17Nt.aUDuEvugMkUhwMAeJhkWJkstkgNiJXC1Me85BmA78v40NVXJq2D4IQxCkGalJasaXB6pBwF4Fa4ipLabz2ioUKaPILqkm6KBesE1i2PYNCBiA7ieN4vjwl-EanNG5yxrcNITpmo4oumjwZJ8OwSrOeaAouc7Lr0paQhWMJVvCNY7qiDb7tODYdpGZwXFcZ7xsxQ6cSmdaouk2lTjxM4gEuAnAvxxYiau4mwtWW5Irp9hyfZLZGYpBIYESNw4eS7oGjexR3oyDDMqy3wvsosTch-bB8r-.iOABGpxlqoG6hBV6Gvg0GmmyBpaohNoyKhIBKOhTpYborq-Xh3oCr6.oOKR5EhlRgQ0SEyn0TEJIBVpHzPGOyz6QNIAHsZpkLuZoKWRC5bDBJG4ItujmHusLnje5nV0d2aneX1I2Tmx479Ud40.HxoJTaZs2ifN0K2VJLkyU5e4bQp7YeV5JIXn514JoFd4PmFEgRW-0UFJ-37xQAzEl9joPBaXgXlFrZewMEZfl8GFchxVdGVjqpJh1y5L9tUEQ1xHNcGlFhh1nYqYxGmDodrEvSxI7nbmV3NIJFndFZYkLY9m7NhzaJHvJbmfdtXYMT2pP9gDp3s6tqtc9OF0mUJZk3YLc1rotdni-rznNptstkKe3nk5lB1pEFwNPmDUUmTFcUMH8AAs8NAcwyOwZlUEY7l5pZQhIhIZI-O5ITGHOlVPmXvhPpEQGLhkbTobUcEjPdczDsGcdw3Dlxhk4hNuvXbrt3WSLkliytQ2yW9FsfUeSk7Qre29SrbMjhLA.l2NWs8.OfPTUWBt3UbovLQ5LevVL70y53X3qXb.n947QMhY-4Wvm7PKxV-P4hZQMAkv0CBPrk4SUFAoiEqf2tEmw6jYP49fa6sUhYAkKEIB-SIm8mgOAb5Ug0AyAADhoJQSgMCYEQGgeob23sADsHpQg4A9GEHAqwYEmBhpQHAZhqD8k4N4Ikyo8CuG8BnYIVCYiUFoe4ZUjCzAwwYNoZUCA8AJHOPw9wDDkCOGOIgPwPhBHyDoRAURwRswCOiMI-RQwCLyjAMooRcjREmAYFKDArhtGyJEeogxhQwD4BkaohRPDWEIBoCSKUqJQCrHoWAKAEgADkAAZOA6hcAQDGAAYUGBFSg3i6BjAALKDDCDAaJrhBi9H8GELkLNbx71Kg6BOlUmRcG-N7GBuRrZWJQAgDAcBGyljKuoNajYGI6GUJyBpDApBsDSZoPk1VLwmAAGzezTn6YijgYEMA4Q4fp.SGBeIcB6IZIBeFNBCVQCAsgxgAGVIDaHKLGJZDinEMAKJ0tUFSqmNmYTQzh.k2Cv1yESKg2hYyVOqfyUUYAnFxg-RIAAPAUKQYxcAAF5vHeLGKFKgoLfrIDGCRMwABSAA3GMQiIzYUQEQDAJF4KyBoBvKCtIAAxElpLwW.VBfChF3iAB8vzglCFYBkUFdgED-DYMgAA9Jy0QvKAB03sYY0E6ckBAbA-UJFcJy8FCBgyUAQKCvAFB1nhFpb8ioaAIUYHUCyhAbKOXcrYDDPl.gZhCH8JATkCAJUwClaAtgnLoFwIQUglBGQ0GYOwYsPB6gCEQCISQshlBOVwAtTARYDqnDELMBgmg6h-nqAsN7Zw3sIDezMOocw.SPTIKITAnA6gMGcsFTQXxAB5AA4mW9NZhlTODMCa2QaBwWQsoNCt0sKqUovYa0GFYwxlmH8MqFFaK7AYqxTizldLOUQGnQCmlZNcJiJgZTdOyA6qTOcLM8MY19kfKOSAE5FroDnOqQwK5rDOHiKpHcxU9i-GOGcYMBGIB3FYE8RIAAgtgJQ0SAASlAwAyH6OoCA0S2DrLYK0WY2AR4OydmhImVJE4FM4N8GGwUQiJBeRcrMsrlD1MlutJpGAWm7Deh0rp1Rvy9PdP0zOo77AbpQFukAczHD6IOXwiQABNeAGAxikFcJQMYAAKdZOAgWyGtsqAAlGMd-OgZBjDIPK64fK9kSGWY-45WBTknuQK8y51DL1NXpNwm99zjmAflaQ09x4rCaMfd8zRfyAVApwKC5ZAAhGAyoaAtoPqClxCBWhvs8bC79WBf1jAAGo6BwOssDELIPQZ0FgDIKKQvQcKZ2.pQ6UVkdaIx2FzgCtjDSTgAoTbWjWz1ba0rg7h0qa6jGVoN5YUoutp5HQ7QYqwpMAV3F-KEygvJW6SlFhqU0oADobLGL82VZoxgUu8R6RFuKbagrMLSubYx9sLYQNbHAUBZvzYO4djAZ2LsXcW5J-OoLKyBbCqCo9apYXeCKxQGAEQUV9q7aiqm46.Aosq9VtArRJiNfK9l0QQOVPYay8-sLEAPFQEiz-sA0T4ueSS-B1LMGMtI.kDltDpWYHlaKyVsYMNHBDZpZsuAZAP7YFU3CMYlARH7D5b8zlCAcDXZu7zypgv9vC-O6dvbC2-d6jO7z-di6arIHo6ukZphgibuCHMmgNAZm7okB8nTh69PHrmUZ89JnJnwosNe9Qt6ajvM0TDEkPzUj.KwICkF3ifN-ccM9qF3jsvhfR2MKLMWceJdkMliDsgoOE8y2MbLJpKB5cp94SgxX4dlea2D7wEO6t-FcND5r3WvJ9chhysYg3h3DYJWClbE3vFUt2.NxbeoG--VBet6lCOesYG2y327R2YAndFwdxbV2pc3cO.d3Jj2JL-7bd4t70APuyC-0kX7HejCdqmyO-HmKQcVcWODyHARi.E9C8HjH0WsdxYS3jlLse0uwcv6TlPcKKfNap1nunNeGfoRjChrs5XAZClhjDqgCbaCo4N5GATDWAc7Kj1AYBirC4C5T7j586T7nbS7D6j5S7C6y5zby4e4Lq0YoAq7DKNTMZiJa60ArpZh7pO4PIm5nKGa4YgAXpW4Mi2724.CO5ijewu6uZu7ubqCQB3JjYeagpsBM5ErJCuCL7BbI7X6h6Y7Y4P5R747P7x5v7J6p7f7p6Z5EQX7H5VZ561YyiF6mG95l4nwDZDYqYjY0hSGrbN6C5t7Larbd6bZ94D5j6LYS5j5i4i4YFD5CBjAPbeJPYQpBbL6sGr5SYb4.bhDdoQDKi9odr9rmDlZ9rmDIqA4mGRETpmGn5Q79pNZv5w5FFlI4Bv6qFh534R6P4x5x7pYJ5J65Zwr5aGGcjGHooVH06.KQCqZgCJ7JDBZYAYDMh4BR7Ca0pEpTHMhjAAByqOKevOIxgGwRQuZA2B0-t23gpqVYUA9QXmDi4KXuYB0x.CcxkSYwdxkxNxsx6x4KUgSg1SUhra7avkjWlRaqfOQgOxIRERURMR3x8R-mIen2Rh32W-PafaHGlR2-QgA2iK--RRh-2KpRFh5R2eVR8OtR9RqO76IejRGhuOWhT-bRr-4xJO-h3RaefR1O-JaqWxYxhij2EAMxdxtKvi3J4waxwmyAmx5A2xYRux-xBxYuRxiAEwpxS-yylxnm0RApLx8xDx6xXJPJrxYw7xYAnx9eEJiJFgQxgJOxwuUpYufOQRBBMuZoHhS2VAKJXeG2thOg.hGBgRI-kuOBIRVpQucBYJC-sRL23ifaGC6JhRAxWJoOJ-uJ5-gxzWsOhJiOdJV-JJEWaht-FJke0eBO7RehXRuuTJGeLJ.xdK7J4x.e3ishZAAAolzrSo2fImACKZyuycCePnsV2TKbIMcfKWcd7hcdIbWUzi2e-uCo8WOQ2U2XqR8UvnWROWAOCicnqJJsaVkRhhWcLkCRKZaQETaT6R4faVQI6e3t4W6aXh6d4jtgEXgb6dPhPl2YtqCXPtESGZub8WMJGQUdTrGTiTVniciSmTUWmUHpmWSeoffpSfmToYWeme.gYYVkYeWUMVWZycvo0HMDABkEqlMUYLSgACLYVjC4VjDeYEWomimjG9kLY9kSmHH9lykshDmJbaDKmvbYWXB4VkBUVTlalYXaA8X4UoFCBvELlcXCW4WiWEWhkB4mk7nmn7lYGHkPknlOmUDnleGN4-Huk1l3lenqX7mhF-nj786RHvnglxEr4h5wmpEomwq.kYkxklEQVo437h6aFwU0lE6IUMklm9FllZ47n-DyVL6gUDFEmIUNHQXNFUmtEv5-WdFk6MlBX9FjpJk4o0oACSkRrgkR7Z.gdF6qzFJxQ56g1gEQMmnF3iaSrA8gAlwmoK9VWgElBpS-rVjVJVGFExdVHgbV4VyhJOsVOZMFeZ2hvlHRyOAV3spZGVCAnaX-2VvynS6yQ1geKhkFnlTR3lk1SV019JxZc16V1ONAy1tKAACgNfILzmtbINOp2Yxd2QGU-QxWZUxQOaxUvpVZQNVX5rVQkGEEIHgIsPQrIE1T9eGpVaDTgODe1YaUDTDWDd4IPtKQtr1TWUjSDSjRDXSvdRte5aSTtbmS0QWbSSlR.jQCdShcyfDudfTmEsDZyp-nDd4HdWkg9TReKR9S9SVe9ejQtrKeVT9VVeEDVaOabjoJDS1WqNLfOR1bLdANLT1WKRyX1VLRgGqgTRCUTVmeSeNWTfBRTTNcdfNWdRdTSpdXLRgBzeso9Wrfza9ZKSVcLYOaLX9eLQDaOasBDZqc1YHusgjRFUHaraMdWcFqHatZzYTVtR5dmV5bBftbof5WbadfTZbUSusnbVzR2Y7XNjNggIXWLnsVOr8qXWdoXcXULWVe7aCr9f9cqLVUyjoAgjLd4i3awPcfqYaZ3W3WHYBhHR3TCK3ZEvjTHbrXHcTQnbtUndSQdUWaldTebRnfTgAEoj1d050O20VoEWmqVelHn4Gt6nlaUEGaUulrZXlba3lo0hG2lmXPnPV3aWXoTz6jBKGQmm6wr2V.ZZHOXRmZUAV61QVjXxU-UL2p1L09G03BVFH4mAX55WENZwqhWx0jXbUz2k0JXk3JWm3QMr3wM7nMjRhNo0oADqQgjQEKPQKBombA8mOAMAEB8AFWaoAA.HdZUoMGgNOsVc9X2V9QqfXWLRLV7lIIkFQFAKEGACuf7UvhI7I4.DI3Iz3Qo5I8o0oCuQPerTWYo1Iyo5.SAyTYbTg8bXg0dUvTTWMD.kUQzf.tHetZPRg.HQbeA8nQhZTZ2tY7YwMfY9lbFho9I1o9vdzWAE7REwIzXUIxVaI97V7qELMIY.I6Cok5QMk2o6k9yek1o3fQccMWrUPWk4Y-PU43EcY1g6YxAynV43Cj46havf.t5tkyo6E3nbRVE-Xc7bdgLejaVTEx7Y3bVS-KMMk9OSM0drkwrYaRMyU505jTIbhZM7I9rRPeU1PfrXFXtfPTU.g1TfU3TXY5bZsks605yvdTvTzYLV05E7zYIyxcI94g3V7U3aOS-OoJoFrSk7WT9p88HYsx8yrfM4U5he8386Uxss4xma41s3PYlbs5Y.s4Q348c78zoG009bIFXeMPRRgGXRXQXUXTi.0w87E57WIyqSKigWwCwJvW3d81S2KrSxkKPf87WbQ0y33WPcC-HaCxyzS1y6s2U2GRU249s.C543s948i5lf47ShvSy1vec5zZc-E3vSpaZbdkfY-bgUQa3hfZeT3teQZXk96cfU-Zq.kxZcGR.RtbZT.Zvg5RGVGf-W5Rs6A4nRNTs5K4i8hTYw00Q0MWQJIoMG80zvQggJ.fnG1h1mMI7BkP0o4Cy3GeYTVpWKVtY7njVtgAMY4Jm.GTVgXig04OVlmxDuUSW81rG8SqSiSovVTTA4hdUQMS0EYkoNlZsoAaGrzsG.VrnfzvvZa0Pt0zPq.aoO.ZG3awkXZY63.d-QA660fqK7C16xKybb62lbAwtaYWW2fv4BfrSt5lAGMOIQAuEHnmMN4p26oEAf4OCnlcQF3ezkYCJvSqikyrqvqlyjyvymCzoDalKoAtoPIHzjoK4FBrha0IiJ.dWySvSN7Cissq0ESAkEQKuLChyJQDihMHKgqt4kqpaqqvjdw2QwACpgdsAABk0mnSSKlHqO.gdHNHjHYSMQs8VHzHSKuF1HzOjHAAqrMFw6Q7w7zrOpETEAtgyh-94qyuyt-7yqIHyn-xgAB5ykB1oJyv4NgO8eoFAK0D0ARlADBwmLCjW.B4hw4sh39ckI0JCBh4MFhzKrh4qsqrIER6tSR7w5ddp2EFADx7R5da-Lp0Jzw9OrOuq4.QfTgeLseXaZpXLpygruQcrgxlTLQCYNeprtumIjDBgowQbpokIbplCfZhbiwtwfSLwfcgIWACYMIQqKIR7qOT7sqDDJ.faw8Q58STC2A-K7g4daFgFY2745lQg7u0W0XllS1t3DEO1iZ2MF1jbOXlgDMA4TXk4XXuNp3k3lNmjZ4c6Ya74V5J6dF8ZY.UO4GbPm.R-baxCR1zCX0b.Y5agy6wfiUbu8BTDsjs25ldFcu713C.1.W-TjK4tTTn.tlaR1Q25yw3ANWSe4MNceDZqpARVn3bIJoGwAAIQRdPlRdatnfWnxfEGJekGK6XiUH1Rro0Gsba6675epAfJ1fFem6lecGW5XrXh8HAIHBAA';
+                        DEVICE_TYPE = 'mobile';
+                        DEVICE_TYPE_MOBILE_OVERRIDE = 'desktop';
+                        customJS = '//load p13n.js\nvar site_id = \u0027sei-431sports\u0027;\n(function (b, t, r, a, i, n) {\n  b[\u0027bt\u0027] = b[\u0027bt\u0027] || function () {\n    (b[\u0027_bt\u0027] = b[\u0027_bt\u0027] || []).push(arguments);\n  }, i = t.createElement(r), n = t.getElementsByTagName(r)[0];\n  i.async = 1;\n  i.src = a;\n  n.parentNode.insertBefore(i, n);\n})(window, document, \u0027script\u0027, \u0027https://cdn.boomtrain.com/p13n/\u0027 \u002B site_id \u002B \u0027/p13n.min.js\u0027);\n\nvar pp_int_id = \u00273391\u0027;\nvar pp_guid = \u00271f81ee88a1fc4479bad9acdfa853ed0e\u0027;\nvar regExp = /[a-zA-Z]/;\nvar regExpNum = /[^0-9-]/;\nvar regNumAndChar = /[^0-9.,#@%\u0026\\/\\-]/;\nvar regSpecialChars = /[^A-Za-z0-9 .,\u0027#@%\u0026\\/\\-]/;\nvar specialChars = \u0022. \u0027 - # @ % \u0026 /\u0022\nvar uid_enc = getUrlParam(\u0027encbu\u0027);\nvar email_enc = getUrlParam(\u0027ence\u0027);\nvar email = atob(email_enc);\nvar uid = atob(uid_enc);\nvar eid = getUrlParam(\u0027eid\u0027);\n// logger(\u0022eid\u0022);\n// logger(eid);\n//var uEmail = atob(email_enc);\nvar opt_in_status = PC_EXTRA_OBJ[\u0022boomtrain_all\u0022];\n\nvar foundMatch = false;\nvar matchedContact;\nvar matchedPhoneContact;\n\nwhile (!foundMatch) {\n  btSubscriberJson.contacts.forEach(contact =\u003E {\n    // swap to uEmail during prod\n    //    logger(contact);\n    if (contact.contact_value == email) {\n      matchedContact = contact;\n      foundMatch = true;\n    }\n  });\n}\n\nif (matchedContact.contact_properties.phone_number) {\n  phone = matchedContact.contact_properties.phone_number;\n} else if (btSubscriberJson.properties.phone_writable) {\n  phone = btSubscriberJson.properties.phone_writable;\n} else {\n  phone = btSubscriberJson.properties.phone;\n}\n\n// logger(\u0022look here\u0022)\n// logger(btSubscriberJson.properties)\n\n//block1\nif (btSubscriberJson.properties.pref_center_parent == \u0027Y\u0027) {\n  $(\u0022#parent\u0022).prop(\u0027checked\u0027, true);\n}\n\nif (btSubscriberJson.properties.pref_center_coach_admin == \u0027Y\u0027) {\n  $(\u0022#coach_admin\u0022).prop(\u0027checked\u0027, true);\n}\n\nif (btSubscriberJson.properties.pref_center_player == \u0027Y\u0027) {\n  $(\u0022#player\u0022).prop(\u0027checked\u0027, true);\n}\n\nif (btSubscriberJson.properties.pref_center_fan == \u0027Y\u0027) {\n  $(\u0022#fan\u0022).prop(\u0027checked\u0027, true);\n}\n\nif (btSubscriberJson.properties.pref_center_referee == \u0027Y\u0027) {\n  $(\u0022#referee\u0022).prop(\u0027checked\u0027, true);\n}\n\n//block2\nif (btSubscriberJson.properties.pref_center_volleyball == \u0027Y\u0027) {\n  $(\u0022#volleyball\u0022).prop(\u0027checked\u0027, true);\n}\n\nif (btSubscriberJson.properties.pref_center_baseball == \u0027Y\u0027) {\n  $(\u0022#baseball\u0022).prop(\u0027checked\u0027, true);\n}\n\nif (btSubscriberJson.properties.pref_center_softball == \u0027Y\u0027) {\n  $(\u0022#softball\u0022).prop(\u0027checked\u0027, true);\n}\n\nif (btSubscriberJson.properties.pref_center_soccer == \u0027Y\u0027) {\n  $(\u0022#soccer\u0022).prop(\u0027checked\u0027, true);\n}\n\nif (btSubscriberJson.properties.pref_center_sports_referee == \u0027Y\u0027) {\n  $(\u0022#sports_referee\u0022).prop(\u0027checked\u0027, true);\n}\n\n$(\u0022#subEmail\u0022).val(email);\n\n$(\u0027#submit\u0027).click(function () {\n  var email_value = email;\n  var failure = false;\n  var first_name_value = $(\u0027#first_name\u0027).val();\n  var last_name_value = $(\u0027#last_name\u0027).val();\n  var date_of_birth_value = $(\u0027#date_of_birth\u0027).val();\n  //   var date_of_birth_value_converted = date_of_birth_value.toISOString().split(\u0027T\u0027)[0\n\n  if ($(\u0027#prefer_all\u0027).is(\u0027:checked\u0027)) {\n    $(\u0027.checkbox-group\u0027).prop(\u0027checked\u0027, true);\n  }\n\n\n  //block1\n  var parent_value = $(\u0027#parent\u0027).prop(\u0022checked\u0022) ? true : false;\n  var coach_admin_value = $(\u0027#coach_admin\u0027).prop(\u0022checked\u0022) ? true : false;\n  var player_value = $(\u0027#player\u0027).prop(\u0022checked\u0022) ? true : false;\n  var fan_value = $(\u0027#fan\u0027).prop(\u0022checked\u0022) ? true : false;\n  var referee_value = $(\u0027#referee\u0027).prop(\u0022checked\u0022) ? true : false;\n  //block2\n  var volleyball_value = $(\u0027#volleyball\u0027).prop(\u0022checked\u0022) ? true : false;\n  var baseball_value = $(\u0027#baseball\u0027).prop(\u0022checked\u0022) ? true : false;\n  var softball_value = $(\u0027#softball\u0027).prop(\u0022checked\u0022) ? true : false;\n  var soccer_value = $(\u0027#soccer\u0027).prop(\u0022checked\u0022) ? true : false;\n  var sports_referee_value = $(\u0027#sports_referee\u0027).prop(\u0022checked\u0022) ? true : false;\n\n  var current_date = new Date();\n  var date_of_birth_not_converted = Date.parse(date_of_birth_value);\n  var date_of_birth_converted = Math.round(Date.parse(date_of_birth_value) / 1000);\n  var current_date_compare = Date.now();\n  var current_date_compare_formatted = Math.round(current_date_compare / 1000);\n  var subtract_this = 12 * 31556926;\n  var twelve_and_up = current_date_compare_formatted - subtract_this;\n\n  if (isBlank(first_name_value)) {\n    alert(\u0027First Name is required.\u0027);\n    failure = true;\n  }\n\n  if (isBlank(last_name_value)) {\n    alert(\u0027Last Name is required.\u0027);\n    failure = true;\n  }\n\n  if (isBlank(date_of_birth_value)) {\n    alert(\u0027Date of Birth is required.\u0027);\n    failure = true;\n  }\n\n  if (twelve_and_up \u003C date_of_birth_converted) {\n    alert(\u0027Must be ages 12 and up.\u0027);\n    failure = true;\n  }\n\n  if (failure) {\n    return;\n  }\n\n  var user_json = {\n    \u0022uid\u0022: uid,\n    \u0022properties\u0022: {\n      \u0022first_name\u0022: first_name_value,\n      \u0022last_name\u0022: last_name_value,\n      \u0022date_of_birth\u0022: date_of_birth_value,\n      \u0022email\u0022: email_value\n    },\n    \u0022contacts\u0022: [{\n      \u0022contact_type\u0022: \u0022email\u0022,\n      \u0022contact_value\u0022: uid,\n      \u0022subscription_status\u0022: \u0022active\u0022,\n      \u0022contact_properties\u0022: {}\n    }],\n  };\n\n  //block1\n  var parent_value_zmp;\n  var coach_admin_value_zmp;\n  var player_value_zmp;\n  var fan_value_zmp;\n  var referee_value_zmp;\n  var volleyball_value_zmp;\n  var baseball_value_zmp;\n  var softball_value_zmp;\n  var soccer_value_zmp;\n  var sports_referee_value_zmp;\n  if (parent_value === true) {\n    user_json[\u0027pref_center_parent\u0027] = \u0027Y\u0027;\n\tvar parent_value_zmp = \u0027Y\u0027;\n  } else {\n    user_json[\u0027pref_center_parent\u0027] = \u0027N\u0027;\n\tvar parent_value_zmp = \u0027N\u0027;\n  }\n\n  if (coach_admin_value === true) {\n    user_json[\u0027pref_center_coach_admin\u0027] = \u0027Y\u0027;\n\tvar coach_admin_value_zmp = \u0027Y\u0027;\n  } else {\n    user_json[\u0027pref_center_coach_admin\u0027] = \u0027N\u0027;\n\tvar coach_admin_value_zmp = \u0027N\u0027;\n  }\n\n  if (player_value === true) {\n    user_json[\u0027pref_center_player\u0027] = \u0027Y\u0027;\n\tvar player_value_zmp = \u0027Y\u0027;\n  } else {\n    user_json[\u0027pref_center_player\u0027] = \u0027N\u0027;\n\tvar player_value_zmp = \u0027N\u0027;\n  }\n\n  if (fan_value === true) {\n    user_json[\u0027pref_center_fan\u0027] = \u0027Y\u0027;\n\tvar fan_value_zmp = \u0027Y\u0027;\n  } else {\n    user_json[\u0027pref_center_fan\u0027] = \u0027N\u0027;\n\tvar fan_value_zmp = \u0027N\u0027;\n  }\n\n  if (referee_value === true) {\n    user_json[\u0027pref_center_referee\u0027] = \u0027Y\u0027;\n\tvar referee_value_zmp = \u0027Y\u0027;\n  } else {\n    user_json[\u0027pref_center_referee\u0027] = \u0027N\u0027;\n\tvar referee_value_zmp = \u0027N\u0027;\n  }\n\n  //block2\n  if (volleyball_value === true) {\n    user_json[\u0027pref_center_volleyball\u0027] = \u0027Y\u0027;\n\tvar volleyball_value_zmp = \u0027Y\u0027;\n  } else {\n    user_json[\u0027pref_center_volleyball\u0027] = \u0027N\u0027;\n\tvar volleyball_value_zmp = \u0027N\u0027;\n  }\n\n  if (baseball_value === true) {\n    user_json[\u0027pref_center_baseball\u0027] = \u0027Y\u0027;\n\tvar baseball_value_zmp = \u0027Y\u0027;\n  } else {\n    user_json[\u0027pref_center_baseball\u0027] = \u0027N\u0027;\n\tvar baseball_value_zmp = \u0027N\u0027;\n  }\n\n  if (softball_value === true) {\n    user_json[\u0027pref_center_softball\u0027] = \u0027Y\u0027;\n\tvar softball_value_zmp = \u0027Y\u0027;\n  } else {\n    user_json[\u0027pref_center_softball\u0027] = \u0027N\u0027;\n\tvar softball_value_zmp = \u0027N\u0027;\n  }\n\n  if (soccer_value === true) {\n    user_json[\u0027pref_center_soccer\u0027] = \u0027Y\u0027;\n\tvar soccer_value_zmp = \u0027Y\u0027;\n  } else {\n    user_json[\u0027pref_center_soccer\u0027] = \u0027N\u0027;\n\tvar soccer_value_zmp = \u0027N\u0027;\n  }\n\n  if (sports_referee_value === true) {\n    user_json[\u0027pref_center_sports_referee\u0027] = \u0027Y\u0027;\n\tvar sports_referee_value_zmp = \u0027Y\u0027;\n  } else {\n    user_json[\u0027pref_center_sports_referee\u0027] = \u0027N\u0027;\n\tvar sports_referee_value_zmp = \u0027N\u0027;\n  }\n\n  var user_event_json = {\n    \u0022activity\u0022: {\n      \u0022subscriber\u0022: {\n        \u0022uid\u0022: uid\n      },\n      \u0022event\u0022: \u0022preference_center\u0022,\n      \u0022properties\u0022: {\n        \u0022subscription_status\u0022: \u0022active\u0022,\n        \u0022first_name\u0022: first_name_value,\n        \u0022last_name\u0022: last_name_value,\n        \u0022date_of_birth\u0022: date_of_birth_value,\n        \u0022email\u0022: email_value,\n        \u0022pref_center_parent\u0022: parent_value_zmp,\n        \u0022pref_center_coach_admin\u0022: coach_admin_value_zmp,\n        \u0022pref_center_player\u0022: player_value_zmp,\n        \u0022pref_center_fan\u0022: fan_value_zmp,\n        \u0022pref_center_referee\u0022: referee_value_zmp,\n        \u0022pref_center_volleyball\u0022: volleyball_value_zmp,\n        \u0022pref_center_baseball\u0022: baseball_value_zmp,\n        \u0022pref_center_softball\u0022: softball_value_zmp,\n        \u0022pref_center_soccer\u0022: soccer_value_zmp,\n        \u0022pref_center_sports_referee\u0022: sports_referee_value_zmp\n      }\n    }\n  };\n\t\n  window.updateSubscriber(pp_guid, pp_int_id, user_json, function (res) {\n    window.zetaTrackEvent(pp_guid, pp_int_id, user_event_json, function (status, data) {\n      setTimeout(function () {\n        window.scrollTo(0, 0);\n        $(\u0027#textBox1\u0027).hide();\n        $(\u0027#textBox2\u0027).hide();\n        $(\u0027#subForm\u0027).hide();\n        $(\u0027#textBox3\u0027).show();\n      }, 1000);\n    });\n  });\n\n});\n\n//check for valid email\nfunction validateEmail(email) {\n  var reg = /^[a-zA-Z0-9.!#$%\u0026\u0027*\u002B/=?^_\u0060{|}~-]\u002B@[a-zA-Z0-9-]\u002B(?:\\.[a-zA-Z0-9-]\u002B)\u002B$/;\n  return reg.test(email);\n}\n\n//check for a blank\nfunction isBlank(str) {\n  return (!str || /^\\s*$/.test(str));\n}\n';
+                        customCSS = '@media only screen and (min-width: 480px) {\n    #layout, #html1, #html2, #html3, #html4, #html1_wrapper, #html2_wrapper, #html3_wrapper, #html4_wrapper {\n        width: 100%!important;\n        height: auto important;\n    }\n}';
+                        logger('DesktopSettings_2');
+                    }
+                } catch(e) { logger('adjustFromDetection selection error: ' + e.message); }
+            }
+
+            async function loadWidgets() {
+                // common first
+                await loadScript('//cdn.pushplanet.com/editor/widget_common.js?cb=0076a8704e35445790aaeb754898d2a9');
+                logger('loaded widget_common');
+
+
+
+
+                // hosted last
+                await loadScript('//cdn.pushplanet.com/editor/widget_hosted.js?cb=0076a8704e35445790aaeb754898d2a9');
+                logger('loaded widget_hosted');
+
+            }
+
+            function start() {
+                detect().then(function(info){
+                    adjustFromDetection(info);
+                    return loadWidgets();
+                }).then(function(){
+                    try {
+                        window.dispatchEvent(new CustomEvent('deviceDetected', { detail: window.DeviceInfo }));
+                    } catch(e) {}
+
+                    // Release jQuery ready queue now that widgets are loaded
+                    if (window.jQuery && $.holdReady) { $.holdReady(false); }
+                }).catch(function(){
+                    try {
+                        window.dispatchEvent(new CustomEvent('deviceDetected', { detail: window.DeviceInfo }));
+                    } catch(e) {}
+
+                    // Even if detection/load fails, attempt to dispatch
+                    if (window.jQuery && $.holdReady) { $.holdReady(false); }
+                });
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', start);
+            } else {
+                start();
+            }
+        })();
+    </script>
+<script type="text/javascript" src="//cdn.pushplanet.com/editor/widget_common.js?cb=0076a8704e35445790aaeb754898d2a9"></script><script type="text/javascript" src="//cdn.pushplanet.com/editor/widget_hosted.js?cb=0076a8704e35445790aaeb754898d2a9"></script><style id="custom_css" type="text/css">@media only screen and (min-width: 480px) {
+    #layout, #html1, #html2, #html3, #html4, #html1_wrapper, #html2_wrapper, #html3_wrapper, #html4_wrapper {
+        width: 100%!important;
+        height: auto important;
+    }
+}</style><style id="element_styles" type="text/css">.float_left {float: left;} .float_right {float: right;} body {background: #ffffff;} .ep1layout {position: relative;border-color: #000000;border-style: solid;border-width: 1px;border-radius: 0px;background: #ffffff;width: 950px;height: 1000px;overflow: hidden;padding: 0;margin-left: auto;margin-right: auto;margin-top: 0;} </style></head>
+<body style="margin: 0px; padding: 0px;" class="device-desktop" data-device-type="desktop" data-is-mobile-phone="false" data-is-tablet="false" data-device-source="geoapi">
+
+    <div id="layout_header"></div><div id="layout" class="layout" style="display: none;"></div>
+    <div id="thxlayout" class="thxlayout" style="display: none;"></div>
+    <div id="ep1layout" class="ep1layout" style="display: block;"></div>
+    <div id="ep2layout" class="ep2layout" style="display: none;"></div>
+    <div id="ep3layout" class="ep3layout" style="display: none;"></div>
+    <div id="ep4layout" class="ep4layout" style="display: none;"></div>
+    <div id="layout_footer"></div><div id="modal_loading"><div id="modal_loading_spinner"></div></div>
+
+    <noscript>
+        <div style="color: red; font-weight: bold; background: #ffecec; padding: 10px; text-align: center;">
+            JavaScript is required to use this website. Please enable JavaScript in your browser settings and refresh the page.
+        </div>
+    </noscript>
+
+    <span style="display: none;" class="error-bubble" id="error_bubble">
+        <span class="error-message" id="error_message"></span>
+        <span id="error_close">x</span>
+    </span>
+    <span style="display: none;" class="success-bubble" id="success_bubble">
+        <span class="success-message" id="success_message"></span>
+        <span id="success_close">x</span>
+    </span>
+
+</body></html>

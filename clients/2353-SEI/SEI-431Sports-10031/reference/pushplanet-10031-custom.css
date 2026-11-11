@@ -1,0 +1,6 @@
+@media only screen and (min-width: 480px) {
+    #layout, #html1, #html2, #html3, #html4, #html1_wrapper, #html2_wrapper, #html3_wrapper, #html4_wrapper {
+        width: 100%!important;
+        height: auto important;
+    }
+}

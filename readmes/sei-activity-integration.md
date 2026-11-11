@@ -50,6 +50,8 @@ The person's fields go in `subscriber.properties`. The event gets a copy in `act
 
 ## Field mapping
 
+Confirm field **names** and checkbox **choice ids** on the live staging DOM (or webhook capture) before pasting JSON — see [GUIDE-new-campaign.md § Where to find field names and choice ids](../GUIDE-new-campaign.md#where-to-find-field-names-and-choice-ids). Labels and PushPlanet `#id`s are not reliable. Sibling campaigns can differ (e.g. 23127 sports still use `My_preferences`, but choice ids are volleyball/baseball/… not cleats/apparel).
+
 | ZMP field | Form field |
 | --- | --- |
 | `subscriber.uid` | `uid` (falls back to `email`) — matches PP `encbu`; editing the email field must not retarget the profile |
@@ -72,7 +74,7 @@ Every flag is always sent, so unchecking a box writes `N`.
 
 | Symptom | Cause |
 | --- | --- |
-| Every `pref_center_*` is `N` | The checkbox field names changed in Grow. The JSON must read `I_am_a` / `My_preferences`; it used to read `multioptin` / `multioptin_01`. |
+| Every `pref_center_*` is `N` | Wrong checkbox **field name** or **choice id** in the Groovy `.contains(…)`. Dump `input[name]` / `value` on staging, or read the webhook body. Common: assumed `Sports` but Grow field is still `My_preferences`; assumed `coach_admin` / `referee` but ids are `coachadmin` / `option`. |
 | Name or DOB missing in ZMP | The form field was empty. Empty values are omitted, so ZMP keeps the old value. |
 | Nothing reaches ZMP | No email in the entry (`required`), or the integration is not attached to this display. |
 | Wrong site written | During testing both On Load and submit must hit `sei-dev`. Prod is `sei-soccer-com` — only after go-live. |

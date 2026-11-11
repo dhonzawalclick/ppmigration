@@ -14,6 +14,8 @@ Full migration notes: [`readmes/sei-pushplanet-grow-migration.md`](../../readmes
 | --- | --- | --- | --- |
 | [`SEI-Soccer-9958/`](SEI-Soccer-9958/) | `9958` | [`22815`](SEI-Soccer-9958/22815/) (display `22904`) | Preference center |
 | [`SEI-Soccer-9952/`](SEI-Soccer-9952/) | `9952` | [`22913`](SEI-Soccer-9952/22913/) | Preferences + unsubscribe |
+| [`SEI-431Sports-10031/`](SEI-431Sports-10031/) | `10031` (PP acct `829`) | _pending_ | 431 Sports prefs — ZMP site `sei-431sports` |
+| [`SEI-WorldSoccerShop-10030/`](SEI-WorldSoccerShop-10030/) | `10030` (PP acct `830`) | _pending_ | World Soccer Shop prefs — capture in progress |
 
 `unused-theme.css` is the earlier full theme, kept for reference. It is not pasted into Grow.
 

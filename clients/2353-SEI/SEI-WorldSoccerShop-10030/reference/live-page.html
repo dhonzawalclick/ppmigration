@@ -1,0 +1,393 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <title>Preferences</title>
+    <meta name="keywords" content="Landing Page">
+    <meta name="description" content="PushPlanet is a drag-and-drop landing page builder with beautiful templates, forms, and is integrated with your Email Marketing and CRM software providers.">
+
+
+
+
+        <link rel="shortcut icon" href="https://cdn.pushplanet.com/images/favicon/favicon-96x96.png" type="image/png">
+    <!--CSS-->
+
+    <link rel="stylesheet" href="//cdn.pushplanet.com/editor/widget_hosted.css?cb=0076a8704e35445790aaeb754898d2a9">
+
+
+    
+
+    
+
+
+
+    <!--JS-->
+        <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css">
+        <script async="" src="https://cdn.boomtrain.com/p13n/sei-worldsoccershop/p13n.min.js"></script><script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+    <script type="text/javascript">if (window.jQuery && $.holdReady) $.holdReady(true);</script>
+
+
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+
+    <script type="text/javascript" src="//cdn.pushplanet.com/static/lz-string-1.4.4-mod.min.js"></script>
+    <script type="text/javascript" src="//cdn.pushplanet.com/editor/device-detection.js?cb=0076a8704e35445790aaeb754898d2a9"></script>
+    <script type="text/javascript">
+        var settings = '';
+        var PP_MODE = 'hosted';
+        var PP_CACHE_VERSION = '0076a8704e35445790aaeb754898d2a9';
+        var PP_STAGE = '';
+        var IS_DEV = false;
+        var IS_PREVIEW = false;
+        var USER_ID = '830';
+        var USER_GUID = '__OwIwLAzApgTAbHAjAYwKyLLADATlQDmEQENUwiATRYCpIA__';
+        var PAGE_ID = '10030';
+        var PAGE_GUID = 'fbaff41da3f742b9bdf84214e223c921';
+        var PAGE_NAME = 'sei-world-soccer-shop-prod preference page updated';
+        var PP_KWK = '';
+        var GEO = {};
+        var DEVICE = "";
+        var DEVICE_TYPE = "";
+        var DEVICE_TYPE_MOBILE_OVERRIDE = '';
+        var UserPixelsSettings = '';
+        var PixelsSettingsOverride = false;
+        // Preview-only: if controller provided a device_type, expose it here
+        var PREVIEW_FORCED_DEVICE = '';
+
+        var usePC_Z_Prof = "";
+        var btGlobalSubscriptionStatus = "";
+        var isValidParse = true;
+        var btSubscriberJson = {};
+        var itSubscriberJson = {};
+        var itMessageTypePolicy = '';
+        var itProjectType = '';
+        var it_lz = '';
+        var bt_lz = '';
+
+        var PP_COUPON_GROUP_POPULATE_OBJ = JSON.parse('{}');
+
+        var PAGE_MODE = 'LP';
+        var PC_PARTNER = '';
+        var PC_LINK_VERSION = '';
+        var PC_LISTS_OBJ = '';
+        var PC_PROFILE_OBJ = '';
+        var PC_EXTRA_OBJ = '';
+        var PC_ALL_OBJ = '';
+        var PC_INTEGRATION_ID = '3393';
+        var PC_ERROR_PAGE = '';
+        var DATA_STORAGE_TYPE = 'none';
+        var PP_TURNSTILE_ENABLED = false;
+
+        //parse PixelsJSONConfigs
+
+        try {
+            if (UserPixelsSettings != '' && typeof UserPixelsSettings === 'object') {
+                let pageMobilePixelThreshold = UserPixelsSettings[PAGE_ID] || UserPixelsSettings["all"] || "";
+                let currentWindowWidth = window.innerWidth;
+                if (pageMobilePixelThreshold && typeof pageMobilePixelThreshold == 'number' && currentWindowWidth <= pageMobilePixelThreshold) {
+                    DEVICE_TYPE = 'mobile';
+                    PixelsSettingsOverride = true;
+                }
+            }
+        } catch(err) {
+            logger('ERROR: ' + e.message);
+        }
+
+        var window_loc_base = window.location.href.toLowerCase();
+        if (window_loc_base.indexOf('http://') == 0) {
+            window.location.href = "https://" + window.location.href.substring(7);
+        }
+
+        var LogIsPrinted = false;
+        var LogDeferredArr = [];
+
+        var logger = function(msg) {
+            if (LogIsPrinted || localStorage.getItem('pp_show_logs') == '1') {
+                console.log(msg);
+                LogIsPrinted = true;
+            }
+            else {
+                LogDeferredArr.push(msg);
+            }
+        };
+
+        var logErrorText = function(function_name, msg) {
+            if (function_name && function_name !== "logger") {
+                logger('ERROR: ' + function_name + '() - ' + msg);
+            }
+        };
+
+        var logError = function(e, function_name) {
+            if (function_name && function_name !== "logger") {
+                logger('ERROR: ' + function_name + '() - ' + e.message);
+            }
+        };
+
+        var hideAllLogs = function () {
+            LogIsPrinted = false;
+            localStorage.removeItem("pp_show_logs");
+        };
+
+        var printAll = function() {
+            if (typeof console !== "undefined") { 
+                LogIsPrinted = true;
+                for (var i = 0; i < LogDeferredArr.length; i++) {
+                    console.log(LogDeferredArr[i]);
+                }
+                LogDeferredArr = [];
+                localStorage.setItem('pp_show_logs', '1');
+            }
+        };
+
+
+
+            PAGE_MODE = 'PC';
+            
+
+            try {
+                PC_LISTS_OBJ = JSON.parse(atob('e30='));
+                //logger("PC_LISTS_OBJ");
+                //logger(PC_LISTS_OBJ);
+            } catch (e) {
+                logger('Error parsing PC_LISTS_OBJ: ' + e.message);
+            }
+            
+
+            try {
+                PC_PROFILE_OBJ = JSON.parse(atob('e30='));
+                //logger("PC_PROFILE_OBJ");
+                //logger(PC_PROFILE_OBJ);
+            } catch (e) {
+                logger('Error parsing PC_PROFILE_OBJ: ' + e.message);
+            }
+            
+
+            try {
+                PC_EXTRA_OBJ = JSON.parse(atob('e30='));
+                //logger("PC_EXTRA_OBJ");
+                //logger(PC_EXTRA_OBJ);
+            } catch (e) {
+                logger('Error parsing PC_EXTRA_OBJ: ' + e.message);
+            }
+            
+
+            try {
+                PC_ALL_OBJ = JSON.parse(atob('e30='));
+                //logger("PC_ALL_OBJ");
+                //logger(PC_ALL_OBJ);
+            } catch (e) {
+                logger('Error parsing PC_ALL_OBJ: ' + e.message);
+            }
+            
+
+                logger('PC_ERRORS: ==> ERROR::::PC Boomtrain Integration encountered an error (3): uid and email were emptyERROR::::PC Boomtrain Integration encountered an error (2): ');
+            
+
+            PC_ERROR_PAGE = 'extra_page_1';
+               
+
+        var customJS = '';
+        var customCSS = '';
+
+        var masterCustomJS = {};
+        masterCustomJS.CustomJSReady = '';
+        masterCustomJS.CustomJSBeforeValidation = '';
+        masterCustomJS.CustomJSBeforeSubmit = '';
+        masterCustomJS.CustomJSAfterSubmit = '';
+        masterCustomJS.CustomJSBeforeRedirect = '';
+        masterCustomJS.CustomJSBeforeDownload = '';
+        masterCustomJS.CustomJSBeforeChangePages = '';
+        masterCustomJS.CustomJSAfterChangePages = '';
+        masterCustomJS.CustomJSBeforeExit = '';
+
+
+        if ('success' !== 'success') {
+            logger('Controller Failure Step: ' + 'success');
+            logger('HostedPagesName: ' + 'worldsoccershop');
+        }
+
+
+
+
+        logger('PageMode: ' + PAGE_MODE);
+        logger('CacheBreakerSource: Cache_prod');
+        logger('UserSource: ');
+        logger('PageSource: ');
+        logger('LZENC: true');
+    </script>
+
+    <!--Widget (deferred until device info is ready) -->
+    <script type="text/javascript">
+        (function(){
+            // Defer deviceDetected event until all widgets finish loading
+            window.__deferDeviceEvent = true;
+            function loadScript(src) {
+                return new Promise(function(resolve, reject){
+                    var s = document.createElement('script');
+                    s.type = 'text/javascript';
+                    s.src = src;
+                    // Ensure classic script execution semantics
+                    s.async = false;
+                    s.onload = function(){ resolve(); };
+                    s.onerror = function(){ reject(new Error('Failed to load ' + src)); };
+                    document.head.appendChild(s);
+                });
+            }
+
+            var DEVICE_DETECT_CONFIG = {
+                geoDeviceUrl: 'https://gdapi.pushplanet.com/', //'https://lightboxapi.azurewebsites.net/Event/GeoDeviceInternal',
+                timeout: 3000
+            };
+
+            function detect() {
+                return new Promise(function(resolve){
+                    try {
+                        // In preview, honor the device_type URL param (provided via ViewBag.DeviceType)
+                        if (IS_PREVIEW === true || IS_PREVIEW === 'true') {
+                            if (typeof PREVIEW_FORCED_DEVICE === 'string' && PREVIEW_FORCED_DEVICE.length > 0) {
+                                var forced = PREVIEW_FORCED_DEVICE.toLowerCase() === 'mobile' ? 'mobile' : 'desktop';
+                                return resolve({ deviceType: forced, isMobilePhone: forced === 'mobile', isTablet: false, source: 'preview' });
+                            }
+                        }
+                        if (window.DeviceDetection) {
+                            var d = new window.DeviceDetection(DEVICE_DETECT_CONFIG);
+                            d.getDeviceInfo().then(resolve).catch(function(){ resolve(d.getUserAgentDeviceType()); });
+                        } else {
+                            resolve({ deviceType: (typeof DEVICE_TYPE === 'string' && DEVICE_TYPE) ? DEVICE_TYPE : 'desktop' });
+                        }
+                    } catch(e) { resolve({ deviceType: 'desktop' }); }
+                });
+            }
+
+            function adjustFromDetection(info){
+                try { window.DeviceInfo = info; } catch(e) {}
+                try { if (window.DeviceDetection && typeof DeviceDetection.prototype.setDeviceInfo === 'function') { (new DeviceDetection(DEVICE_DETECT_CONFIG)).setDeviceInfo(info); } } catch(e) {}
+                try { if (info && info.geo) { GEO = info.geo; } } catch(e) {}
+                try { if (info && typeof info.device === 'string') { DEVICE = info.device; } } catch(e) {}
+                try {
+                    // pixel override check moved here from Razor block
+                    if (typeof UserPixelsSettings !== 'undefined' && UserPixelsSettings && typeof UserPixelsSettings === 'object') {
+                        var pageMobilePixelThreshold = UserPixelsSettings[PAGE_ID] || UserPixelsSettings["all"] || "";
+                        var currentWindowWidth = window.innerWidth;
+                        if (pageMobilePixelThreshold && typeof pageMobilePixelThreshold == 'number' && currentWindowWidth <= pageMobilePixelThreshold) {
+                            DEVICE_TYPE = 'mobile';
+                            PixelsSettingsOverride = true;
+                        }
+                    }
+                } catch(e) { logger('pixels override move error: ' + e.message); }
+                
+                try {
+                    var __pageWidth = '510';
+                    if (__pageWidth && (info && (info.isMobilePhone === true || info.isTablet === true))) {
+                        var __vp = document.querySelector('meta[name="viewport"]');
+                        if (!__vp) { __vp = document.createElement('meta'); __vp.setAttribute('name', 'viewport'); document.head.appendChild(__vp); }
+                        __vp.setAttribute('content', 'width=' + __pageWidth);
+                    }
+                } catch(e) { logger('viewport set error: ' + e.message); }
+                // Re-apply original device selection logic using client DeviceType
+                try {
+                    var clientDt = 'desktop';
+                    if (info) {
+                        if (info.deviceType) clientDt = info.deviceType;
+                        else if (info.isMobilePhone === true || info.isTablet === true) clientDt = 'mobile';
+                    }
+
+                    if (clientDt === 'desktop' && '1' === '1') {
+                        settings = 'N4IgNghgng9grgFxALlAcwE4EsAmB9HDCNNCAIzAFMUBGAGhE1zw0oGcsAvcq2hp.GwAWMAO4oQlAG6UAdkgYQwWNLIkBjOQkoYQDUbgRCUAVhoAGBkMoqhSZDRoBmABwMAthAxossvAhgABxRLEDIIdQBrTHhZHBRQdRgwGF1kEABiADMc3L1GIhwsLQls3Jz8rE80anT81kDKCHsQWRgAWgamhRBAmA4ELBg1dKoshAACAOCGODZKPEwIIpLkLKV52fm8KuJa9bB5gF8GcKiYuDi8eG00xOTU0vKK.kLi-SfnyurakHrKRrNCRtToA7r5PoDIYjcCUcZTIL5OYLJYrD5rDaULYLXY1FAHY6nVI4HQJEAGHBGPggJIpNKZcyMpn5NgIKC8dJtWTUBhvOYhE4gazLHR4OzuMASfJZGAwW5ihASqWCowAD0gsEQZIEBCIJB4tXoBWYrA43AohtezGEYgk0hKimUqg0WlJ-kMxmQAE4TKFrLZ7BZGR4vD4.NMQqcItEMLF4qgaQ96WVyvlUe8Wim8gxcb9.oCWiCukCGJCsINhhIxpMI9jFm9VgSsSBkTsfvjMYKzjG49dEKSE7THuksy8CssM59Uzn23VeWCgZyOsWemWKzDqwiZi3tunG5i67mO4dKF3iQPQBSqQ4GEPk0zmQxWezfmxkrh6hP-chzEdBQCaA1G5tWwfBCGIUgLWpHVTS4A1oNAvAbXEdJ7Q-R0VBhTR5DdckPRQH0.RsNA7FoJkQ28Xx.ERH8o3OWNLnje46SnbNxzRTNniyb49ilecC2BZcF1Xfpy2hKs4RrRE6z3dEm0PWcmy7aMLiuG4L0TFiRy4tMG3RTIdJnXi5xAFdBNBATS1E9cJPhWsdxRPT7Hkhy22MpSiQwEk7jwylPSNO9SgfRkWTZDkQDfZR4l5L82AFf9AgAJiArUEx1cD9Sgm9jXwWDzQ5I0dWQu0ZHQkAlEwl0cN0d0.II30rGI0iHHIkBPEo8MaNCbtVKYzThwMr5XgnVZBunEAjxMsylws8ErKhStRkkrckV3Jzj02VzJo8sIVIYtT-x8wLtKG9jJxO8bJr-fjwRmsz5rExbYTs6TXNk5yDy2xTO087yySvfzbyTILgtCl8JEij8YqKb9fwSpwUvsdBEIyyCCqtXL2DgrLCsQ4rUNKnoKuddJsNufIAfqoiAzI4M2tDKiI1o3b6LjMljrGtj3tYscrvzW7WiEyzems8Slpe7dW25jETwU9yfpZntGL7cnB2Bi6ufWjXedna7TOE8z7pFhaN2W-ypa1lzW22hWyHPHzKeyjmMmC8wwfCyHotM2L4oYAEABZEZA5hUfg7KYKx.LLRypCRBQyRCfyYmsNdGrfOvQjGpplq6fasNqOCZmev2vrncMs7RtHbijLxKaDbug2Hps8WpMltaRrkz7re-k9lNZ5X1KO9XObHaWR-ribdf5xdBdmktjce02JdWxyO4-2Wvvl3vfo0x2AuHl3QafMLX3fL2-Tin8.yfSgYDJQYEHC.JIkoKBRGJS-9ZJNh1GwQJm71usKQWAkgwhAIKZEPk0BwA.OkAA7GQf2ThKCJQAGyoJoOoMw.sUHmB9C4OBNAIAmH9oQnANA4E4AweAhgnBfAklVHgdwvhaahDoXESgjDPCqlYeYJwDBtCqgQHgJIlxhGeBYcgRKpxEABD8KI-QTCICSNCLmERsRxHKJGH6RUYB1FiKUZIkwDAZQYHcPoxREjtEmOKGAfACjNEqIEZwhANAyQynRKAdYzCwBQAkAAcgADJwHULgCAEwADCwxIqUH8XQCYABZYYEQYDxPcMMfogQIg8n6veI-5UnQp2qiyLgvx.YuHyHbOxKAEAYDgM2csFV1AbWbIxHQyhuQtIYFINgWTNAClqteEwqD.ZZxIoGRKbgQA8IcOghgfiHBelGSAQRLQIlUAgLICYABlSA2hKjxhWS4txDAii9I1DUupzZ2EMN4QFNgn98gkioNoeMtT6mCnFGANxCYvkSAADxFCkBMXAABefx.iJjPioOCgGyAJhBgAKQAG4Jj-nGfCiAiAYDIshWQNAd5wUZAAGKkrJZCgG4KkX-IAHz.PCUIVgWRwV2AQIENgyAAD0nLRC8oAHTvwwHYt86hNAYBtIEPlSR3CcshQgUMlAEDgrwBQTZkRaX.KqGgKFGB1AsoQGyjl3K2BOD5YEOYQhAiQG5AgKVMAZWQLYJyhBSCUHoMwdg3B-DCHENITQchlCMGcrgFamAywnVZBwGQEZiVJnRtQYgnAXpXAWHIC4MgiV.UQCcOYLIJgICcoAArYFkF4KAgSYBoBgMSuAYAwBRJSHADAZrZBoEhdCygsKPTwqRai7h7Q4UTH9oyQIqpUXorsJi7FuLOV0s5RAOdQKaUU3wsgYd1NxmmFCDM4xIAFmJVUYcr5JyQBnKtdAS59TaH0M4bw6RNIHnKmcUIxK7jhhIxAN4rAviJAAEFsBKHiQACUoGAGQgx1AQHiWwTZbB2jzGwBPZ2rsk6FKquTJ8pSJA5sqckN5VyczyuUM0mWm02lCt8PsT6PS-m1F.IMz0qC6YTvsA1aZKAD3zI47u1ZEgACa8AMATFIO4SgEwAAUmycAgtkHbVUABKCY38dAyAmGQRVtw-UHIkKs19pysDnIvcgd51yb0zKDIyfhD7HmnNA4qyg-GPlWF0a-35uiAVApBTgcFqyABCMBVQ0HbSfcFHiEDtC.b4-F.6sCAYmAANR0DgTZUGoWwfgzoLAWRUVhfg6UntqDR2oo6ZQdoLH4UHqKxMLJOAiitvaHbA19qKvmCq8XOM7Q7zwtRXbLyOhOixXhSYIreKCVJnBRSj0VLGSItpQAHS2RMf58qLQTEpf4r05hZtqftuC8w83FsTCWwgO2OAoA0oW0dq7x2MAXcO9d470nk7gurMFl84Kz0anhb4ErDWUhRFRYO3taKmoICnQEVFNW6toHaNMFrVXcuiFB.CqpOAcvvoixAHxUBosAbAPExLXkUvQfSwhrL6P5B5c4JQCrLgqu.fKxMJwiURs0sLYgCYmohOltExMYYUxrBTCaO4KF1hFV8v-ZyhAOA7sPaW1L27l2ruS5OzAM7sv5craoHdyXS6V11WQExjdzU2MzM43usiqCcxHpc08gz56FkmevRw8zD573qEfXUT5uinBkj-ekQFWBgVgv8X5gLiU3swv8blyLOOJgxbi4T5LpaSeyDg2T7LExctmhpwiwrY6JgM-RxMSrBeoe-Bh41gI7h4cF9695AbMMOUTGG2O0bhKIVram.46lGvlsGi735cFm3tv150Htg713lunfO0rqftSNdy-W09wpL3JKR87f4z70BvuyF-xQGAAPB9GB7TN8dxesUQ-q8saHsOgi14p-F2PuPYv44S0l4naW08ZcQ4.qnueaA6cC8i8AwKsWc28aVtlMIJgQ0EQ1MxMjAxMsgsBxUpIJhIg2hRAJhyAbhsC60BcxM9l2BJgAArHQeYKAbAuILPWUBAJHLwJTWMdlCXKXGXOfZXBXRfTXGfPvKXA0HXTlPXBjFAI3MZE3bdDjUIBZQAw9CQL5X3fTQzR3AjEAG5W9HORkd3T3P4b3CUf2P3dzAPTzdQSAB5CbLzcFNgOAMgYlVIdwDfULDHZ.ePPHAnD.FPL.dPTLTPbPfLPPenSjMrYvUvSHG.CvBrOUavB.I7MfDARvLAOYIbEbNTMbOkcw9bXvJXfvVbdbEfPFXbfxfbLg6fNXWfe7I7ZbRXco5XIwPAzCNfcYBwrfe3L7GTfff7SIPtCAVUAdbtEvX0KrQdX0FFEHUA7A6da.WrcIuHEvVrAvRHYvVHP.ZwhPN.JPT.GDb.DPP.HPArAI7kIIsYkIjVSAdTMAGgjAULFA1kPAHnWJGlYla4yYAAOSxxp0l1ONAy4KXzICqLlyn18HNRrCgEaB8xcUhRD2QNQNuLeMhTuKuOhLuMhSkCUHqXMI7S7T8hazmNxTnSMG-JqKEDqNUAaIQCaO3zjx-0CIPyP37UHUSgGILyGK23PzGMvxxUmNvxmJCJoMpyRzGKWN5Kfyx2.Tj1WLcKJw8M2K8N.yFP.z2OAMCMZ2OLpU-PONMRewgBuKRJpUCS1JeLeOQA-PIC-PYJ-L-P-IqMBI5zZFBND3BIsP8VMOESRImHhKdP1JhNE2RNRM3yaPpJHQgJVyEAJJVwtIqKlx4KyL4ItD7y1zE1yK23yL60uMKMnxqKjOqMqIJIqNqOeydPXyhRC38UHTgRZNGIxXGKv3L3q25JxLlP5MrMFJjxFKixcNfwlOT1S2lJ.3JzlN2P8MVIOOVJxJOJNPVNSEsOsIAFEJEwBaVZzlEwAjTOU1Sczldfj1yrTZAgSpgQTN9VkITvN.ErCyBFzv04S3ipyzy5yfSwA0STyZzbylMDMDRpMMSSy-ic1Ry8SQyzTNdwzuDSjeD4y4yB9EzR8Ciij2CSj1d.zsz.zcyiT8zXsiz3tPysSJgyyRjGd2TQipjaz79ZiEcMdGzJ0ds7FljWyxTXD39JTuzSdvCdi.CaB89islTgifz.k1SLiPtmgFgYAsgVUUCjBaUAARfivnLICYXzESoQFctcxCjcwCpfa04Eu05LbQI8vi7Qa4ISsgOSy80THSgS.SwyiYFE-8zfTS0y4SjAUStCqPAMriqXP8rMzgmCyM4C6M0CrI-M4.IQYfJMnbFMifYo1XOCrMhfJS5fYk2QUk8klonfNTDowHPo7C1kysvCuUlY2i9YqUxi2U3w6nBU9i4czi1nf5QIRyzfBYgUvDKi7HF.RPdwhirYpi.slitiwvDio4n8gASWwJFwgBXMCC3KWzUr3LtPUGsCiDk20uaIWCEC8HwHWFkCMusuKDFBWrwDWrvIfJWG2q8l2s2XTMtO4vHN4sWqOtWtOpqscMp1yo7Loq7NTxlL7OKoAP9n2NK0Z0AMqt6U2XuujycOouarWNaret7J8IxwHJoG-qHN-uL3-ogLEuKDRRWqz02Ul0BtkDnUUuqKn03KUoqOJsJuV0mttM3xmsoDmoCwWsgysKUBOvWrdKvP8UZrgGZr2ost9PBU5u5tOvGourOKuoFr0T2rpVxuBpbKavbJavoqhu2M6pKoRQRrKqRrGJRtxIiS1K5vVOxs5VxvxvHOFrJstNJpUoe01R3JtP3P5tmsiHmsdJJGZvmEoBfgwA2o-yaD0Xds9v2ust9qQkoA9p0DOv-JFtAyuod3DqlqyS2Q.NltFPBs7I2MKo-thpYvVp6vKq1qANxLEt9qhVDs9pxoTpNrOLxLYPcuivuxV0zIjN8sW2yKoACqCsgtCrTPCsbutrrvOulzioSuBopJR1SoCvhQyorPIuyuTrbPFJevTvaqKqztVtYp-sOMrJ5JrMr0iOawRS4uqqTtBrloXvyravephspzhu6pAK3q4tZFjFbRpQSUoOLThB0DkE0DYBxtqWGDQDnTGpJomttsmBMK1LYHMKpodtpqdvpsdKIJuMCFjBwBCWEUICCDYG9o9O0CQZQbQd1EwcDs1NweEWQbVwIYwfZQjottoeVx4o1JweILwHIdQfUHQaYKwfjqBuPserBvlohsVs8OhuYrXpzrvvIu1tpT1NIeq3wfYcYMwfLs2UrtNPJrocjvNo0e0f-S0e0boZtt3PAbMM72gY5sdudpD1dsODwCkyQkaFCWZsEqyHIOwesbYFsauF6Vptfz0pcfFWIa319o8bse8ccb0WcdcfGv0YqIYcnKCY2E8cEAcd8ciYCe4cTuLLnpouevPqVo6s-p7XEd6srKkZpSLo2CoPfJSaUCkv8Z.qNoruNKruAZiaWz0bac0ats6YptAYmGMcgdMftvMdgcsePO5FEHURwkUTsa8AgyoCwbZuMv8Qmame0BmauDmZAQWcCdWdAXWeEVmfsu2fYBoZ6focusYb2ffS0CSdseOZMNOYyZlpPpToEbToKuXszuvuzo3r-oLtpWeMoCwP2a0CqewIeYWeUbxuaa-JVxrqXw8vrq8siqbv4L8vAu7zyJCu8jCpgoirKKX37sjsHpQsLI.NHpSsP06InqwvLNwomOydTsXs-cvtEYANvpKfIpVN0dkX5xD1POYTJOBva0Yk6yTHhRdiyFQUShcfwtv2rAqxzp3s6COOVbCPqyr33poHAPlemKIp1aqy6wmBJTJVJXZdKobOLzaDMSUFxKgNUBgMCElzID5ZhdYNDKRaJe6ceyHoLMaJHqSrjxpJpdLPpYv0ZdefnryshuEeVsKcHI1s3u5frJVbrNZ180oJMJAUiArwmH8Qda2RDUhUGuIFYAQJgAIKWwZSZX1UNS5R5X5RFTFTtRlVBfkClx0HcDg0EvaGRCaONdNaZH9lRVWXaBJCSCIHXHhS5EoFxSmAVSVX8RVWtXVSlr.ufoABUu22AAAyWTXpZFXdrHQII9g909qJOIRePd895FQS.dsgQ9gAVXmF.qfoAclwXXBfpTRVrf8VZXZQbd5VED5WbZ0Fbc5XbYQE5WQaDwiCgHaD6GIygAHYlZNdJWHdHZcXHdptSGaGhBneGDnblUXeVVVVkDXf-Ufv.rZ2wBRPUCgAfcPcLXfAY7fZo8.ers9eJabt7pV3RdkF1yD2XWEMN2Y1B1oBMHvTNykI4ycDgWtzkN0X0MUId0vVMxdzvVvG0JoSFF0RMAMKVCMKD0dLD1VCcESqUMI-5EarebPtjZ7PjdXo5b-YqrLw1d3qaxr2Irrz2g62NZ63tniMSJb2SPxQ70myHx7xm3TNboTKxeCtiLxfroJdDJ477pX3qP9eFYpaDd33aOpbSswuBwZerI87v0CGiLqqbIapyv4fs6Ecc4Kec9p1c7GOZ1Z03eWoo853gAuP6eGChOYVbV66bTkY.tYFkG.oAEJ4XuPAKG7vKW6YztcFshOpARP05GNxPs5TdJCuMWorcJobcJQDPVOLljMVC1DXcmQtDHk.wgA___';
+                        DEVICE_TYPE = 'desktop';
+                        DEVICE_TYPE_MOBILE_OVERRIDE = '';
+                        customJS = '//load p13n.js\nvar site_id = \u0027sei-worldsoccershop\u0027;\n(function (b, t, r, a, i, n) {\n  b[\u0027bt\u0027] = b[\u0027bt\u0027] || function () {\n    (b[\u0027_bt\u0027] = b[\u0027_bt\u0027] || []).push(arguments);\n  }, i = t.createElement(r), n = t.getElementsByTagName(r)[0];\n  i.async = 1;\n  i.src = a;\n  n.parentNode.insertBefore(i, n);\n})(window, document, \u0027script\u0027, \u0027https://cdn.boomtrain.com/p13n/\u0027 \u002B site_id \u002B \u0027/p13n.min.js\u0027);\n\nvar pp_int_id = \u00273393\u0027;\nvar pp_guid = \u00277b43e2661c514e2095871a5471d17d61\u0027;\nvar regExp = /[a-zA-Z]/;\nvar regExpNum = /[^0-9-]/;\nvar regNumAndChar = /[^0-9.,#@%\u0026\\/\\-]/;\nvar regSpecialChars = /[^A-Za-z0-9 .,\u0027#@%\u0026\\/\\-]/;\nvar specialChars = \u0022. \u0027 - # @ % \u0026 /\u0022\nvar uid_enc = getUrlParam(\u0027encbu\u0027);\nvar email_enc = getUrlParam(\u0027ence\u0027);\nvar email = atob(email_enc);\nvar uid = atob(uid_enc);\nvar eid = getUrlParam(\u0027eid\u0027);\n// logger(\u0022eid\u0022);\n// logger(eid);\n//var uEmail = atob(email_enc);\nvar opt_in_status = PC_EXTRA_OBJ[\u0022boomtrain_all\u0022];\n\nvar foundMatch = false;\nvar matchedContact;\nvar matchedPhoneContact;\n\nwhile (!foundMatch) {\n  btSubscriberJson.contacts.forEach(contact =\u003E {\n    // swap to uEmail during prod\n    //    logger(contact);\n    if (contact.contact_value == email) {\n      matchedContact = contact;\n      foundMatch = true;\n    }\n  });\n}\n\nif (matchedContact.contact_properties.phone_number) {\n  phone = matchedContact.contact_properties.phone_number;\n} else if (btSubscriberJson.properties.phone_writable) {\n  phone = btSubscriberJson.properties.phone_writable;\n} else {\n  phone = btSubscriberJson.properties.phone;\n}\n\n// logger(\u0022look here\u0022)\n// logger(btSubscriberJson.properties)\n\n//block1\nif (btSubscriberJson.properties.pref_center_die_hard_fan == \u0027Y\u0027) {\n  $(\u0022#die_hard_fan\u0022).prop(\u0027checked\u0027, true);\n}\n\nif (btSubscriberJson.properties.pref_center_casual_fan == \u0027Y\u0027) {\n  $(\u0022#casual_fan\u0022).prop(\u0027checked\u0027, true);\n}\n\nif (btSubscriberJson.properties.pref_center_deal_seeker == \u0027Y\u0027) {\n  $(\u0022#deal_seeker\u0022).prop(\u0027checked\u0027, true);\n}\n\n//block2\nif (btSubscriberJson.properties.pref_center_latest_product_drops == \u0027Y\u0027) {\n  $(\u0022#latest_product_drops\u0022).prop(\u0027checked\u0027, true);\n}\n\nif (btSubscriberJson.properties.pref_center_deals_and_special_offers == \u0027Y\u0027) {\n  $(\u0022#deals_and_special_offers\u0022).prop(\u0027checked\u0027, true);\n}\n\nif (btSubscriberJson.properties.pref_center_new_content_and_articles == \u0027Y\u0027) {\n  $(\u0022#new_content_and_articles\u0022).prop(\u0027checked\u0027, true);\n}\n\n$(\u0022#subEmail\u0022).val(email);\n\n$(\u0027#submit\u0027).click(function () {\n  var email_value = email;\n  var failure = false;\n  var first_name_value = $(\u0027#first_name\u0027).val();\n  var last_name_value = $(\u0027#last_name\u0027).val();\n  var date_of_birth_value = $(\u0027#date_of_birth\u0027).val();\n  //   var date_of_birth_value_converted = date_of_birth_value.toISOString().split(\u0027T\u0027)[0\n  \n  if ($(\u0027#prefer_all\u0027).is(\u0027:checked\u0027)) {\n    $(\u0027.checkbox-group\u0027).prop(\u0027checked\u0027, true);\n  }\n  \n  \n  //block1\n  var die_hard_fan_value = $(\u0027#die_hard_fan\u0027).prop(\u0022checked\u0022) ? true : false;\n  var casual_fan_value = $(\u0027#casual_fan\u0027).prop(\u0022checked\u0022) ? true : false;\n  var deal_seeker_value = $(\u0027#deal_seeker\u0027).prop(\u0022checked\u0022) ? true : false;\n  //block2\n  var latest_product_drops_value = $(\u0027#latest_product_drops\u0027).prop(\u0022checked\u0022) ? true : false;\n  var deals_and_special_offers_value = $(\u0027#deals_and_special_offers\u0027).prop(\u0022checked\u0022) ? true : false;\n  var new_content_and_articles_value = $(\u0027#new_content_and_articles\u0027).prop(\u0022checked\u0022) ? true : false;\n\t\n  var current_date = new Date();\n  var date_of_birth_not_converted = Date.parse(date_of_birth_value);\n  var date_of_birth_converted = Math.round(Date.parse(date_of_birth_value) / 1000);\n  var current_date_compare = Date.now();\n  var current_date_compare_formatted = Math.round(current_date_compare / 1000);\n  var subtract_this = 12 * 31556926;\n  var twelve_and_up = current_date_compare_formatted - subtract_this;\n\n  if (isBlank(first_name_value)) {\n    alert(\u0027First Name is required.\u0027);\n    failure = true;\n  }\n\n  if (isBlank(last_name_value)) {\n    alert(\u0027Last Name is required.\u0027);\n    failure = true;\n  }\n\n  if (isBlank(date_of_birth_value)) {\n    alert(\u0027Date of Birth is required.\u0027);\n    failure = true;\n  }\n\n  if (twelve_and_up \u003C date_of_birth_converted) {\n    alert(\u0027Must be ages 12 and up.\u0027);\n    failure = true;\n  }\n\n  if (failure) {\n    return;\n  }\n\n  var user_json = {\n    \u0022uid\u0022: uid,\n    \u0022properties\u0022: {\n      \u0022first_name\u0022: first_name_value,\n      \u0022last_name\u0022: last_name_value,\n      \u0022date_of_birth\u0022: date_of_birth_value,\n      \u0022email\u0022: email_value\n    },\n    \u0022contacts\u0022: [{\n      \u0022contact_type\u0022: \u0022email\u0022,\n      \u0022contact_value\u0022: uid,\n      \u0022subscription_status\u0022: \u0022active\u0022,\n      \u0022contact_properties\u0022: {}\n    }],\n  };\n\n  //block1\n  var die_hard_fan_value_zmp;\n  var casual_fan_value_zmp;\n  var deal_seeker_value_zmp;\n  var latest_product_drops_value_zmp;\n  var deals_and_special_offers_value_zmp;\n  var new_content_and_articles_value_zmp;\n  if (die_hard_fan_value === true) {\n    user_json[\u0027pref_center_die_hard_fan\u0027] = \u0027Y\u0027;\n\tvar die_hard_fan_value_zmp = \u0027Y\u0027;\n  } else {\n    user_json[\u0027pref_center_die_hard_fan\u0027] = \u0027N\u0027;\n\tvar die_hard_fan_value_zmp = \u0027N\u0027;\n  }\n\n  if (casual_fan_value === true) {\n    user_json[\u0027pref_center_casual_fan\u0027] = \u0027Y\u0027;\n\tvar casual_fan_value_zmp = \u0027Y\u0027;\n  } else {\n    user_json[\u0027pref_center_casual_fan\u0027] = \u0027N\u0027;\n\tvar casual_fan_value_zmp = \u0027N\u0027;\n  }\n\n  if (deal_seeker_value === true) {\n    user_json[\u0027pref_center_deal_seeker\u0027] = \u0027Y\u0027;\n\tvar deal_seeker_value_zmp = \u0027Y\u0027;\n  } else {\n    user_json[\u0027pref_center_deal_seeker\u0027] = \u0027N\u0027;\n\tvar deal_seeker_value_zmp = \u0027N\u0027;\n  }\n\n  //block2\n  if (latest_product_drops_value === true) {\n    user_json[\u0027pref_center_latest_product_drops\u0027] = \u0027Y\u0027;\n\tvar latest_product_drops_value_zmp = \u0027Y\u0027;\n  } else {\n    user_json[\u0027pref_center_latest_product_drops\u0027] = \u0027N\u0027;\n\tvar latest_product_drops_value_zmp = \u0027N\u0027;\n  }\n\n  if (deals_and_special_offers_value === true) {\n    user_json[\u0027pref_center_deals_and_special_offers\u0027] = \u0027Y\u0027;\n\tvar deals_and_special_offers_value_zmp = \u0027Y\u0027;\n  } else {\n    user_json[\u0027pref_center_deals_and_special_offers\u0027] = \u0027N\u0027;\n\tvar deals_and_special_offers_value_zmp = \u0027N\u0027;\n  }\n\n  if (new_content_and_articles_value === true) {\n    user_json[\u0027pref_center_new_content_and_articles\u0027] = \u0027Y\u0027;\n\tvar new_content_and_articles_value_zmp = \u0027Y\u0027;\n  } else {\n    user_json[\u0027pref_center_new_content_and_articles\u0027] = \u0027N\u0027;\n\tvar new_content_and_articles_value_zmp = \u0027N\u0027;\n  }\n\t\n  var user_event_json = {\n    \u0022activity\u0022: {\n      \u0022subscriber\u0022: {\n        \u0022uid\u0022: uid\n      },\n      \u0022event\u0022: \u0022preference_center\u0022,\n      \u0022properties\u0022: {\n        \u0022subscription_status\u0022: \u0022active\u0022,\n        \u0022first_name\u0022: first_name_value,\n        \u0022last_name\u0022: last_name_value,\n        \u0022date_of_birth\u0022: date_of_birth_value,\n        \u0022email\u0022: email_value,\n        \u0022pref_center_die_hard_fan\u0022: die_hard_fan_value_zmp,\n        \u0022pref_center_casual_fan\u0022: casual_fan_value_zmp,\n        \u0022pref_center_deal_seeker\u0022: deal_seeker_value_zmp,\n        \u0022pref_center_latest_product_drops\u0022: latest_product_drops_value_zmp,\n        \u0022pref_center_deals_and_special_offers\u0022: deals_and_special_offers_value_zmp,\n        \u0022pref_center_new_content_and_articles\u0022: new_content_and_articles_value_zmp\n      }\n    }\n  };\t\n\n  window.updateSubscriber(pp_guid, pp_int_id, user_json, function (res) {\n    window.zetaTrackEvent(pp_guid, pp_int_id, user_event_json, function (status, data) {\n      setTimeout(function () {\n        window.scrollTo(0, 0);\n        $(\u0027#textBox1\u0027).hide();\n        $(\u0027#textBox2\u0027).hide();\n        $(\u0027#subForm\u0027).hide();\n        $(\u0027#textBox3\u0027).show();\n      }, 1000);\n    });\n  });\n\n});\n\n//check for valid email\nfunction validateEmail(email) {\n  var reg = /^[a-zA-Z0-9.!#$%\u0026\u0027*\u002B/=?^_\u0060{|}~-]\u002B@[a-zA-Z0-9-]\u002B(?:\\.[a-zA-Z0-9-]\u002B)\u002B$/;\n  return reg.test(email);\n}\n\n//check for a blank\nfunction isBlank(str) {\n  return (!str || /^\\s*$/.test(str));\n}';
+                        customCSS = '@media only screen and (min-width: 480px) {\n    #layout, #html1, #html2, #html3, #html4, #html1_wrapper, #html2_wrapper, #html3_wrapper, #html4_wrapper {\n        width: 100%!important;\n        height: auto important;\n    }\n}';
+                        logger('DesktopSettings_1');
+                    }
+                    else if (clientDt === 'mobile' && '0' === '1') {
+                        settings = 'Q___';
+                        DEVICE_TYPE = 'mobile';
+                        DEVICE_TYPE_MOBILE_OVERRIDE = '';
+                        customJS = '';
+                        customCSS = '';
+                        logger('MobileSettings_1');
+                    }
+                    else if (clientDt === 'mobile' && '1' === '1') {
+                        settings = 'N4IgNghgng9grgFxALlAcwE4EsAmB9HDCNNCAIzAFMUBGAGhE1zw0oGcsAvcq2hp.GwAWMAO4oQlAG6UAdkgYQwWNLIkBjOQkoYQDUbgRCUAVhoAGBkMoqhSZDRoBmABwMAthAxossvAhgABxRLEDIIdQBrTHhZHBRQdRgwGF1kEABiADMc3L1GIhwsLQls3Jz8rE80anT81kDKCHsQWRgAWgamhRBAmA4ELBg1dKoshAACAOCGODZKPEwIIpLkLKV52fm8KuJa9bB5gF8GcKiYuDi8eG00xOTU0vKK.kLi-SfnyurakHrKRrNCRtToA7r5PoDIYjcCUcZTIL5OYLJYrD5rDaULYLXY1FAHY6nVI4HQJEAGHBGPggJIpNKZcyMpn5NgIKC8dJtWTUBhvOYhE4gazLHR4OzuMASfJZGAwW5ihASqWCowAD0gsEQZIEBCIJB4tXoBWYrA43AohtezGEYgk0hKimUqg0WlJ-kMxmQAE4TKFrLZ7BZGR4vD4.NMQqcItEMLF4qgaQ96WVyvlUe8Wim8gxcb9.oCWiCukCGJCsINhhIxpMI9jFm9VgSsSBkTsfvjMYKzjG49dEKSE7THuksy8CssM59Uzn23VeWCgZyOsWemWKzDqwiZi3tunG5i67mO4dKF3iQPQBSqQ4GEPk0zmQxWezfmxkrh6hP-chzEdBQCaA1G5tWwfBCGIUgLWpHVTS4A1oNAvAbXEdJ7Q-R0VBhTR5DdckPRQH0.RsNA7FoJkQ28Xx.ERH8o3OWNLnje46SnbNxzRTNniyb49ilecC2BZcF1Xfpy2hKs4RrRE6z3dEm0PWcmy7aMLiuG4L0TFiRy4tMG3RTIdJnXi5xAFdBNBATS1E9cJPhWsdxRPT7Hkhy22MpSiQwEk7jwylPSNO9SgfRkWTZDkQDfZR4l5L82AFf9AgAJiArUEx1cD9Sgm9jXwWDzQ5I0dWQu0ZHQkAlEwl0cN0d0.II30rGI0iHHIkBPEo8MaNCbtVKYzThwMr5XgnVZBunEAjxMsylws8ErKhStRkkrckV3Jzj02VzJo8sIVIYtT-x8wLtKG9jJxO8bJr-fjwRmsz5rExbYTs6TXNk5yDy2xTO087yySvfzbyTILgtCl8JEij8YqKb9fwSpwUvsdBEIyyCCqtXL2DgrLCsQ4rUNKnoKuddJsNufIAfqoiAzI4M2tDKiI1o3b6LjMljrGtj3tYscrvzW7WiEyzems8Slpe7dW25jETwU9yfpZntGL7cnB2Bi6ufWjXedna7TOE8z7pFhaN2W-ypa1lzW22hWyHPHzKeyjmMmC8wwfCyHotM2L4oYAEABZEZA5hUfg7KYKx.LLRypCRBQyRCfyYmsNdGrfOvQjGpplq6fasNqOCZmev2vrncMs7RtHbijLxKaDbug2Hps8WpMltaRrkz7re-k9lNZ5X1KO9XObHaWR-ribdf5xdBdmktjce02JdWxyO4-2Wvvl3vfo0x2AuHl3QafMLX3fL2-Tin8.yfSgYDJQYEHC.JIkoKBRGJS-9ZJNh1GwQJm71usKQWAkgwhAIKZEPk0BwA.OkAA7GQf2ThKCJQAGyoJoOoMw.sUHmB9C4OBNAIAmH9oQnANA4E4AweAhgnBfAklVHgdwvhaahDoXESgjDPCqlYeYJwDBtCqgQHgJIlxhGeBYcgRKpxEABD8KI-QTCICSNCLmERsRxHKJGH6RUYB1FiKUZIkwDAZQYHcPoxREjtEmOKGAfACjNEqIEZwhANAyQynRKAdYzCwBQAkAAcgADJwHULgCAEwADCwxIqUH8XQCYABZYYEQYDxPcMMfogQIg8n6veI-5UnQp2qiyLgvx.YuHyHbOxKAEAYDgM2csFV1AbWbIxHQyhuQtIYFINgWTNAClqteEwqD.ZZxIoGRKbgQA8IcOghgfiHBelGSAQRLQIlUAgLICYABlSA2hKjxhWS4txDAii9I1DUupzZ2EMN4QFNgn98gkioNoeMtT6mCnFGANxCYvkSAADxFCkBMXAABefx.iJjPioOCgGyAJhBgAKQAG4Jj-nGfCiAiAYDIshWQNAd5wUZAAGKkrJZCgG4KkX-IAHz.PCUIVgWRwV2AQIENgyAAD0nLRC8oAHTvwwHYt86hNAYBtIEPlSR3CcshQgUMlAEDgrwBQTZkRaX.KqGgKFGB1AsoQGyjl3K2BOD5YEOYQhAiQG5AgKVMAZWQLYJyhBSCUHoMwdg3B-DCHENITQchlCMGcrgFamAywnVZBwGQEZiVJnRtQYgnAXpXAWHIC4MgiV.UQCcOYLIJgICcoAArYFkF4KAgSYBoBgMSuAYAwBRJSHADAZrZBoEhdCygsKPTwqRai7h7Q4UTH9oyQIqpUXorsJi7FuLOV0s5RAOdQKaUU3wsgYd1NxmmFCDM4xIAFmJVUYcr5JyQBnKtdAS59TaH0M4bw6RNIHnKmcUIxK7jhhIxAN4rAviJAAEFsBKHiQACUoGAGQgx1AQHiWwTZbB2jzGwBPZ2rsk6FKquTJ8pSJA5sqckN5VyczyuUM0mWm02lCt8PsT6PS-m1F.IMz0qC6YTvsA1aZKAD3zI47u1ZEgACa8AMATFIO4SgEwAAUmycAgtkHbVUABKCY38dAyAmGQRVtw-UHIkKs19pysDnIvcgd51yb0zKDIyfhD7HmnNA4qyg-GPlWF0a-35uiAVApBTgcFqyABCMBVQ0HbSfcFHiEDtC.b4-F.6sCAYmAANR0DgTZUGoWwfgzoLAWRUVhfg6UntqDR2oo6ZQdoLH4UHqKxMLJOAiitvaHbA19qKvmCq8XOM7Q7zwtRXbLyOhOixXhSYIreKCVJnBRSj0VLGSItpQAHS2RMf58qLQTEpf4r05hZtqftuC8w83FsTCWwgO2OAoA0oW0dq7x2MAXcO9d470nk7gurMFl84Kz0anhb4ErDWUhRFRYO3taKmoICnQEVFNW6toHaNMFrVXcuiFB.CqpOAcvvoixAHxUBosAbAPExLXkUvQfSwhrL6P5B5c4JQCrLgqu.fKxMJwiURs0sLYgCYmohOltExMYYUxrBTCaO4KF1hFV8v-ZyhAOA7sPaW1L27l2ruS5OzAM7sv5craoHdyXS6V11WQExjdzU2MzM43usiqCcxHpc08gz56FkmevRw8zD573qEfXUT5uinBkj-ekQFWBgVgv8X5gLiU3swv8blyLOOJgxbi4T5LpaSeyDg2T7LExctmhpwiwrY6JgM-RxMSrBeoe-Bh41gI7h4cF9695AbMMOUTGG2O0bhKIVram.46lGvlsGi735cFm3tv150Htg713lunfO0rqftSNdy-W09wpL3JKR87f4z70BvuyF-xQGAAPB9GB7TN8dxesUQ-q8saHsOgi14p-F2PuPYv44S0l4naW08ZcQ4.qnueaA6cC8i8AwKsWc28aVtlMIJgQ0EQ1MxMjAxMsgsBxUpIJhIg2hRAJhyAbhsC60BcxM9l2BJgAArHQeYKAbAuILPWUBAJHLwJTWMdlCXKXGXOfZXBXRfTXGfPvKXA0HXTlPXBjFAI3MZE3bdDjUIBZQAw9CQL5X3fTQzR3AjEAG5W9HORkd3T3P4b3CUf2P3dzAPTzdQSAB5CbLzcFNgOAMgYlVIdwDfULDHZ.ePPHAnD.FPL.dPTLTPbPfLPPenSjMrYvUvSHG.CvBrOUavB.I7MfDARvLAOYIbEbNTMbOkcw9bXvJXfvVbdbEfPFXbfxfbLg6fNXWfe7I7ZbRXco5XIwPAzCNfcYBwrfe3L7GTfff7SIPtCAVUAdbtEvX0KrQdX0FFEHUA7A6da.WrcIuHEvVrAvRHYvVHP.ZwhPN.JPT.GDb.DPP.HPArAI7kIIsYkIjVSAdTMAGgjAULFA1kPAHnWJGlYla4yYAAOSxxp0l1ONAy4KXzICqLlyn18HNRrCgEaB8xcUhRD2QNQNuLeMhTuKuOhLuMhSkCUHqXMI7S7T8hazmNxTnSMG-JqKEDqNUAaIQCaO3zjx-0CIPyP37UHUSgGILyGK23PzGMvxxUmNvxmJCJoMpyRzGKWN5Kfyx2.Tj1WLcKJw8M2K8N.yFP.z2OAMCMZ2OLpU-PONMRewgBuKRJpUCS1JeLeOQA-PIC-PYJ-L-P-IqMBI5zZFBND3BIsP8VMOESRImHhKdP1JhNE2RNRM3yaPpJHQgJVyEAJJVwtIqKlx4KyL4ItD7y1zE1yK23yL60uMKMnxqKjOqMqIJIqNqOeydPXyhRC38UHTgRZNGIxXGKv3L3q25JxLlP5MrMFJjxFKixcNfwlOT1S2lJ.3JzlN2P8MVIOOVJxJOJNPVNSEsOsIAFEJEwBaVZzlEwAjTOU1Sczldfj1yrTZAgSpgQTN9VkITvN.ErCyBFzv04S3ipyzy5yfSwA0STyZzbylMDMDRpMMSSy-ic1Ry8SQyzTNdwzuDSjeD4y4yB9EzR8Ciij2CSj1d.zsz.zcyiT8zXsiz3tPysSJgyyRjGd2TQipjaz79ZiEcMdGzJ0ds7FljWyxTXD39JTuzSdvCdi.CaB89islTgifz.k1SLiPtmgFgYAsgVUUCjBaUAARfivnLICYXzESoQFctcxCjcwCpfa04Eu05LbQI8vi7Qa4ISsgOSy80THSgS.SwyiYFE-8zfTS0y4SjAUStCqPAMriqXP8rMzgmCyM4C6M0CrI-M4.IQYfJMnbFMifYo1XOCrMhfJS5fYk2QUk8klonfNTDowHPo7C1kysvCuUlY2i9YqUxi2U3w6nBU9i4czi1nf5QIRyzfBYgUvDKi7HF.RPdwhirYpi.slitiwvDio4n8gASWwJFwgBXMCC3KWzUr3LtPUGsCiDk20uaIWCEC8HwHWFkCMusuKDFBWrwDWrvIfJWG2q8l2s2XTMtO4vHN4sWqOtWtOpqscMp1yo7Loq7NTxlL7OKoAP9n2NK0Z0AMqt6U2XuujycOouarWNaret7J8IxwHJoG-qHN-uL3-ogLEuKDRRWqz02Ul0BtkDnUUuqKn03KUoqOJsJuV0mttM3xmsoDmoCwWsgysKUBOvWrdKvP8UZrgGZr2ost9PBU5u5tOvGourOKuoFr0T2rpVxuBpbKavbJavoqhu2M6pKoRQRrKqRrGJRtxIiS1K5vVOxs5VxvxvHOFrJstNJpUoe01R3JtP3P5tmsiHmsdJJGZvmEoBfgwA2o-yaD0Xds9v2ust9qQkoA9p0DOv-JFtAyuod3DqlqyS2Q.NltFPBs7I2MKo-thpYvVp6vKq1qANxLEt9qhVDs9pxoTpNrOLxLYPcuivuxV0zIjN8sW2yKoACqCsgtCrTPCsbutrrvOulzioSuBopJR1SoCvhQyorPIuyuTrbPFJevTvaqKqztVtYp-sOMrJ5JrMr0iOawRS4uqqTtBrloXvyravephspzhu6pAK3q4tZFjFbRpQSUoOLThB0DkE0DYBxtqWGDQDnTGpJomttsmBMK1LYHMKpodtpqdvpsdKIJuMCFjBwBCWEUICCDYG9o9O0CQZQbQd1EwcDs1NweEWQbVwIYwfZQjottoeVx4o1JweILwHIdQfUHQaYKwfjqBuPserBvlohsVs8OhuYrXpzrvvIu1tpT1NIeq3wfYcYMwfLs2UrtNPJrocjvNo0e0f-S0e0boZtt3PAbMM72gY5sdudpD1dsODwCkyQkaFCWZsEqyHIOwesbYFsauF6Vptfz0pcfFWIa319o8bse8ccb0WcdcfGv0YqIYcnKCY2E8cEAcd8ciYCe4cTuLLnpouevPqVo6s-p7XEd6srKkZpSLo2CoPfJSaUCkv8Z.qNoruNKruAZiaWz0bac0ats6YptAYmGMcgdMftvMdgcsePO5FEHURwkUTsa8AgyoCwbZuMv8Qmame0BmauDmZAQWcCdWdAXWeEVmfsu2fYBoZ6focusYb2ffS0CSdseOZMNOYyZlpPpToEbToKuXszuvuzo3r-oLtpWeMoCwP2a0CqewIeYWeUbxuaa-JVxrqXw8vrq8siqbv4L8vAu7zyJCu8jCpgoirKKX37sjsHpQsLI.NHpSsP06InqwvLNwomOydTsXs-cvtEYANvpKfIpVN0dkX5xD1POYTJOBva0Yk6yTHhRdiyFQUShcfwtv2rAqxzp3s6COOVbCPqyr33poHAPlemKIp1aqy6wmBJTJVJXZdKobOLzaDMSUFxKgNUBgMCElzID5ZhdYNDKRaJe6ceyHoLMaJHqSrjxpJpdLPpYv0ZdefnryshuEeVsKcHI1s3u5frJVbrNZ180oJMJAUiArwmH8Qda2RDUhUGuIFYAQJgAIKWwZSZX1UNS5R5X5RFTFTtRlVBfkClx0HcDg0EvaGRCaONdNaZH9lRVWXaBJCSCIHXHhS5EoFxSmAVSVX8RVWtXVSlr.ufoABUu22AAAyWTXpZFXdrHQII9g909qJOIRePd895FQS.dsgQ9gAVXmF.qfoAclwXXBfpTRVrf8VZXZQbd5VED5WbZ0Fbc5XbYQE5WQaDwiCgHaD6GIygAHYlZNdJWHdHZcXHdptSGaGhBneGDnblUXeVVVVkDXf-Ufv.rZ2wBRPUCgAfcPcLXfAY7fZo8.ers9eJabt7pV3RdkF1yD2XWEMN2Y1B1oBMHvTNykI4ycDgWtzkN0X0MUId0vVMxdzvVvG0JoSFF0RMAMKVCMKD0dLD1VCcESqUMI-5EarebPtjZ7PjdXo5b-YqrLw1d3qaxr2Irrz2g62NZ63tniMSJb2SPxQ70myHx7xm3TNboTKxeCtiLxfroJdDJ477pX3qP9eFYpaDd33aOpbSswuBwZerI87v0CGiLqqbIapyv4fs6Ecc4Kec9p1c7GOZ1Z03eWoo853gAuP6eGChOYVbV66bTkY.tYFkG.oAEJ4XuPAKG7vKW6YztcFshOpARP05GNxPs5TdJCuMWorcJobcJQDPVOLljMVC1DXcmQtDHk.wgA___';
+                        DEVICE_TYPE = 'mobile';
+                        DEVICE_TYPE_MOBILE_OVERRIDE = 'desktop';
+                        customJS = '//load p13n.js\nvar site_id = \u0027sei-worldsoccershop\u0027;\n(function (b, t, r, a, i, n) {\n  b[\u0027bt\u0027] = b[\u0027bt\u0027] || function () {\n    (b[\u0027_bt\u0027] = b[\u0027_bt\u0027] || []).push(arguments);\n  }, i = t.createElement(r), n = t.getElementsByTagName(r)[0];\n  i.async = 1;\n  i.src = a;\n  n.parentNode.insertBefore(i, n);\n})(window, document, \u0027script\u0027, \u0027https://cdn.boomtrain.com/p13n/\u0027 \u002B site_id \u002B \u0027/p13n.min.js\u0027);\n\nvar pp_int_id = \u00273393\u0027;\nvar pp_guid = \u00277b43e2661c514e2095871a5471d17d61\u0027;\nvar regExp = /[a-zA-Z]/;\nvar regExpNum = /[^0-9-]/;\nvar regNumAndChar = /[^0-9.,#@%\u0026\\/\\-]/;\nvar regSpecialChars = /[^A-Za-z0-9 .,\u0027#@%\u0026\\/\\-]/;\nvar specialChars = \u0022. \u0027 - # @ % \u0026 /\u0022\nvar uid_enc = getUrlParam(\u0027encbu\u0027);\nvar email_enc = getUrlParam(\u0027ence\u0027);\nvar email = atob(email_enc);\nvar uid = atob(uid_enc);\nvar eid = getUrlParam(\u0027eid\u0027);\n// logger(\u0022eid\u0022);\n// logger(eid);\n//var uEmail = atob(email_enc);\nvar opt_in_status = PC_EXTRA_OBJ[\u0022boomtrain_all\u0022];\n\nvar foundMatch = false;\nvar matchedContact;\nvar matchedPhoneContact;\n\nwhile (!foundMatch) {\n  btSubscriberJson.contacts.forEach(contact =\u003E {\n    // swap to uEmail during prod\n    //    logger(contact);\n    if (contact.contact_value == email) {\n      matchedContact = contact;\n      foundMatch = true;\n    }\n  });\n}\n\nif (matchedContact.contact_properties.phone_number) {\n  phone = matchedContact.contact_properties.phone_number;\n} else if (btSubscriberJson.properties.phone_writable) {\n  phone = btSubscriberJson.properties.phone_writable;\n} else {\n  phone = btSubscriberJson.properties.phone;\n}\n\n// logger(\u0022look here\u0022)\n// logger(btSubscriberJson.properties)\n\n//block1\nif (btSubscriberJson.properties.pref_center_die_hard_fan == \u0027Y\u0027) {\n  $(\u0022#die_hard_fan\u0022).prop(\u0027checked\u0027, true);\n}\n\nif (btSubscriberJson.properties.pref_center_casual_fan == \u0027Y\u0027) {\n  $(\u0022#casual_fan\u0022).prop(\u0027checked\u0027, true);\n}\n\nif (btSubscriberJson.properties.pref_center_deal_seeker == \u0027Y\u0027) {\n  $(\u0022#deal_seeker\u0022).prop(\u0027checked\u0027, true);\n}\n\n//block2\nif (btSubscriberJson.properties.pref_center_latest_product_drops == \u0027Y\u0027) {\n  $(\u0022#latest_product_drops\u0022).prop(\u0027checked\u0027, true);\n}\n\nif (btSubscriberJson.properties.pref_center_deals_and_special_offers == \u0027Y\u0027) {\n  $(\u0022#deals_and_special_offers\u0022).prop(\u0027checked\u0027, true);\n}\n\nif (btSubscriberJson.properties.pref_center_new_content_and_articles == \u0027Y\u0027) {\n  $(\u0022#new_content_and_articles\u0022).prop(\u0027checked\u0027, true);\n}\n\n$(\u0022#subEmail\u0022).val(email);\n\n$(\u0027#submit\u0027).click(function () {\n  var email_value = email;\n  var failure = false;\n  var first_name_value = $(\u0027#first_name\u0027).val();\n  var last_name_value = $(\u0027#last_name\u0027).val();\n  var date_of_birth_value = $(\u0027#date_of_birth\u0027).val();\n  //   var date_of_birth_value_converted = date_of_birth_value.toISOString().split(\u0027T\u0027)[0\n  \n  if ($(\u0027#prefer_all\u0027).is(\u0027:checked\u0027)) {\n    $(\u0027.checkbox-group\u0027).prop(\u0027checked\u0027, true);\n  }\n  \n  \n  //block1\n  var die_hard_fan_value = $(\u0027#die_hard_fan\u0027).prop(\u0022checked\u0022) ? true : false;\n  var casual_fan_value = $(\u0027#casual_fan\u0027).prop(\u0022checked\u0022) ? true : false;\n  var deal_seeker_value = $(\u0027#deal_seeker\u0027).prop(\u0022checked\u0022) ? true : false;\n  //block2\n  var latest_product_drops_value = $(\u0027#latest_product_drops\u0027).prop(\u0022checked\u0022) ? true : false;\n  var deals_and_special_offers_value = $(\u0027#deals_and_special_offers\u0027).prop(\u0022checked\u0022) ? true : false;\n  var new_content_and_articles_value = $(\u0027#new_content_and_articles\u0027).prop(\u0022checked\u0022) ? true : false;\n\t\n  var current_date = new Date();\n  var date_of_birth_not_converted = Date.parse(date_of_birth_value);\n  var date_of_birth_converted = Math.round(Date.parse(date_of_birth_value) / 1000);\n  var current_date_compare = Date.now();\n  var current_date_compare_formatted = Math.round(current_date_compare / 1000);\n  var subtract_this = 12 * 31556926;\n  var twelve_and_up = current_date_compare_formatted - subtract_this;\n\n  if (isBlank(first_name_value)) {\n    alert(\u0027First Name is required.\u0027);\n    failure = true;\n  }\n\n  if (isBlank(last_name_value)) {\n    alert(\u0027Last Name is required.\u0027);\n    failure = true;\n  }\n\n  if (isBlank(date_of_birth_value)) {\n    alert(\u0027Date of Birth is required.\u0027);\n    failure = true;\n  }\n\n  if (twelve_and_up \u003C date_of_birth_converted) {\n    alert(\u0027Must be ages 12 and up.\u0027);\n    failure = true;\n  }\n\n  if (failure) {\n    return;\n  }\n\n  var user_json = {\n    \u0022uid\u0022: uid,\n    \u0022properties\u0022: {\n      \u0022first_name\u0022: first_name_value,\n      \u0022last_name\u0022: last_name_value,\n      \u0022date_of_birth\u0022: date_of_birth_value,\n      \u0022email\u0022: email_value\n    },\n    \u0022contacts\u0022: [{\n      \u0022contact_type\u0022: \u0022email\u0022,\n      \u0022contact_value\u0022: uid,\n      \u0022subscription_status\u0022: \u0022active\u0022,\n      \u0022contact_properties\u0022: {}\n    }],\n  };\n\n  //block1\n  var die_hard_fan_value_zmp;\n  var casual_fan_value_zmp;\n  var deal_seeker_value_zmp;\n  var latest_product_drops_value_zmp;\n  var deals_and_special_offers_value_zmp;\n  var new_content_and_articles_value_zmp;\n  if (die_hard_fan_value === true) {\n    user_json[\u0027pref_center_die_hard_fan\u0027] = \u0027Y\u0027;\n\tvar die_hard_fan_value_zmp = \u0027Y\u0027;\n  } else {\n    user_json[\u0027pref_center_die_hard_fan\u0027] = \u0027N\u0027;\n\tvar die_hard_fan_value_zmp = \u0027N\u0027;\n  }\n\n  if (casual_fan_value === true) {\n    user_json[\u0027pref_center_casual_fan\u0027] = \u0027Y\u0027;\n\tvar casual_fan_value_zmp = \u0027Y\u0027;\n  } else {\n    user_json[\u0027pref_center_casual_fan\u0027] = \u0027N\u0027;\n\tvar casual_fan_value_zmp = \u0027N\u0027;\n  }\n\n  if (deal_seeker_value === true) {\n    user_json[\u0027pref_center_deal_seeker\u0027] = \u0027Y\u0027;\n\tvar deal_seeker_value_zmp = \u0027Y\u0027;\n  } else {\n    user_json[\u0027pref_center_deal_seeker\u0027] = \u0027N\u0027;\n\tvar deal_seeker_value_zmp = \u0027N\u0027;\n  }\n\n  //block2\n  if (latest_product_drops_value === true) {\n    user_json[\u0027pref_center_latest_product_drops\u0027] = \u0027Y\u0027;\n\tvar latest_product_drops_value_zmp = \u0027Y\u0027;\n  } else {\n    user_json[\u0027pref_center_latest_product_drops\u0027] = \u0027N\u0027;\n\tvar latest_product_drops_value_zmp = \u0027N\u0027;\n  }\n\n  if (deals_and_special_offers_value === true) {\n    user_json[\u0027pref_center_deals_and_special_offers\u0027] = \u0027Y\u0027;\n\tvar deals_and_special_offers_value_zmp = \u0027Y\u0027;\n  } else {\n    user_json[\u0027pref_center_deals_and_special_offers\u0027] = \u0027N\u0027;\n\tvar deals_and_special_offers_value_zmp = \u0027N\u0027;\n  }\n\n  if (new_content_and_articles_value === true) {\n    user_json[\u0027pref_center_new_content_and_articles\u0027] = \u0027Y\u0027;\n\tvar new_content_and_articles_value_zmp = \u0027Y\u0027;\n  } else {\n    user_json[\u0027pref_center_new_content_and_articles\u0027] = \u0027N\u0027;\n\tvar new_content_and_articles_value_zmp = \u0027N\u0027;\n  }\n\t\n  var user_event_json = {\n    \u0022activity\u0022: {\n      \u0022subscriber\u0022: {\n        \u0022uid\u0022: uid\n      },\n      \u0022event\u0022: \u0022preference_center\u0022,\n      \u0022properties\u0022: {\n        \u0022subscription_status\u0022: \u0022active\u0022,\n        \u0022first_name\u0022: first_name_value,\n        \u0022last_name\u0022: last_name_value,\n        \u0022date_of_birth\u0022: date_of_birth_value,\n        \u0022email\u0022: email_value,\n        \u0022pref_center_die_hard_fan\u0022: die_hard_fan_value_zmp,\n        \u0022pref_center_casual_fan\u0022: casual_fan_value_zmp,\n        \u0022pref_center_deal_seeker\u0022: deal_seeker_value_zmp,\n        \u0022pref_center_latest_product_drops\u0022: latest_product_drops_value_zmp,\n        \u0022pref_center_deals_and_special_offers\u0022: deals_and_special_offers_value_zmp,\n        \u0022pref_center_new_content_and_articles\u0022: new_content_and_articles_value_zmp\n      }\n    }\n  };\t\n\n  window.updateSubscriber(pp_guid, pp_int_id, user_json, function (res) {\n    window.zetaTrackEvent(pp_guid, pp_int_id, user_event_json, function (status, data) {\n      setTimeout(function () {\n        window.scrollTo(0, 0);\n        $(\u0027#textBox1\u0027).hide();\n        $(\u0027#textBox2\u0027).hide();\n        $(\u0027#subForm\u0027).hide();\n        $(\u0027#textBox3\u0027).show();\n      }, 1000);\n    });\n  });\n\n});\n\n//check for valid email\nfunction validateEmail(email) {\n  var reg = /^[a-zA-Z0-9.!#$%\u0026\u0027*\u002B/=?^_\u0060{|}~-]\u002B@[a-zA-Z0-9-]\u002B(?:\\.[a-zA-Z0-9-]\u002B)\u002B$/;\n  return reg.test(email);\n}\n\n//check for a blank\nfunction isBlank(str) {\n  return (!str || /^\\s*$/.test(str));\n}';
+                        customCSS = '@media only screen and (min-width: 480px) {\n    #layout, #html1, #html2, #html3, #html4, #html1_wrapper, #html2_wrapper, #html3_wrapper, #html4_wrapper {\n        width: 100%!important;\n        height: auto important;\n    }\n}';
+                        logger('DesktopSettings_2');
+                    }
+                } catch(e) { logger('adjustFromDetection selection error: ' + e.message); }
+            }
+
+            async function loadWidgets() {
+                // common first
+                await loadScript('//cdn.pushplanet.com/editor/widget_common.js?cb=0076a8704e35445790aaeb754898d2a9');
+                logger('loaded widget_common');
+
+
+
+
+                // hosted last
+                await loadScript('//cdn.pushplanet.com/editor/widget_hosted.js?cb=0076a8704e35445790aaeb754898d2a9');
+                logger('loaded widget_hosted');
+
+            }
+
+            function start() {
+                detect().then(function(info){
+                    adjustFromDetection(info);
+                    return loadWidgets();
+                }).then(function(){
+                    try {
+                        window.dispatchEvent(new CustomEvent('deviceDetected', { detail: window.DeviceInfo }));
+                    } catch(e) {}
+
+                    // Release jQuery ready queue now that widgets are loaded
+                    if (window.jQuery && $.holdReady) { $.holdReady(false); }
+                }).catch(function(){
+                    try {
+                        window.dispatchEvent(new CustomEvent('deviceDetected', { detail: window.DeviceInfo }));
+                    } catch(e) {}
+
+                    // Even if detection/load fails, attempt to dispatch
+                    if (window.jQuery && $.holdReady) { $.holdReady(false); }
+                });
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', start);
+            } else {
+                start();
+            }
+        })();
+    </script>
+<script type="text/javascript" src="//cdn.pushplanet.com/editor/widget_common.js?cb=0076a8704e35445790aaeb754898d2a9"></script><script type="text/javascript" src="//cdn.pushplanet.com/editor/widget_hosted.js?cb=0076a8704e35445790aaeb754898d2a9"></script><style id="custom_css" type="text/css">@media only screen and (min-width: 480px) {
+    #layout, #html1, #html2, #html3, #html4, #html1_wrapper, #html2_wrapper, #html3_wrapper, #html4_wrapper {
+        width: 100%!important;
+        height: auto important;
+    }
+}</style><style id="element_styles" type="text/css">.float_left {float: left;} .float_right {float: right;} body {background: #ffffff;} .ep1layout {position: relative;border-color: #000000;border-style: solid;border-width: 1px;border-radius: 0px;background: #ffffff;width: 950px;height: 1000px;overflow: hidden;padding: 0;margin-left: auto;margin-right: auto;margin-top: 0;} </style></head>
+<body style="margin: 0px; padding: 0px;" class="device-desktop" data-device-type="desktop" data-is-mobile-phone="false" data-is-tablet="false" data-device-source="geoapi">
+
+    <div id="layout_header"></div><div id="layout" class="layout" style="display: none;"></div>
+    <div id="thxlayout" class="thxlayout" style="display: none;"></div>
+    <div id="ep1layout" class="ep1layout" style="display: block;"></div>
+    <div id="ep2layout" class="ep2layout" style="display: none;"></div>
+    <div id="ep3layout" class="ep3layout" style="display: none;"></div>
+    <div id="ep4layout" class="ep4layout" style="display: none;"></div>
+    <div id="layout_footer"></div><div id="modal_loading"><div id="modal_loading_spinner"></div></div>
+
+    <noscript>
+        <div style="color: red; font-weight: bold; background: #ffecec; padding: 10px; text-align: center;">
+            JavaScript is required to use this website. Please enable JavaScript in your browser settings and refresh the page.
+        </div>
+    </noscript>
+
+    <span style="display: none;" class="error-bubble" id="error_bubble">
+        <span class="error-message" id="error_message"></span>
+        <span id="error_close">x</span>
+    </span>
+    <span style="display: none;" class="success-bubble" id="success_bubble">
+        <span class="success-message" id="success_message"></span>
+        <span id="success_close">x</span>
+    </span>
+
+</body></html>

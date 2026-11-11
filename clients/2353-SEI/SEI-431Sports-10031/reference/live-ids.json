@@ -1,0 +1,12 @@
+{
+  "pageId": "10031",
+  "pageName": "sei-431sports-prod-preference page updated",
+  "pageGuid": "11381d9518774d37bdae7a1867532f76",
+  "userId": "829",
+  "userGuid": "1f81ee88a1fc4479bad9acdfa853ed0e",
+  "integrationId": "3391",
+  "pp_int_id_idx": 12356,
+  "getUrlParam_idx": 12685,
+  "around_pp_int_id": "nc = 1;\\n  i.src = a;\\n  n.parentNode.insertBefore(i, n);\\n})(window, document, \\u0027script\\u0027, \\u0027https://cdn.boomtrain.com/p13n/\\u0027 \\u002B site_id \\u002B \\u0027/p13n.min.js\\u0027);\\n\\nvar pp_int_id = \\u00273391\\u0027;\\nvar pp_guid = \\u00271f81ee88a1fc4479bad9acdfa853ed0e\\u0027;\\nvar regExp = /[a-zA-Z]/;\\nvar regExpNum = /[^0-9-]/;\\nvar regNumAndChar = /[^0-9.,#@%\\u0026\\\\/\\\\-]/;\\nvar regSpecialChars = /[^A-Za-z0-9 .,\\u0027#@%\\u0026\\\\/\\\\-]/;\\nvar specialChars = \\u0022. \\u0027 - # @ % \\u0026 /\\u0022\\nvar uid_enc = getUrlParam(\\u0027encbu\\u0027);\\nvar email_enc = getUrlParam(\\u0027ence\\u0027);\\nvar email = atob(email_enc);\\nvar uid = atob(uid_enc);\\nvar eid = getUrlParam(\\u0027eid\\u0027);\\n// logger(\\u0022eid\\u0022);\\n// logger(eid);\\n//var uEmail = atob(email_enc);\\nvar opt_in_status = PC_EXTRA_OBJ[\\u0022boomtrain_all\\u0022];\\n\\nvar foundMatch = false;\\nvar matchedContact;\\nvar matchedPhoneContact;\\n\\nwhile (!foundMatch) {\\n  btSubscriberJson.contacts.forEach(contact =\\u003E {",
+  "around_getUrlParam": "um = /[^0-9-]/;\\nvar regNumAndChar = /[^0-9.,#@%\\u0026\\\\/\\\\-]/;\\nvar regSpecialChars = /[^A-Za-z0-9 .,\\u0027#@%\\u0026\\\\/\\\\-]/;\\nvar specialChars = \\u0022. \\u0027 - # @ % \\u0026 /\\u0022\\nvar uid_enc = getUrlParam(\\u0027encbu\\u0027);\\nvar email_enc = getUrlParam(\\u0027ence\\u0027);\\nvar email = atob(email_enc);\\nvar uid = atob(uid_enc);\\nvar eid = getUrlParam(\\u0027eid\\u0027);\\n// logger(\\u0022eid\\u0022);\\n// logger(eid);\\n//var uEmail = atob(email_enc);\\nvar opt_in_status = PC_EXTRA_OBJ[\\u0022boomtrain_all\\u0022];\\n\\nvar foundMatch = false;\\nvar matchedContact;\\nvar matchedPhoneContact;\\n\\nwhile (!foundMatch) {\\n  btSubscriberJson.contacts.forEach(contact =\\u003E {\\n    // swap to uEmail during prod\\n    //    logger(contact);\\n    if (contact.contact_value == email) {\\n      matchedContact = contact;\\n      foundMatch = true;\\n    }\\n  });\\n}\\n\\nif (matchedContact.contact_properties.phone_number) {\\n  phone = matchedContact.contact_properties.phone_number;\\n} else if (btSubscriberJson.p"
+}

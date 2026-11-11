@@ -1,0 +1,57 @@
+/* SEI 23127 (10031 / 431 Sports) — hide fromOnLoad radios; gate Name + T&C + submit.
+ * Paste into Grow Customize → Custom CSS (replace prior SEI gate blocks entirely).
+ * No #xSectionDetails_* digit ids. Field-name / platform selectors only.
+ */
+
+/* Hide True/False radios (stay in DOM for On Load / entry). */
+#fromOnLoadWrapper {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Name: no Grow display condition (conditional modules keep one On Load value).
+   Hide with CSS until fromOnLoad = true. */
+.xForm:not(:has(input[name="fromOnLoad"][value="true"]:checked)) .xComponent.xName {
+  display: none !important;
+}
+
+/* Default: hide T&C + submit. Must re-show when true — theme / leftover rules
+   often leave #xSubmitContainer at display:none; hide-only CSS is not enough. */
+#terms_and_conditionsWrapper,
+.xComponent.xPolicy,
+#xSubmitContainer,
+.xCustom-sei-hide-cta {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Show T&C + submit when fromOnLoad = true (checked radio, not Wrapper display). */
+#entries:has(input[name="fromOnLoad"][value="true"]:checked) #terms_and_conditionsWrapper,
+#entries:has(input[name="fromOnLoad"][value="true"]:checked) .xComponent.xPolicy,
+#entries:has(input[name="fromOnLoad"][value="true"]:checked) #xSubmitContainer {
+  display: flex !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  overflow: visible !important;
+  pointer-events: auto !important;
+}

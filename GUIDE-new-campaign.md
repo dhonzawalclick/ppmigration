@@ -6,9 +6,10 @@ Source: [Notes Migration](https://zetaglobal.atlassian.net/wiki/spaces/PTGM/page
 
 1. If the account is new, copy `clients/_TEMPLATE-0000-ACCOUNT/` to `clients/{grow_tenant_id}-{ACCOUNT}/` (e.g. `2353-SEI`) and fill its `README.md`. The tenant id is in the experience page source: `'tenant': { 'id': … }`.
 2. Rename `_TEMPLATE-Account-0000/` to `{Account}-{PushPlanet experience id}` (e.g. `SEI-Soccer-9958`). Add one of these per migrated experience.
-3. Rename `_TEMPLATE-campaign-id/` to the Grow campaign id.
-4. Put the original PushPlanet / Digioh script in `{campaign_id}/reference/`.
-5. Keep copies with real credentials as `WIP*.json` next to the placeholder files. `.gitignore` excludes them.
+3. **Grow experience name:** `{PushPlanet id} - {PushPlanet page name}` (e.g. `9952 - sei-soccer-com-prod preference page`, `10031 - sei-431sports-prod-preference page updated`).
+4. Rename `_TEMPLATE-campaign-id/` to the Grow campaign id.
+5. Put the original PushPlanet / Digioh script in `{campaign_id}/reference/`.
+6. Keep copies with real credentials as `WIP*.json` next to the placeholder files. `.gitignore` excludes them.
 
 ## 2. Form modules
 
@@ -27,6 +28,20 @@ Field names work like HTML `name`. On Load `return$.data.<name>` fills the field
 - Checkbox fields take an array of choice ids from On Load (e.g. `"I_am_a": ["parent", "fan"]`).
 - Do not name a field `campaignid`. It collides with Grow's `campaignId`. Use `campaign_id`.
 
+### Where to find field names and choice ids
+
+Do **not** guess from PushPlanet DOM ids or from a sibling SEI campaign. Labels in the builder are not the names integrations see. Confirm on the live staging page before writing On Load / activity JSON.
+
+| What you need | Where to get it |
+| --- | --- |
+| Field **name** (e.g. `I_am_a`, `My_preferences`) | Staging page → DevTools: `document.querySelectorAll('input[name]')` / each input’s `name`. Or Page Builder → module → field name. Wrapper ids follow the name: `#fromOnLoadWrapper`, `#My_preferencesWrapper`. |
+| Name module parts | Always `name_Firstname` / `name_Lastname` (not `first_name` / `last_name`) when using Grow’s Name module. |
+| Checkbox **choice id** (what `.contains('…')` must match) | Same DevTools pass: each checkbox’s `value` (e.g. `coachadmin`, `volleyball`). Or Page Builder → checkbox choices → id column (CSV import uses the `id` column). The **label** can say Referee while the id is still the default `option` — map the id, or rename it in the builder. |
+| What actually posted | Point HTTP entry `stageUrl` at webhook.site (or Integration Debug). The JSON body shows `params` / mapped fields. If every `pref_center_*` is `N`, the field name or choice id in the Groovy is wrong. |
+| Quick dump in console | Staging URL with `&debug=6`, then: `[...document.querySelectorAll('input[type=checkbox]')].map(i => [i.name, i.value, i.checked])` |
+
+SEI 23127 example: sports lived under **`My_preferences`** (not `Sports`); role ids were `parent` / `coachadmin` / `player` / `fan` / `option`. Mapping assumed different names and all sports came through as `N` until the live page was inspected.
+
 ## 3. On Load
 
 Person prefill from ZMP uses the template `onload.json`. Verified on SEI campaign 22815 / display 22904. Step-by-step notes: [`readmes/sei-onload-integration.md`](readmes/sei-onload-integration.md).
@@ -41,7 +56,7 @@ Person prefill from ZMP uses the template `onload.json`. Verified on SEI campaig
 
 ## 4. Customize (`custom.css`, `custom.html`)
 
-- The `fromOnLoad` gate is CSS: `custom.css` hides the radios, hides T&C + submit while `fromOnLoad` is false, and hides multi-value modules (Name) until it is true. Replace the `REPLACE_` module ids with the ones on the live page.
+- The `fromOnLoad` gate is CSS: `custom.css` hides the radios, hides T&C + submit while `fromOnLoad` is false, and hides multi-value modules (Name) until it is true. Prefer field-name / platform selectors (`#fromOnLoadWrapper`, `input[name="fromOnLoad"]`, `.xComponent.xName`, `.xComponent.xPolicy`, `#xSubmitContainer`) — not `#xSectionDetails_*` digit ids (they regenerate).
 - The submit module cannot take a display condition, which is why the gate is in CSS.
 - `custom.html` may stay empty. If used, it must be wrapped in `<script>` tags. Use it for copying non-`nc.` URL params into hidden fields on `page:ready`. Do not decrypt tokens in JS.
 - On Load values arrive after `page:ready` and `form:ready`. JS must react to the `fromOnLoad` radio changing instead of reading it once.

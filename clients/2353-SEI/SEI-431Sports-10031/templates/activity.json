@@ -1,0 +1,78 @@
+{
+  "url": "https://api.zetaglobal.net/ver2/sei-dev/activities",
+  "stageUrl": "https://api.zetaglobal.net/ver2/sei-dev/activities",
+  "bindUrl": false,
+  "requestType": "json",
+  "verb": "post",
+  "paramsType": "mapped",
+  "formatType": "structured",
+  "encoding": "UTF-8",
+  "ignoreEmpty": true,
+  "nullHandling": "omit",
+  "required": [
+    "email"
+  ],
+  "sendEntitlements": false,
+  "verifyHost": true,
+  "trustAll": false,
+  "logDebug": true,
+  "searchForParamsMapKeyword": true,
+  "header": {
+    "Authorization": "Basic REPLACE_WITH_BASE64(api:ZMP_REST_API_KEY)",
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+  },
+  "params": {
+    "activity": {
+      "identify_person": true,
+      "subscriber": {
+        "uid": "${entry.uid ?: entry.email}",
+        "first_name": "${entry.name_Firstname ?: entry.first_name ?: ''}",
+        "last_name": "${entry.name_Lastname ?: entry.last_name ?: ''}",
+        "source": "grow",
+        "contacts": [
+          {
+            "contact_type": "email",
+            "contact_value": "${entry.email ?: entry.uid}",
+            "subscription_status": "active"
+          }
+        ],
+        "properties": {
+          "first_name": "${entry.name_Firstname ?: entry.first_name ?: ''}",
+          "last_name": "${entry.name_Lastname ?: entry.last_name ?: ''}",
+          "date_of_birth": "${entry.date_of_birth ?: params.date_of_birth ?: ''}",
+          "email": "${entry.email ?: ''}",
+          "pref_center_parent": "${((params.I_am_a ?: entry.I_am_a ?: '') as String).contains('parent') ? 'Y' : 'N'}",
+          "pref_center_coach_admin": "${((params.I_am_a ?: entry.I_am_a ?: '') as String).contains('coachadmin') ? 'Y' : 'N'}",
+          "pref_center_player": "${((params.I_am_a ?: entry.I_am_a ?: '') as String).contains('player') ? 'Y' : 'N'}",
+          "pref_center_fan": "${((params.I_am_a ?: entry.I_am_a ?: '') as String).contains('fan') ? 'Y' : 'N'}",
+          "pref_center_referee": "${(((params.I_am_a ?: entry.I_am_a ?: '') as String).contains('referee') || ((params.I_am_a ?: entry.I_am_a ?: '') as String).contains('option')) ? 'Y' : 'N'}",
+          "pref_center_volleyball": "${((params.My_preferences ?: entry.My_preferences ?: '') as String).contains('volleyball') ? 'Y' : 'N'}",
+          "pref_center_baseball": "${((params.My_preferences ?: entry.My_preferences ?: '') as String).contains('baseball') ? 'Y' : 'N'}",
+          "pref_center_softball": "${((params.My_preferences ?: entry.My_preferences ?: '') as String).contains('softball') ? 'Y' : 'N'}",
+          "pref_center_soccer": "${((params.My_preferences ?: entry.My_preferences ?: '') as String).contains('soccer') ? 'Y' : 'N'}",
+          "pref_center_sports_referee": "${((params.My_preferences ?: entry.My_preferences ?: '') as String).contains('sports_referee') ? 'Y' : 'N'}"
+        }
+      },
+      "event": "preference_center",
+      "properties": {
+        "source": "grow",
+        "subscription_status": "active",
+        "first_name": "${entry.name_Firstname ?: entry.first_name ?: ''}",
+        "last_name": "${entry.name_Lastname ?: entry.last_name ?: ''}",
+        "email": "${entry.email ?: ''}",
+        "date_of_birth": "${entry.date_of_birth ?: params.date_of_birth ?: ''}",
+        "pref_center_parent": "${((params.I_am_a ?: entry.I_am_a ?: '') as String).contains('parent') ? 'Y' : 'N'}",
+        "pref_center_coach_admin": "${((params.I_am_a ?: entry.I_am_a ?: '') as String).contains('coachadmin') ? 'Y' : 'N'}",
+        "pref_center_player": "${((params.I_am_a ?: entry.I_am_a ?: '') as String).contains('player') ? 'Y' : 'N'}",
+        "pref_center_fan": "${((params.I_am_a ?: entry.I_am_a ?: '') as String).contains('fan') ? 'Y' : 'N'}",
+        "pref_center_referee": "${(((params.I_am_a ?: entry.I_am_a ?: '') as String).contains('referee') || ((params.I_am_a ?: entry.I_am_a ?: '') as String).contains('option')) ? 'Y' : 'N'}",
+        "pref_center_volleyball": "${((params.My_preferences ?: entry.My_preferences ?: '') as String).contains('volleyball') ? 'Y' : 'N'}",
+        "pref_center_baseball": "${((params.My_preferences ?: entry.My_preferences ?: '') as String).contains('baseball') ? 'Y' : 'N'}",
+        "pref_center_softball": "${((params.My_preferences ?: entry.My_preferences ?: '') as String).contains('softball') ? 'Y' : 'N'}",
+        "pref_center_soccer": "${((params.My_preferences ?: entry.My_preferences ?: '') as String).contains('soccer') ? 'Y' : 'N'}",
+        "pref_center_sports_referee": "${((params.My_preferences ?: entry.My_preferences ?: '') as String).contains('sports_referee') ? 'Y' : 'N'}"
+      }
+    }
+  }
+}
